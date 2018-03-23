@@ -1,0 +1,112 @@
+--------------------------------------------------------------------
+ Spacelib is supplied in a ZIP file.
+ To install it Unzip it using  -d option to restore the path names
+--------------------------------------------------------------------
+Information on the last patches at the end of this file
+-------------------------------------------------------
+
+What is SPACELIB(c)?
+SPACELIB is a software library useful 
+for the realization of programs for the kinematic and dynamic 
+analysis of systems of rigid bodies. 
+This library is currently used in ROBOTICS and BIOMECHANICS. 
+It has been developed at the Mechanical Engineering Department 
+of the University of Brescia.
+
+Three versions of the library are currently available:
+
+	* c language (numerical computetion)
+	* matlab     (numerical computation)
+	* MAPLEV     (symbolic manipulation)
+
+
+The library is offered with:
+
+	* full source code
+	* a full reference manual
+	* commented application examples
+	* papers describing the mathematic theory which 
+          is at the base of spacelib
+
+The functions contained in the library are devoted to:
+
+* basis operations on matrices 
+    sum, product, (pseudo)inversion, ...
+* basic operation on points, lines and planes
+    line between two points
+    plane defined by three points
+    intersection / projection of point, lines on planes
+    ...
+* basic operation on vectors
+    module, dot product, cross product, ...
+* tranformation matrices (rototranslations)
+* velocity and acceleration matrices
+* Cardan/Euler angles
+    tranformation of angles to/from rotation matrices
+    derivative of angles to/from angular velocity and acceleration
+* linear systems
+
+The library is intended as an aid in writing programs for the 
+analysis of systems of rigid bodies following a particular 
+methodology based on 4*4 matrices. This approach can be 
+considered a powerful generalization of the Transformation 
+Matrix Approach  proposed by Denavit and Hartenberg.
+Shortly the position and the orientation of each body is 
+represented by 4*4 transformation matrices.
+Two others matrices called W and H are utilized for the velocity 
+and the acceleration (linear and angular).
+Additional matrices are used for the momentum, forces, torques, 
+inertia.
+
+The main feature of this methodology is that it allows the 
+development of the analysis of systems of rigid bodies in a 
+systematic way simplifying the symbolic manipulation of equations 
+as well as the realization of efficient numerical programs.
+
+----------------------------------------------------------------
+The file listfile.txt contained in the zip file lists 
+of all the files of the library, of the examples and of the 
+documentation. 
+----------------------------------------------------------------
+
+The library is free avalailable for non-profit activities including 
+scientific and educational purposes.
+See also the "disclaimer warranties" statment in the manual.
+
+For commercial activities please contact:
+Giovanni Legnani
+Universita di Brescia
+Dip. Ing. Meccanica
+Via Branze 38
+25123 Brescia, Italy.
+
+phone +39/030 3715425
+fax   +39/030 3702448
+
+e-mail: giovanni.legnani @ ing.unibs.it
+
+
+--------------------------------------------------------------------
+patch November 2001 (function pseudo_inv)
+--------------------------------------------------------------------
+patch January 2003 (function interslpl)
+--------------------------------------------------------------------
+patch November 2005
+
+new manual in PDF restiled and improved
+
+minor bugs fixed
+manual improved and extended
+few new functions added (dhtomstd, psedot, crosstom, translat, translat2, translat24)
+-------------------------------------------------------
+patch February 2006
+
+fixed bugs in macros:
+
+Wtocard(m,W,q1,q2,qp1,qp2)
+Wtoeul(m,W,q1,q2,qp1,qp2)     
+Wtonaut(m,W,q1,q2,qp1,qp2)
+
+Htocard(m,W,H,q1,q2,qp1,qp2)
+Htoeul(m,W,H,q1,q2,qp1,qp2)     
+Htonaut(m,W,H,q1,q2,qp1,qp2)

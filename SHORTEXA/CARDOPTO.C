@@ -1,0 +1,28 @@
+/*
+----------------------------------------------------------------------------
+CARDOPTO.C:
+  Example of function   cardanto_OMEGAPTO().  For detail see User's Manual.
+
+		University of Brescia
+		Mechanical Eng. Department
+		Via Branze 38
+		25123 BRESCIA - ITALY
+
+                giovanni.legnani @ ing.unibs.it
+-----------------------------------------------------------------------------
+*/
+#include <stdio.h>
+#include <math.h>
+#include "spacelib.h"
+
+void main(void)
+{
+	VECTOR q={1.,1.2,3.};
+	VECTOR qp={0.,1.,0.};
+	VECTOR qpp={3.,2.5,4.01};
+	VECTOR omegapto;
+
+	cardanto_OMEGAPTO(q,qp,qpp,Y,X,Z,omegapto);
+
+	printv("\nThe angular acceleration omegapto is:",omegapto,3);
+}

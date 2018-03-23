@@ -1,0 +1,28 @@
+/*
+----------------------------------------------------------------------------
+ROTAT.C:
+  Example of function  rotat().  For detail see User's Manual.
+
+		University of Brescia
+		Mechanical Eng. Department
+		Via Branze 38
+		25123 BRESCIA - ITALY
+
+                giovanni.legnani @ ing.unibs.it
+-----------------------------------------------------------------------------
+*/
+#include <stdio.h>
+#include <conio.h>
+#include "spacelib.h"
+
+void main (void)
+{
+	MAT4 A;
+	AXIS u=Zaxis_n;
+	real fi=PIG_2;
+
+	clear4(A);
+	rotat(u,fi,M A,4);
+
+	printm4("The A matrix is :",A);
+}

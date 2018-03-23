@@ -1,0 +1,22 @@
+----------------------------------------
+          January 2004
+----------------------------------------
+The library hase been verified with Microsoft Visual Studio 6.0 and lcc-win32 distributed by www.cs.virginia.edu/~lcc-win32
+
+----------
+
+To install the SpaceLib follow the instruction contained in section 2 of the user's manual.
+
+As an alternative unzip the files in 
+
+c:\users\spacelib_c
+
+remember to set the environment variable of your compiler in order to allow it to find the spacelib include files contained in
+
+c:\users\spacelib_c\spacelib
+
+This directory contains also the library functions (*.c) to be linked to your project.
+
+The string 'c:\users\spacelib_c' should be replaced with the pathname of the directory where you install spacelib in your computer.
+
+Read also the content of README_c.TXT

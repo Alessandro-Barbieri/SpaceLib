@@ -1,0 +1,165 @@
+/* elb_d_DH.c program for the DIRECT kinematics of ELBOW robot.
+   Frames assigned according to Denavit and Hartenberg conventions.
+   the output of this program is compatible with the input  of elb_i_dh.c
+   the input  of this program is compatible with tho output of elb_i_dh.c */
+
+/* NOTE: To compile this program the type real must be set equivalent to the type float
+	 (see also User's Manual). This is necessary because the formatting string of the
+	 fscanf function have been written using %f as descriptor. */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <conio.h>
+#include <math.h>
+#include "spacelib.h"
+
+#define MAXLINK 6
+
+void main(int argc,char *argv[])
+{
+	int i,j,k,ierr;
+	int ii=X;                  /* Euler/Cardan convention */
+	int jj=Y;                  /* for gripper             */
+	int kk=Z;                  /* angular position        */
+
+				   /* Denavit & Hartemberg's parameters (D&H) */
+	real theta[MAXLINK+1]={0.,0.,0.,0.,0.,0.,0.};
+	real d[MAXLINK+1]={0.,0.,0.,0.,0.,0.,0.};
+	real b[MAXLINK+1]={0.,0.,0.,0.,0.,0.,0.};
+	real fi[MAXLINK+1]={0.,PIG_2,0.,0.,3*PIG_2,PIG_2,0.};
+	real a[MAXLINK+1];         /* to be read from data_file */
+
+	real q,qp,qpp;             /* joint variables : pos., vel., acc. */
+	real t,dt;
+
+	VECTOR q1,q2;              /* Euler/Cardan angle configurations */
+	VECTOR qp1,qp2;            /* Euler/Cardan angle first time der. */
+	VECTOR qpp1,qpp2;          /* Euler/Cardan angle sec. time der. */
+
+	MAT4 mreli_1[MAXLINK+1],   /* array containing pos. mat. of frame
+				      (i) seen in frame (i-1) */
+	     mabs[MAXLINK+1],      /* array containing abs. pos. mat. of
+				      frame (i) in base frame */
+	     Wreli_1[MAXLINK+1],   /* array containing rel. vel. mat. of
+				      frame (i) seen in frame (i-1) */
+	     Wrel0[MAXLINK+1],     /* array containing rel. vel. mat. of
+				      frame (i) seen in base frame */
+	     Wabs[MAXLINK+1],      /* array containing abs. vel. mat. of
+				      frame (i) in base frame */
+	     Hreli_1[MAXLINK+1],   /* array containing rel. acc. mat. of
+				      frame (i) seen in frame (i-1) */
+	     Hrel0[MAXLINK+1],     /* array containing rel. acc. mat. of
+				      frame (i) seen in base frame */
+	     Habs[MAXLINK+1];      /* array containing abs. vel. mat. of
+				      frame (i) in base frame */
+	MAT4 Last ={ {0.,1.,0.,0.},      /* transformation matrix from */
+		     {0.,0.,1.,0.},      /* frame (6) to gripper       */
+		     {1.,0.,0.,0.},      /* element Z-U is in a[6]     */
+		     {0.,0.,0.,1.} };    /*                            */
+	MAT4 gripper;              /* abs. frame of gripper */
+	POINT first=ORIGIN;        /* origin of frame 0 with respect to base,
+				      Z value is in a[1] */
+	MAT4 Aus,                  /* Ausiliar frame, origin in gripper, parallel to base */
+	     Waus, Haus;           /* abs. gripper vel. and acc. in Aus frame */
+	FILE *data;                /* file containing robot description */
+	FILE *motion;              /* file containing motion description */
+	FILE *out;                 /* output file */
+
+	if (argc!=4)               /* testing parameters */
+	{
+		fprintf(stderr,"Usage: elb_d_dh data_file joint_motion_file gripper_output_file\n");
+		exit(1);
+	}
+	data=fopen(argv[1],"r");
+	if(data==NULL)
+	{
+		fprintf(stderr,"Error: Unable to open data_file\n");
+		exit(2);
+	}
+	motion=fopen(argv[2],"r");
+	if(motion==NULL)
+	{
+		fprintf(stderr,"Error: Unable to open motion_file\n");
+		exit(3);
+	}
+	out=fopen(argv[3],"w");
+	if(out==NULL)
+	{
+		fprintf(stderr,"Error: Unable to open output_file\n");
+		exit(4);
+	}
+
+	a[0]=0;
+        for(i=1;i<=MAXLINK;i++)          /* read link lengths */
+	{
+		fscanf(data,"%f",&a[i]);
+	}
+				   /* matrices initialization */
+	first[Z]=a[1];
+	rotat24(Z,PIG_2,first,mabs[0]); /* pos. mat. of frame 0 from base frame */
+	Last[Z][U]=a[6];                /* gripper position in frame 6 */
+	idmat4(Aus);
+	clear4(Wabs[0]);               /* abs. velocity of base and of frame 0 */
+	clear4(Habs[0]);               /*      acceleration */
+
+	a[1]=a[6]=0;    /* D&H parameter 'a' of link 1 and link 6 are zero */
+
+	fscanf(motion,"%f",&dt);       /* read time step */
+	fprintf(out,"%f\n",dt);        /* write dt to out file */
+	fprintf(out,"%d %d %d\n\n",ii,jj,kk);  /* write Cardan convention to out file */
+
+	for(t=0;eof(motion);t+=dt) /* main loop */
+	{
+		for(i=1;i<=MAXLINK;i++)
+		{                  /* read joint motion */
+			ierr=fscanf(motion,"%f %f %f\n",&q,&qp,&qpp);
+			if(ierr!=3)
+				exit(0);
+
+				   /* builds rel. pos. matrix */
+			dhtom(Rev,theta[i],d[i],b[i],a[i],fi[i],q,mreli_1[i]);
+
+				   /* builds rel. vel. and acc. matrices */
+			velacctoWH(Rev,qp,qpp,Wreli_1[i],Hreli_1[i]);
+
+				   /* abs. pos. matrix of frame (i) */
+			molt4(mabs[i-1],mreli_1[i],mabs[i]);
+
+				   /* W and H matrices in base frame */
+			trasf_mami(Wreli_1[i],mabs[i-1],Wrel0[i]);
+			trasf_mami(Hreli_1[i],mabs[i-1],Hrel0[i]);
+
+				   /* abs. vel. and acc. matrices */
+			sum4(Wabs[i-1],Wrel0[i],Wabs[i]);
+			coriolis(Habs[i-1],Hrel0[i],Wabs[i-1],Wrel0[i],Habs[i]);
+		}
+		molt4(mabs[MAXLINK],Last,gripper); /* gripper position */
+		Aus[X][U]=gripper[X][U];
+		Aus[Y][U]=gripper[Y][U];
+		Aus[Z][U]=gripper[Z][U];
+		trasf_miam(Wabs[MAXLINK],Aus,Waus); /* transform velocity */
+		trasf_miam(Habs[MAXLINK],Aus,Haus); /* and acceleration in ausiliar frame */
+					  /* extracts Cardan angles (and their
+					     time derivatives) of gripper  */
+		Htocardan(gripper,Waus,Haus,
+			  ii,jj,kk,q1,q2,qp1,qp2,qpp1,qpp2);
+
+				   /* output results */
+		printf("Time=%f\n",t);
+		printm4("The position matrix of the gripper is:",gripper);
+		printm4("The velocity matrix of the gripper is:",Waus);
+		printm4("The acceleration matrix of the gripper is:",Haus);
+		printf("\nPress any key to continue\n");
+		getch() ;
+
+		fprintf(out,"%f %f %f\n",q1[0],q1[1],q1[2]);
+		fprintf(out,"%f %f %f\n",qp1[0],qp1[1],qp1[2]);
+		fprintf(out,"%f %f %f\n",qpp1[0],qpp1[1],qpp1[2]);
+
+		fprintf(out,"%f %f %f\n",gripper[X][U],gripper[Y][U],
+						       gripper[Z][U]);
+		fprintf(out,"%f %f %f\n",Waus[X][U],Waus[Y][U],Waus[Z][U]);
+		fprintf(out,"%f %f %f\n",Haus[X][U],Haus[Y][U],Haus[Z][U]);
+	}
+	fcloseall();
+}

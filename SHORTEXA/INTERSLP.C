@@ -1,0 +1,40 @@
+/*
+----------------------------------------------------------------------------
+INTERSLP.C:
+  Example of function interslpl().  For detail see User's Manual.
+
+		University of Brescia
+		Mechanical Eng. Department
+		Via Branze 38
+		25123 BRESCIA - ITALY
+
+                giovanni.legnani @ ing.unibs.it
+-----------------------------------------------------------------------------
+*/
+#include <stdio.h>
+#include <conio.h>
+#include <math.h>
+#include "spacelib.h"
+
+void main(void)
+{
+PLANE pl={0.,0.,1.,-5.};
+VECTOR dir={0.,0.,1.},
+       v;
+POINT P={0.,6.,10.,1.},
+      P1;
+POINT Ps;
+LINE l;
+int type;
+real d;
+
+	pcopy (P,l.P);
+	vcopy(dir,l.dir);
+	interslpl(l,pl,P1,&type);
+	printv("Intersection Point P1",P1,4);
+	d=dist(P,P1);
+	vector(dir,d,v);
+	subv(P1,v,Ps);
+	Ps[U]=1.;
+	printv("The symmetric point Ps is:",Ps,4);
+}
