@@ -8,7 +8,7 @@ ROBSCAR.C:  Sample program for direct kinematics of Scara robot
 		Via Branze 38
 		25123 BRESCIA - ITALY
 
-		giovanni.legnani @ bsing.unibs.it
+		giovanni.legnani @ unibs.it
 -----------------------------------------------------------------------------
 */
 #include <stdio.h>

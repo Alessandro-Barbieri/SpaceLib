@@ -8,7 +8,7 @@ TRASF_MA.C:
 		Via Branze 38
 		25123 BRESCIA - ITALY
 
-                giovanni.legnani @ ing.unibs.it
+                giovanni.legnani @ unibs.it
 -----------------------------------------------------------------------------
 */
 #include <stdio.h>
