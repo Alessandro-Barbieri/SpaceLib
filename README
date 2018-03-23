@@ -48,11 +48,11 @@ The functions contained in the library are devoted to:
 
 The library is intended as an aid in writing programs for the 
 analysis of systems of rigid bodies following a particular 
-methodology based on 4*4 matrices. This approach can be 
+methodology based on 4⨯4 matrices. This approach can be 
 considered a powerful generalization of the Transformation 
 Matrix Approach  proposed by Denavit and Hartenberg.
 Shortly the position and the orientation of each body is 
-represented by 4*4 transformation matrices.
+represented by 4⨯4 transformation matrices.
 Two others matrices called W and H are utilized for the velocity 
 and the acceleration (linear and angular).
 Additional matrices are used for the momentum, forces, torques, 
