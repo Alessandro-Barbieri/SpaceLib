@@ -1,6 +1,6 @@
 /*
 ------------------------------------------------------------------------------
-		SPACELIB.C (c)
+		SPACELIB.C ©
 		copyright by
 
 		G. Legnani and R. Faglia

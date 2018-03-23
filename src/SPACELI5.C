@@ -1,7 +1,7 @@
 /*
 ------------------------------------------------------------------------------
 			SPACELI5.C
-			(C) copyright by
+			© copyright by
 
 			G. Legnani, D. Manara
 

@@ -1,7 +1,7 @@
 /*
 ------------------------------------------------------------------------------
 			LINEAR2.C
-			(C) copyright by
+			© copyright by
 
 			D.Amadori, P.Ghislotti, G.Pugliese
 

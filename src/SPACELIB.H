@@ -12,7 +12,7 @@ typedef double real;
 #endif
 #define aabs(a)   ((double)(a)>0.  ? (a) : -(a))
                    /* conditional compilation to avoid conflict with standard definitions of min
-                      and max. SPACELIB (C) definitions coincide with ANSI definitions */
+                      and max. SPACELIB © definitions coincide with ANSI definitions */
 #ifndef max
 #define max(a,b) ((a)>(b) ? (a) : (b))
 #endif

@@ -1,6 +1,6 @@
 /*
 ------------------------------------------------------------------------------
-		SPACELI3.C addendum to SPACELIB.C (c)
+		SPACELI3.C addendum to SPACELIB.C ©
 
 		       copyright by
 
