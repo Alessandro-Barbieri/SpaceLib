@@ -3,8 +3,8 @@
 VELWH2.C:
   Example of function velacctoWH2.  For detail see User's Manual.
 
-		University of Brescia
-		Mechanical Eng. Department
+		Università degli Studi di Brescia
+		Dipartimento di Ingegneria Meccanica ed Industriale
 		Via Branze 38
 		25123 BRESCIA - ITALY
 
