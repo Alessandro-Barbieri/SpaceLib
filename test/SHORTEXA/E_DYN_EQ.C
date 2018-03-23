@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include "spacelib.h"
-#include "linear.h"
+#include "SPACELIB.H"
+#include "LINEAR.H"
 
 
 MAT4 J={{21., -2., -2., 20.0},

@@ -23,8 +23,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "spacelib.h"
-#include "linear.h"
+#include "SPACELIB.H"
+#include "LINEAR.H"
 
 
 /* --- Functions solve minvers linear, solve --- */

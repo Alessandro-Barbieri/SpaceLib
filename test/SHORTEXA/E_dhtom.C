@@ -10,7 +10,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <time.h>
-#include "spacelib.h"
+#include "SPACELIB.H"
 
 #define MAXLINK 6
 

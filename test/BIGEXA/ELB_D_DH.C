@@ -11,7 +11,7 @@
 #include <stdlib.h>
 #include <conio.h>
 #include <math.h>
-#include "spacelib.h"
+#include "SPACELIB.H"
 
 #define MAXLINK 6
 

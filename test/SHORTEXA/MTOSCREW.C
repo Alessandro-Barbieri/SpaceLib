@@ -13,7 +13,7 @@ MTOSCREW.C:
 */
 #include <stdio.h>
 #include <conio.h>
-#include "spacelib.h"
+#include "SPACELIB.H"
 
 void main (void)
 {

@@ -22,8 +22,8 @@
 */
 
 #include <stdio.h>
-#include "spacelib.h"
-#include "linear.h"
+#include "SPACELIB.H"
+#include "LINEAR.H"
 
 
 /* --- Speed and Acceleration Matrices --- */

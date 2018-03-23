@@ -29,7 +29,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include "spacelib.h"
+#include "SPACELIB.H"
 
 
 /* --- Rotation and Position Matrices --- */

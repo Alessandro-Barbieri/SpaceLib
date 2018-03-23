@@ -11,8 +11,8 @@
 #include <conio.h>
 #include <math.h>
 #include <stdlib.h>
-#include "spacelib.h"
-#include "linear.h"
+#include "SPACELIB.H"
+#include "LINEAR.H"
 
 #define MAXLINK 6
 

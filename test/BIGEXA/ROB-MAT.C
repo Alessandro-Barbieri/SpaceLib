@@ -8,7 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include "spacelib.h"
+#include "SPACELIB.H"
 
 void main(int argc,char *argv[])
 {

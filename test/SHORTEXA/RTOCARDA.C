@@ -13,7 +13,7 @@ RTOCARDA.C:
 */
 #include <stdio.h>
 #include <math.h>
-#include "spacelib.h"
+#include "SPACELIB.H"
 
 void main(void)
 {

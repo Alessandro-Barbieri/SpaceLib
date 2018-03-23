@@ -26,7 +26,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <float.h>
-#include "spacelib.h"
+#include "SPACELIB.H"
 
 
 /* --- Rotation and Position Matrices --- */

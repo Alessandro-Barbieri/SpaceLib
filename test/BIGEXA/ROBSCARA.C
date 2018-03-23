@@ -13,7 +13,7 @@ ROBSCAR.C:  Sample program for direct kinematics of Scara robot
 */
 #include <stdio.h>
 #include <math.h>
-#include "spacelib.h"
+#include "SPACELIB.H"
 
 void main(void)
 {

@@ -22,8 +22,8 @@
 #include <stdio.h> 
 #include <float.h> 
 #include <math.h> 
-#include "spacelib.h" 
-#include "linear.h" 
+#include "SPACELIB.H" 
+#include "LINEAR.H" 
 
 void delta_m(MAT4 W, MAT4 H, real dt, MAT4 dm);
 
