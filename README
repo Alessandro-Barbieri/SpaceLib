@@ -85,19 +85,6 @@ fax   +39/030 3702448
 
 e-mail: giovanni.legnani @ unibs.it
 
-
---------------------------------------------------------------------
-patch November 2001 (function pseudo_inv)
---------------------------------------------------------------------
-patch January 2003 (function interslpl)
---------------------------------------------------------------------
-patch November 2005
-
-new manual in PDF restyled and improved
-
-minor bugs fixed
-manual improved and extended
-few new functions added (dhtomstd, psedot, crosstom, translat, translat2, translat24)
 -------------------------------------------------------
 patch February 2006
 
@@ -110,3 +97,15 @@ Wtonaut(m,W,q1,q2,qp1,qp2)
 Htocard(m,W,H,q1,q2,qp1,qp2)
 Htoeul(m,W,H,q1,q2,qp1,qp2)     
 Htonaut(m,W,H,q1,q2,qp1,qp2)
+--------------------------------------------------------------------
+patch November 2005
+
+new manual in PDF restyled and improved
+
+minor bugs fixed
+manual improved and extended
+few new functions added (dhtomstd, psedot, crosstom, translat, translat2, translat24)
+--------------------------------------------------------------------
+patch January 2003 (function interslpl)
+--------------------------------------------------------------------
+patch November 2001 (function pseudo_inv)
