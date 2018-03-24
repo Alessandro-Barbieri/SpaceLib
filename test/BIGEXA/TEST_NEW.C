@@ -6,7 +6,7 @@
 
 % This is an improved version of Test.c <----------------****************
 % The angular moment of the system should be constant, but inaccuracy in
-% the integration method corrupts it. In this version, some statments have
+% the integration method corrupts it. In this version, some statements have
 % been added to preserve the total angular momentum obtaining an improved
 % final accuracy.
 % At each integration step the angular momentum is evaluated and a velocity dW
@@ -77,7 +77,7 @@ int main(void)
 		printf("error on input file TEST.MOT");
 		exit(1);
 	}
-	fscanf(fil,"%f",&dt);      /* read integration step "dt" */
+	fscanf(fil,"%f",&dt);      /* read integration step "dt" */
 
 	for(t=0;;t+=dt)            /* loop for each instant t --- step (2) */
 	{
@@ -95,8 +95,7 @@ int main(void)
 							  link 1&2 (e) */
 		trasf_mami(W12,m1,W120);
 		trasf_mami(H12,m1,H120);               /* (f) */
-		norm_simm_skew(M W120,3,4,SKEW);       /* normalization redu_
-							cing num. error */
+		norm_simm_skew(M W120,3,4,SKEW);       /* normalization reducing num. error */
 			     /* absolute velocity and partial acceleration
 				of link 2 (g1) */
 		sum4(W1,W120,W2);
@@ -105,14 +104,12 @@ int main(void)
 			     /* refer inertia moment to absolute frame (h) */
 		trasf_mamt4(J1,m1,J10);
 		trasf_mamt4(J2,m2,J20);
-		norm_simm_skew(M J10,4,4,SYMM);	       /* normalization redu_
-							cing num. errors */
-		norm_simm_skew(M J20,4,4,SYMM);	       /* normalization redu_
-							cing num. errors */
+		norm_simm_skew(M J10,4,4,SYMM);	       /* normalization reducing num. errors */
+		norm_simm_skew(M J20,4,4,SYMM);	       /* normalization reducing num. errors */
 
 		mcopy4(J10,Jtot);                      /* total inertia (i)*/
 		sum4(Jtot,J20,Jtot);
-/**/		/* new statments */
+/**/		/* new statements */
 		skew4(W1,J10,G1);
 		skew4(W2,J20,G2);
 		sum4(G1,G2,G);
@@ -121,10 +118,9 @@ int main(void)
 		excode=dyn_eq(Jtot,dW,G,var);
 		sub4(W1,dW,W1);
 		sub4(W2,dW,W2);
-			/* moved statments */
+			/* moved statements */
 
-		molt4(W1,W1,H1);                       /* partial accelera_
-							tion of link 1 (d) */
+		molt4(W1,W1,H1);                       /* partial acceleration of link 1 (d) */
 		coriolis(H1,H120,W1,W120,H2); /* (g2) */
 /**/
 		skew4(H1,J10,F1);                      /* evaluate inertia

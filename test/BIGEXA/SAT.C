@@ -41,15 +41,15 @@ int main (void)
 	molt4(Q5,m4,mf);
                                              
                                              /* evaluate global elements */
-        invers(mi,miinv);
+        inverse(mi,miinv);
         molt4(mf,miinv,Qtot);
 	mtoscrew(Qtot,utot,&fi,&h,P);
                                              
                                              /* output results */
         printf("\n*** Results ***\n");
-        printv("The rototraslation axis is :",utot,3);
+        printv("The rototranslation axis is :",utot,3);
 	printf("\nThe rotation angle about this axis is :%f [deg]\n",deg(fi));
-	printf("\nThe traslation about this axis is :%f\n",h);
+	printf("\nThe translation about this axis is :%f\n",h);
         printv("The point P of the axis is :",P,4);
 
 #undef sb

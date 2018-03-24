@@ -48,7 +48,7 @@ int rotat2(int a, real q, MAT R, int dim)
 		fprintf(stderr,"Error (rotat2) : illegal axis\n");
 		return(NOTOK);
 	}
-	if (a == U) 		  /* a==U traslation only */
+	if (a == U) 		  /* a==U translation only */
 	{
 		#ifdef _BORLAND_
 			*R      =  1; *(R+1)  =  0; *(R+2)  = 0;
@@ -61,7 +61,7 @@ int rotat2(int a, real q, MAT R, int dim)
 			r(Z, X) =  0; r(Z, Y) =  0; r(Z, Z) = 1;
 		#endif
 	}
-	else			  /* a==X,Y or Z roto-traslation */
+	else			  /* a==X,Y or Z roto-translation */
 	{
 		x=(a+1) % 3; y=(a+2) % 3; z=a;
 		c = (real) cos(q);  s = (real) sin(q);
@@ -97,7 +97,7 @@ int rotat24(int a, real q, POINT O, MAT4 m)
 	}
 	rotat2(a, q, M m, 4);
 
-	/* traslation and constant parts */
+	/* translation and constant parts */
 	m[X][U] = O[X]; m[Y][U] = O[Y]; m[Z][U] = O[Z];
 	m[U][X] = m[U][Y] = m[U][Z] = 0 ; m[U][U] =  1 ;
 
@@ -108,10 +108,10 @@ int rotat24(int a, real q, POINT O, MAT4 m)
 /* --- Speed and Acceleration Matrices --- */
 
 /* == makeL =============================================================== */
-/* this function builds a L matrix describing a rotation or a traslation
+/* this function builds a L matrix describing a rotation or a translation
    about axis whose unit vector is u and which passes through point P.
    pitch is the pitch of the axis. It is jtype==Rev (rotation) or jtype==Pri
-   (traslation). If jtype==Pri, pitch is ignored */
+   (translation). If jtype==Pri, pitch is ignored */
 
 int makeL(int jtype, AXIS u, real pitch, POINT P, MAT4 L)
 {
@@ -119,7 +119,7 @@ int makeL(int jtype, AXIS u, real pitch, POINT P, MAT4 L)
 
 	clear4(L);
 
-	if (jtype==Pri)      /* traslation only */
+	if (jtype==Pri)      /* translation only */
 	{
 		L[X][U]=u[X]; L[Y][U]=u[Y]; /*L[Y][U]=u[X]; bug fixed */
 		L[Z][U]=u[Z];
@@ -144,9 +144,9 @@ int makeL(int jtype, AXIS u, real pitch, POINT P, MAT4 L)
 }
 
 /* == makeL2 ============================================================== */
-/* this function builds a L matrix describing a rotation or a traslation
+/* this function builds a L matrix describing a rotation or a translation
    about axis a with pitch pitch. It is jtype==Rev (rotation) or jtype==Pri
-   (traslation). If jtype==Pri, pitch is ignored */
+   (translation). If jtype==Pri, pitch is ignored */
 
 int makeL2(int jtype, int a, real pitch, POINT P, MAT4 L)
 {
@@ -160,7 +160,7 @@ int makeL2(int jtype, int a, real pitch, POINT P, MAT4 L)
 
 	clear4(L);
 
-	if (jtype==Pri)      /* traslation only */
+	if (jtype==Pri)      /* translation only */
 	{
 		L[a][U]=1;
 	}

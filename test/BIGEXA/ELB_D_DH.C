@@ -21,7 +21,7 @@ int main(int argc,char *argv[])
 	int jj=Y;                  /* for gripper             */
 	int kk=Z;                  /* angular position        */
 
-				   /* Denavit & Hartemberg's parameters (D&H) */
+				   /* Denavit & Hartenberg's parameters (D&H) */
 	real theta[MAXLINK+1]={0.,0.,0.,0.,0.,0.,0.};
 	real d[MAXLINK+1]={0.,0.,0.,0.,0.,0.,0.};
 	real b[MAXLINK+1]={0.,0.,0.,0.,0.,0.,0.};
@@ -58,8 +58,8 @@ int main(int argc,char *argv[])
 	MAT4 gripper;              /* abs. frame of gripper */
 	POINT first=ORIGIN;        /* origin of frame 0 with respect to base,
 				      Z value is in a[1] */
-	MAT4 Aus,                  /* Ausiliar frame, origin in gripper, parallel to base */
-	     Waus, Haus;           /* abs. gripper vel. and acc. in Aus frame */
+	MAT4 Aux,                  /* Auxiliary frame, origin in gripper, parallel to base */
+	     Waux, Haux;           /* abs. gripper vel. and acc. in Aux frame */
 	FILE *data;                /* file containing robot description */
 	FILE *motion;              /* file containing motion description */
 	FILE *out;                 /* output file */
@@ -97,7 +97,7 @@ int main(int argc,char *argv[])
 	first[Z]=a[1];
 	rotat24(Z,PIG_2,first,mabs[0]); /* pos. mat. of frame 0 from base frame */
 	Last[Z][U]=a[6];                /* gripper position in frame 6 */
-	idmat4(Aus);
+	idmat4(Aux);
 	clear4(Wabs[0]);               /* abs. velocity of base and of frame 0 */
 	clear4(Habs[0]);               /*      acceleration */
 
@@ -133,21 +133,21 @@ int main(int argc,char *argv[])
 			coriolis(Habs[i-1],Hrel0[i],Wabs[i-1],Wrel0[i],Habs[i]);
 		}
 		molt4(mabs[MAXLINK],Last,gripper); /* gripper position */
-		Aus[X][U]=gripper[X][U];
-		Aus[Y][U]=gripper[Y][U];
-		Aus[Z][U]=gripper[Z][U];
-		trasf_miam(Wabs[MAXLINK],Aus,Waus); /* transform velocity */
-		trasf_miam(Habs[MAXLINK],Aus,Haus); /* and acceleration in ausiliar frame */
+		Aux[X][U]=gripper[X][U];
+		Aux[Y][U]=gripper[Y][U];
+		Aux[Z][U]=gripper[Z][U];
+		trasf_miam(Wabs[MAXLINK],Aux,Waux); /* transform velocity */
+		trasf_miam(Habs[MAXLINK],Aux,Haux); /* and acceleration in auxiliary frame */
 					  /* extracts Cardan angles (and their
 					     time derivatives) of gripper  */
-		Htocardan(gripper,Waus,Haus,
+		Htocardan(gripper,Waux,Haux,
 			  ii,jj,kk,q1,q2,qp1,qp2,qpp1,qpp2);
 
 				   /* output results */
 		printf("Time=%f\n",t);
 		printm4("The position matrix of the gripper is:",gripper);
-		printm4("The velocity matrix of the gripper is:",Waus);
-		printm4("The acceleration matrix of the gripper is:",Haus);
+		printm4("The velocity matrix of the gripper is:",Waux);
+		printm4("The acceleration matrix of the gripper is:",Haux);
 		printf("\nPress any key to continue\n");
 		getch() ;
 
@@ -157,8 +157,8 @@ int main(int argc,char *argv[])
 
 		fprintf(out,"%f %f %f\n",gripper[X][U],gripper[Y][U],
 						       gripper[Z][U]);
-		fprintf(out,"%f %f %f\n",Waus[X][U],Waus[Y][U],Waus[Z][U]);
-		fprintf(out,"%f %f %f\n",Haus[X][U],Haus[Y][U],Haus[Z][U]);
+		fprintf(out,"%f %f %f\n",Waux[X][U],Waux[Y][U],Waux[Z][U]);
+		fprintf(out,"%f %f %f\n",Haux[X][U],Haux[Y][U],Haux[Z][U]);
 	}
 	fcloseall();
 }

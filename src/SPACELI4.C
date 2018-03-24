@@ -7,9 +7,9 @@
 
 			version v1.0 - April 1997
                         revision July 1998
-			patch (function pseudo_inv) by g. legnani - November 2001
-			patch (function interslpl) by g. legnani - January 2003
-			patch (function intermediate) by d. manara - January 2005
+			patch (function pseudo_inv) by g. Legnani - November 2001
+			patch (function interslpl) by g. Legnani - January 2003
+			patch (function intermediate) by d. Manara - January 2005
 
 			Developed for :
 
@@ -76,7 +76,7 @@ void Gtomegapto(MAT3 G, VECTOR omegapto)
 }
 
 /* == velacctoWH3 ========================================================= */
-/* function that builds the velocity and position matricx of a body moving
+/* function that builds the velocity and position matrix of a body moving
    around an axis parallel to an axis of the reference frame
     Input parameters
       jtype = defines the joint type : prismatic or revolute (Rev or Pri)
@@ -167,7 +167,7 @@ int Mtocardan(MAT4 m, int i, int j, int k, real q1[3], real q2[3])
 
     Note : The first time derivative of Euler/Cardan angles is evaluated using
 	   the relation
-			  qpx=omega*A(i)   (i)=invers
+			  qpx=omega*A(i)   (i)=inverse
 	   where qpx can be either qp1 or qp2
 */
 
@@ -740,9 +740,9 @@ int pseudo_inv(MAT A, MAT Api, int rows, int cols)
 	real *dk,*ck,*bk,*aux;
 	real temp;
 	real toll=1.0e-5;
-	int irank=0;	/* by joe July 1998 */
+	int irank=0;	/* by Joe July 1998 */
 
-	toll=norm(M A,rows,cols)*zerom()*1000.;	/* by joe october 2000 */
+	toll=norm(M A,rows,cols)*zerom()*1000.;	/* by Joe October 2000 */
 	ck = (real *) calloc(rows,sizeof(real));
 	bk = (real *) calloc(rows,sizeof(real));
 	clear(M Api,cols,rows);

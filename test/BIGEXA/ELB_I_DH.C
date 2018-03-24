@@ -17,7 +17,7 @@
 
 int main(int argc,char *argv[])
 {
-				       /* Denavit & Hartemberg's parameters */
+				       /* Denavit & Hartenberg's parameters */
 	real theta[MAXLINK+1]={0.,0.,0.,0.,0.,0.,0.};
 	real d[MAXLINK+1]={0.,0.,0.,0.,0.,0.,0.};
 	real b[MAXLINK+1]={0.,0.,0.,0.,0.,0.,0.};
@@ -49,7 +49,7 @@ int main(int argc,char *argv[])
 					  (p) seen in frame (p-1) */
 	     mabs[MAXLINK+1],          /* array containing abs. pos. mat. of
                                           frame (p) in base frame */
-	     mabsinv,                  /* invers position matrix of the frame
+	     mabsinv,                  /* inverse position matrix of the frame
 					  positioned in the centre of the
 					  gripper */
 	     Lrelp,                    /* L relative matrix of p-th joint
@@ -80,8 +80,8 @@ int main(int argc,char *argv[])
 	MAT4 gripper;       /* abs. frame of gripper */
 	POINT first=ORIGIN; /* origin of frame 0 with respect to base,
 			       Z value is in a[1] */
-	MAT4 Aus,                  /* Ausiliar frame, origin in gripper, parallel to base */
-	     Waus, Haus;           /* abs. gripper vel. and acc. in Aus frame */
+	MAT4 Aux,                  /* Auxiliary frame, origin in gripper, parallel to base */
+	     Waux, Haux;           /* abs. gripper vel. and acc. in Aux frame */
 
         FILE *data;                /* file containing robot description */
         FILE *motion;              /* file containing motion descr. */
@@ -128,8 +128,8 @@ int main(int argc,char *argv[])
 	first[Z]=a[1];
 	rotat24(Z,PIG_2,first,mabs[0]); /* pos. mat. of frame 0 from base frame */
 	Last[Z][U]=a[6];                /* gripper position in frame 6 */
-        idmat4(Aus);
-	clear4(Waus); clear4(Haus);
+        idmat4(Aux);
+	clear4(Waux); clear4(Haux);
         clear4(Wabs[0]); /* abs velocity of base and of frame 0 */
         clear4(Habs[0]); /*     acceleration                    */
 
@@ -180,7 +180,7 @@ int main(int argc,char *argv[])
 				       /* tests if sol. has been reached */
 			if (n>toll)
 			{
-				invers(gripper,mabsinv);
+				inverse(gripper,mabsinv);
 				molt4(dm,mabsinv,dS);
 				ds[0]=dS[X][U];
 				ds[1]=dS[Y][U];
@@ -198,18 +198,18 @@ int main(int argc,char *argv[])
 		}
 		if (k<maxiter)
 		{
-		 Aus[X][U]=gripper[X][U];
-		 Aus[Y][U]=gripper[Y][U];
-		 Aus[Z][U]=gripper[Z][U];
+		 Aux[X][U]=gripper[X][U];
+		 Aux[Y][U]=gripper[Y][U];
+		 Aux[Z][U]=gripper[Z][U];
 
 				       /* builds target velocity matrix */
-		 cardantoW(q1,qp1,ii,jj,kk,O,Waus);
-		 vmcopy(M vel,3,4,Col,M Waus,4,4);
-		 trasf_mami(Waus,Aus,Wtar); /* transform velocity from ausiliar frame to base frame*/
+		 cardantoW(q1,qp1,ii,jj,kk,O,Waux);
+		 vmcopy(M vel,3,4,Col,M Waux,4,4);
+		 trasf_mami(Waux,Aux,Wtar); /* transform velocity from auxiliary frame to base frame*/
 				       /* builds target acceleration matrix */
-		 cardantoH(q1,qp1,qpp1,ii,jj,kk,O,Haus);
-		 vmcopy(M acc,3,4,Col,M Haus,4,4);
-		 trasf_mami(Haus,Aus,Htar); /* transform acceleration from ausiliar frame to base frame */
+		 cardantoH(q1,qp1,qpp1,ii,jj,kk,O,Haux);
+		 vmcopy(M acc,3,4,Col,M Haux,4,4);
+		 trasf_mami(Haux,Aux,Htar); /* transform acceleration from auxiliary frame to base frame */
 
 				       /* builds joint volocity array */
 		 buf[0]=Wtar[X][U];
@@ -251,7 +251,7 @@ int main(int argc,char *argv[])
 		printf("\nTime=%f",t);
                 printv("The joint angles q are",q,6);
                 printv("The joint velocity qp are",qp,6);
-                printv("The joint ecceleration qpp are",qpp,6);
+                printv("The joint acceleration qpp are",qpp,6);
 		char a; scanf(" %c",&a);
 
 		for (p=0;p<MAXLINK;p++)

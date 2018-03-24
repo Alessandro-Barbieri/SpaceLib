@@ -14,7 +14,7 @@
 #define MAXLINK 6
 
 int jtype[]={Rev, Rev, Pri, Rev, Rev, Rev};   // joint type
-							    /* Denavit & Hartemberg's parameters */
+							    /* Denavit & Hartenberg's parameters */
 real alpha[]={-PIG_2, PIG_2, 0., -PIG_2, PIG_2, 0.};
 real a[]={0., 0., 0., 0., 0., 0};
 real d[]={0., 0.2, 0., 0., 0., 0.};

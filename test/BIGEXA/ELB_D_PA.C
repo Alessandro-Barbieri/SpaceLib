@@ -46,8 +46,8 @@ int main(int argc,char *argv[])
 				      frame (i) seen in frame (0) */
 	     Habs[MAXLINK+2];      /* array containing abs. vel. mat. of
 				      frame (i) in frame (0) */
-        MAT4 Aus,                  /* Ausiliar frame, origin in gripper, parallel to base */
-	     Waus, Haus;           /* abs. gripper vel. and acc. in Aus frame */
+        MAT4 Aux,                  /* Auxiliary frame, origin in gripper, parallel to base */
+	     Waux, Haux;           /* abs. gripper vel. and acc. in Aux frame */
 
 	FILE *data;                /* file containing robot description */
 	FILE *motion;              /* file containing motion description */
@@ -78,7 +78,7 @@ int main(int argc,char *argv[])
 	}
 
 				   /* matrices initialization */
-	idmat4(mabs[0]); idmat4(Aus);
+	idmat4(mabs[0]); idmat4(Aux);
 	clear4(Wabs[0]);
 	clear4(Habs[0]);
 	clearv(O[0]);
@@ -150,21 +150,21 @@ int main(int argc,char *argv[])
 		Htocardan(mabs[MAXLINK+1],Wabs[MAXLINK+1],Habs[MAXLINK+1],
 			  ii,jj,kk,q1,q2,qp1,qp2,qpp1,qpp2);
 
-		Aus[X][U]=mabs[MAXLINK+1][X][U];
-		Aus[Y][U]=mabs[MAXLINK+1][Y][U];
-		Aus[Z][U]=mabs[MAXLINK+1][Z][U];
-		trasf_miam(Wabs[MAXLINK],Aus,Waus); /* transform velocity */
-		trasf_miam(Habs[MAXLINK],Aus,Haus); /* and acceleration in ausiliar frame */
+		Aux[X][U]=mabs[MAXLINK+1][X][U];
+		Aux[Y][U]=mabs[MAXLINK+1][Y][U];
+		Aux[Z][U]=mabs[MAXLINK+1][Z][U];
+		trasf_miam(Wabs[MAXLINK],Aux,Waux); /* transform velocity */
+		trasf_miam(Habs[MAXLINK],Aux,Haux); /* and acceleration in auxiliary frame */
 					  /* extracts Cardan angles (and their
 					     time derivatives) of gripper  */
-		Htocardan(mabs[MAXLINK+1],Waus,Haus,
+		Htocardan(mabs[MAXLINK+1],Waux,Haux,
 			  ii,jj,kk,q1,q2,qp1,qp2,qpp1,qpp2);
 
 				   /* output results */
 		printf("Time=%f\n",t);
 		printm4("The position matrix of the gripper is:",mabs[MAXLINK+1]);
-		printm4("The velocity matrix of the gripper is:",Waus);
-		printm4("The acceleration matrix of the gripper is:",Haus);
+		printm4("The velocity matrix of the gripper is:",Waux);
+		printm4("The acceleration matrix of the gripper is:",Haux);
 		printf("\nPress any key to continue\n");
 		char a; scanf(" %c",&a);
 
@@ -174,8 +174,8 @@ int main(int argc,char *argv[])
 
 		fprintf(out,"%f %f %f\n",mabs[MAXLINK+1][X][U],mabs[MAXLINK+1][Y][U],
 						       mabs[MAXLINK+1][Z][U]);
-		fprintf(out,"%f %f %f\n",Waus[X][U],Waus[Y][U],Waus[Z][U]);
-		fprintf(out,"%f %f %f\n",Haus[X][U],Haus[Y][U],Haus[Z][U]);
+		fprintf(out,"%f %f %f\n",Waux[X][U],Waux[Y][U],Waux[Z][U]);
+		fprintf(out,"%f %f %f\n",Haux[X][U],Haux[Y][U],Haux[Z][U]);
 	}
 	fcloseall();
 }

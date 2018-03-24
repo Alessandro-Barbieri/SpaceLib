@@ -108,7 +108,7 @@ void axis(int a, AXIS A)
 }
 
 /* == traslat =========================================================== */
-/* function that Builds the matrix m of a traslation h along a unit vector u.*/
+/* function that Builds the matrix m of a translation h along a unit vector u.*/
 
 void traslat(AXIS u, real h, MAT4 m)
 
@@ -126,7 +126,7 @@ void traslat(AXIS u, real h, MAT4 m)
 }
 
 /* == traslat2 =========================================================== */
-/* function that Builds the matrix m of a traslation h along a frame's axes*/
+/* function that Builds the matrix m of a translation h along a frame's axes*/
 
 void traslat2(int a, real h, MAT4 m)
 
@@ -138,7 +138,7 @@ void traslat2(int a, real h, MAT4 m)
 }
 
 /* == traslat24 =========================================================== */
-/* function that Builds the matrix m of a traslation h along a frame's axes*/
+/* function that Builds the matrix m of a translation h along a frame's axes*/
 
 void traslat24(int a, real h, POINT p, MAT4 m)
 

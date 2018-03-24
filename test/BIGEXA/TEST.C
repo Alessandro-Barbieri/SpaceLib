@@ -75,14 +75,12 @@ int main(void)
 							links 1&2 (b) */
 		molt4(m1,m12,m2);                      /* absolute position
 							of link 2 (c) */
-		molt4(W1,W1,H1);                       /* partial accelera_
-							tion of link 1 (d) */
+		molt4(W1,W1,H1);                       /* partial acceleration of link 1 (d) */
 		velacctoWH2(Rev,Z,qp,qpp,W12,H12);     /* rel.vel. & acc. of
 							  link 1&2 (e) */
 		trasf_mami(W12,m1,W120);
 		trasf_mami(H12,m1,H120);               /* (f) */
-		norm_simm_skew(M W120,3,4,SKEW);       /* normalization redu_
-							cing num. error */
+		norm_simm_skew(M W120,3,4,SKEW);       /* normalization reducing num. error */
 			     /* absolute velocity and partial acceleration
 				of link 2 (g) */
 		sum4(W1,W120,W2);
@@ -91,10 +89,8 @@ int main(void)
 			     /* refer inertia moment to absolute frame (h) */
 		trasf_mamt4(J1,m1,J10);
 		trasf_mamt4(J2,m2,J20);
-		norm_simm_skew(M J10,4,4,SYMM);	       /* normalization redu_
-							cing num. errors */
-		norm_simm_skew(M J20,4,4,SYMM);	       /* normalization redu_
-							cing num. errors */
+		norm_simm_skew(M J10,4,4,SYMM);	       /* normalization reducing num. errors */
+		norm_simm_skew(M J20,4,4,SYMM);	       /* normalization reducing num. errors */
 
 		mcopy4(J10,Jtot);                      /* total inertia (i)*/
 		sum4(Jtot,J20,Jtot);

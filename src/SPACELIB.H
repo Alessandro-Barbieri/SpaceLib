@@ -164,7 +164,7 @@ typedef real PLANE[4];   /* PLANE type is defined as a four real element array. 
 #define clear4(m)          clear(M m,4,4)           /* clears a 4*4 matrix */
 #define idmat3(m)          idmat(M m,3)             /* makes unitary 3*3 matrices */
 #define idmat4(m)          idmat(M m,4)             /* makes unitary 4*4 matrices */
-#define transp3(a,b)       transp(M a,M b,3,3)      /* transposte of a matrix */
+#define transp3(a,b)       transp(M a,M b,3,3)      /* transpose of a matrix */
 #define transp4(a,b)       transp(M a,M b,4,4)
                     /* --- Operations on Matrices and Vectors, Gen. Operations on Vectors --- */
 #define clearv(v)          clear(M v,3,1);          /* clears vector */
@@ -218,7 +218,7 @@ void   trasf_mamt(MAT A1, MAT m, MAT A2, int dim);
 void   trasf_miamit(MAT4 A1, MAT4 m, MAT4 A2);
                                         /* --- Matrix transformations, General Operations --- */
 void   coriolis(MAT4 H0, MAT4 H1, MAT4 W0, MAT4 W1, MAT4 H);
-void   invers(MAT4 m, MAT4 mi);
+void   inverse(MAT4 m, MAT4 mi);
 void   mtov(MAT A, int dim, VECTOR v);      /* 3*3 skew matrix to vector[3] */
 void   vtom(VECTOR v, MAT A, int dim);      /* vector[3] to 3*3 skew matrix */
 void   skew(MAT A, MAT B, MAT C, int dim);

@@ -238,8 +238,8 @@ int mtoscrew (MAT4 Q, AXIS u, real *fi, real *h, POINT P)
 }
 
 /* == screwtom ============================================================ */
-/* builds rototraslation matrix Q from: unit vector u, rotation angle fi,
-   traslation h and a point P of the axis. fi is assumed >= 0 and <= PIG */
+/* builds rototranslation matrix Q from: unit vector u, rotation angle fi,
+   translation h and a point P of the axis. fi is assumed >= 0 and <= PIG */
 
 void screwtom (AXIS u, real fi, real h, POINT P, MAT4 Q)
 {
@@ -435,10 +435,10 @@ void jtoJ(real mass, real jxx, real jyy, real jzz, real jxy, real jyz,
 /* --- Matrix Transformations, Normalization --- */
 
 /* == normal ============================================================== */
-/* makes ortogonal a rotation matrix (if n==3) or the 3*3 upper-left
+/* makes orthogonal a rotation matrix (if n==3) or the 3*3 upper-left
    sub-matrix of a n*n square matrix
 
-   Note : a square matrix is ortogonal if its transposte and its invers are
+   Note : a square matrix is orthogonal if its transpose and its inverse are
 	 equal
 */
 
@@ -448,7 +448,7 @@ int normal(MAT R, int n)
 {
 	MAT3 RR;
 	real maxx,det,t,t1,z;
-	real kz=1.; /* update by joe July 1998 */
+	real kz=1.; /* update by Joe July 1998 */
 	real a,b;
 	int i,j,nit=0;
 
@@ -495,7 +495,7 @@ int normal(MAT R, int n)
 
 		/* printf(" max= %f\n",maxx); */              /* debug only */
 		if(nit>=8 && nit <=12) kz *= 3.;    /* if fails to converge */
-											/* increase tolerence - july 1998 */
+											/* increase tolerance - July 1998 */
 		if(maxx<=z*kz)
 			return(nit);
 	}
@@ -546,7 +546,7 @@ int norm_simm_skew(MAT A, int n, int dim, int sign)
 /* change of reference for 4*4 matrices which are contra-variant with respect
    to the row index and co-variant with respect to the column index and
    therefore transform as:
-		A2 = m * A1 * m(i)       (i)=invers
+		A2 = m * A1 * m(i)       (i)=inverse
    It is assumed m[3][0]==m[3][1]==m[3][2]==0 and m[3][3]==1 */
 
 void trasf_mami(MAT4 A1, MAT4 m, MAT4 A2)
@@ -577,7 +577,7 @@ void trasf_mami(MAT4 A1, MAT4 m, MAT4 A2)
 /* inverse change of reference for 4*4 transformation matrices which are
    contra-variant with respect to the row index and co-variant with respect to
    the column index. These matrices transform as:
-		A2 = m(i) * A1 * m        (i)=invers
+		A2 = m(i) * A1 * m        (i)=inverse
    It is assumed that  m[3][0]==m[3][1]==m[3][2]==0 and m[3][3]==1 */
 
 void trasf_miam(MAT4 A1, MAT4 m, MAT4 A2)
@@ -614,7 +614,7 @@ void trasf_miam(MAT4 A1, MAT4 m, MAT4 A2)
 /* == trasf_mamt ========================================================== */
 /* change of reference for (dim*dim) matrices which are contra-variant and
    therefore which transform as:
-		A2 = m * A1 * m(t)  (t)=transposte
+		A2 = m * A1 * m(t)  (t)=transpose
 */
 
 void trasf_mamt(MAT A1, MAT m, MAT A2, int dim)
@@ -644,7 +644,7 @@ void trasf_mamt(MAT A1, MAT m, MAT A2, int dim)
 /* == trasf_miamit ======================================================== */
 /* inverse change of reference for 4*4 contravariant matrices which transform
    as :
-		A2 = m(i) * A1 * m(i)(t)   (t)=transposte, (i)=invers
+		A2 = m(i) * A1 * m(i)(t)   (t)=transpose, (i)=inverse
    It is assumed that m[3][0]==m[3][1]==m[3][2]==0 and m[3][3]==1 */
 
 void trasf_miamit(MAT4 A1, MAT4 m, MAT4 A2)
@@ -690,7 +690,7 @@ void trasf_miamit(MAT4 A1, MAT4 m, MAT4 A2)
 
 /* --- Matrix Transformations, General Operations --- */
 
-/* == coriolis ============================================================ */
+/* == Coriolis ============================================================ */
 /* Coriolis' theorem:  H = H0 + H1 + 2 W0 * W1. Last line of W & H matrices is
    always null */
 
@@ -715,16 +715,16 @@ void coriolis(MAT4 H0, MAT4 H1, MAT4 W0, MAT4 W1, MAT4 H)
 	H[U][X]=H[U][Y]=H[U][Z]=H[U][U]=0;
 }
 
-/* == invers ============================================================== */
+/* == inverse ============================================================== */
 /* inverts transformation matrix m : mi = inv(m) */
 
-void invers(MAT4 m, MAT4 mi)
+void inverse(MAT4 m, MAT4 mi)
 {
 	int i,j;
 	real t;
 
 	if (m==mi){
-		runtime_error("invers(m,mi)","the input and the output operands 'm' and 'mi' must be different", 1);
+		runtime_error("inverse(m,mi)","the input and the output operands 'm' and 'mi' must be different", 1);
 	}
 
 	for (i=0;i<3;i++)
@@ -806,7 +806,7 @@ void skew(MAT A, MAT B, MAT C, int dim)
 }
 
 /* == trac_ljlt4 ========================================================== */
-/* evaluates the trace of L1*J*L2(t) (t) = transposte. L1,L2 are 4*4 matrices
+/* evaluates the trace of L1*J*L2(t) (t) = transpose. L1,L2 are 4*4 matrices
    whose 4th row is null. J is a 4*4 square matrix */
 
 real trac_ljlt4(MAT4 L1, MAT4 J, MAT4 L2)
@@ -1142,7 +1142,7 @@ double dzerom(void)
 	goto loop;
 }
 
-/* == runtime_error ======================================================== october 2005.*/
+/* == runtime_error ======================================================== October 2005.*/
 /*
      prints an error messages and exit if requested (ex>0)
 
