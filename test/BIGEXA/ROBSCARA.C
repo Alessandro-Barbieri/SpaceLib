@@ -1,6 +1,6 @@
 /*
 ----------------------------------------------------------------------------
-ROBSCAR.C:  Sample program for direct kinematics of Scara robot
+ROBSCAR.C:  Sample program for direct kinematics of SCARA robot
 	    (See User's Manual)
 
 		Università degli Studi di Brescia
