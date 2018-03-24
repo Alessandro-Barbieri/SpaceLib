@@ -15,7 +15,7 @@ GTOM.C:
 #include <math.h>
 #include "SPACELIB.H"
 
-void main(void)
+int main(void)
 {
 	MAT4 Hg;
 	real gx=0.;

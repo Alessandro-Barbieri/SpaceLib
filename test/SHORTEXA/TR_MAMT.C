@@ -15,7 +15,7 @@ TR_MAMT.C:
 #include <math.h>
 #include "SPACELIB.H"
 
-void main(void)
+int main(void)
 {
 	MAT4 GAMMA1={ {0.,19.,-2.5,9. }, {-19.,0.,-38.5,0.5},
 		      {2.5,38.5,0.,13.5},{-9.,-0.5,-13.5,0.}};

@@ -15,7 +15,7 @@ INTERSLP.C:
 #include <math.h>
 #include "SPACELIB.H"
 
-void main(void)
+int main(void)
 {
 PLANE pl={0.,0.,1.,-5.};
 VECTOR dir={0.,0.,1.},

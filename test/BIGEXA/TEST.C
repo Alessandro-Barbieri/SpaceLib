@@ -26,7 +26,7 @@ void delta_m(MAT4 W, MAT4 H, real dt, MAT4 dm);
 
 	int var[2][6] = {{1, 1, 1, 1, 1, 1}, {0, 0, 0, 0, 0, 0}};
 
-void main(void)
+int main(void)
 {
 	real q, qp, qpp;
 	real t,dt;

@@ -15,7 +15,7 @@
 
 #define MAXLINK 6
 
-void main(int argc,char *argv[])
+int main(int argc,char *argv[])
 {
 				       /* Denavit & Hartemberg's parameters */
 	real theta[MAXLINK+1]={0.,0.,0.,0.,0.,0.,0.};

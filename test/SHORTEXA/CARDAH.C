@@ -15,7 +15,7 @@ CARDAH.C:
 #include <math.h>
 #include "SPACELIB.H"
 
-void main(void)
+int main(void)
 {
 	MAT4 H;
 	POINT O={50.,10.,100.,1.};

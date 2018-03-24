@@ -15,7 +15,7 @@ CARD_OM.C:
 #include <math.h>
 #include "SPACELIB.H"
 
-void main(void)
+int main(void)
 {
 	VECTOR q={10.,5.,12.};
 	VECTOR qp={0.,2.,1.};

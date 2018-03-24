@@ -15,7 +15,7 @@ VELWH2.C:
 #include <math.h>
 #include "SPACELIB.H"
 
-void main(void)
+int main(void)
 {
 	MAT4 W1,H1;
 	real qp=1.5;

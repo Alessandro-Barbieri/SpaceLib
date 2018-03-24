@@ -15,7 +15,7 @@ FRAMEV.C:
 #include <math.h>
 #include "SPACELIB.H"
 
-void main(void)
+int main(void)
 {
 	MAT4 m01;
 	VECTOR v1={0.,2.,1.};

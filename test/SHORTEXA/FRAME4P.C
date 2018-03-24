@@ -15,7 +15,7 @@ FRAME4P.C:
 #include <math.h>
 #include "SPACELIB.H"
 
-void main(void)
+int main(void)
 {
 	MAT4 m01,ma1, m1a, m0a;
 	POINT Ptmp;

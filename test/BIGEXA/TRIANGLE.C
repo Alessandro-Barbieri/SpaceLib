@@ -14,7 +14,7 @@
 #include <math.h>
 #include "SPACELIB.H"
 
-void main(void)
+int main(void)
 {
 	MAT4 m01,m02,m10;   /* position matrices */
 	MAT4 Q;             /* rototraslation matrix */

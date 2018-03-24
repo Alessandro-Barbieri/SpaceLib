@@ -15,7 +15,7 @@ JTOJ.C:
 #include <math.h>
 #include "SPACELIB.H"
 
-void main(void)
+int main(void)
 
 {
     MAT4 M10;

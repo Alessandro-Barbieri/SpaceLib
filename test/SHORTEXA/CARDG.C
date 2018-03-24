@@ -15,7 +15,7 @@ CARDG.C:
 #include <math.h>
 #include "SPACELIB.H"
 
-void main(void)
+int main(void)
 {
 	MAT4 A;
 	VECTOR q={0.1,0.5,0.9};

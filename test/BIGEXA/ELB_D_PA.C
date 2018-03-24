@@ -13,7 +13,7 @@
 
 #define MAXLINK 6
 
-void main(int argc,char *argv[])
+int main(int argc,char *argv[])
 {
 	int axis[MAXLINK+2]={U,Z,X,X,X,Z,X,U};
 	int i,j,k,ierr;

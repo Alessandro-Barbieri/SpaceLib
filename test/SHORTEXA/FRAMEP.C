@@ -15,7 +15,7 @@ FRAMEP.C:
 #include <math.h>
 #include "SPACELIB.H"
 
-void main(void)
+int main(void)
 {
 	MAT3 R01;
 	MAT4 m01;

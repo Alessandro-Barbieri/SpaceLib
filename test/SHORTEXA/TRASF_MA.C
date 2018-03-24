@@ -15,7 +15,7 @@ TRASF_MA.C:
 #include <math.h>
 #include "SPACELIB.H"
 
-void main(void)
+int main(void)
 {
   MAT4 W1={ { 0. , -1.5, 0., 0.},
 	    { 1.5,  0. , 0., 0.},

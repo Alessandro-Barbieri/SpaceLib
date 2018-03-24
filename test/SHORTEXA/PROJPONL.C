@@ -15,7 +15,7 @@ PROJPONL.C:
 #include <math.h>
 #include "SPACELIB.H"
 
-void main(void)
+int main(void)
 {
    LINE l={ {3.,7.2,2.05,1.}, {0.7,4.,9.} };
    LINE m;

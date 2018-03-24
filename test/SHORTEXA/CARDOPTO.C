@@ -15,7 +15,7 @@ CARDOPTO.C:
 #include <math.h>
 #include "SPACELIB.H"
 
-void main(void)
+int main(void)
 {
 	VECTOR q={1.,1.2,3.};
 	VECTOR qp={0.,1.,0.};

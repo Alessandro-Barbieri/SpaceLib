@@ -24,7 +24,7 @@ real q[]={0.11,0.22, 0.33, 0.44, 0.55, 0.66}; /* array of joint pos. variables *
 
 #define RandData 0     /* 1 = random data, 0 = fixed data */
 
-void main(int argc,char *argv[])
+int main(int argc,char *argv[])
 {
 	int i;
 

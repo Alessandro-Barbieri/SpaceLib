@@ -16,7 +16,7 @@ CARDAW.C:
 #include <math.h>
 #include "SPACELIB.H"
 
-void main(void)
+int main(void)
 {
 	MAT4 W;
 	POINT O={50.,10.,100.,1.};

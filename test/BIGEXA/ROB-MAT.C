@@ -10,7 +10,7 @@
 #include <math.h>
 #include "SPACELIB.H"
 
-void main(int argc,char *argv[])
+int main(int argc,char *argv[])
 {
 	#define MAXLINK 10                                /* max number of links */
 

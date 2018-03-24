@@ -15,7 +15,7 @@ CARDA_OM.C:
 #include <math.h>
 #include "SPACELIB.H"
 
-void main(void)
+int main(void)
 {
 	MAT4 A;
 	POINT O={200.,40.,300.,1.};

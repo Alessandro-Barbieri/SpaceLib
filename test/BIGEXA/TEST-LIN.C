@@ -15,7 +15,7 @@
 #include "LINEAR.H"
 #define Nmax 6
 #define Mmax 7
-void main(void)
+int main(void)
 {
 	real H[Nmax][Mmax+1], A[Nmax][Mmax], x[Mmax], b[Nmax];
 	int ivet[Mmax],vpr[1];

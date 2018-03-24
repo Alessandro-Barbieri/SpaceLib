@@ -15,7 +15,7 @@ RTOCARDA.C:
 #include <math.h>
 #include "SPACELIB.H"
 
-void main(void)
+int main(void)
 {
 	MAT3 R={ { 0.840, -0.395, -0.371},
 		 {-0.415, -0.029, -0.909},

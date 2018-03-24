@@ -14,7 +14,7 @@
 
 #define MAXLINK 6
 
-void main(int argc,char *argv[])
+int main(int argc,char *argv[])
 {
 	int i,j,k,ierr;
 	int ii=X;                  /* Euler/Cardan convention */

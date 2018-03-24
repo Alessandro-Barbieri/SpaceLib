@@ -15,7 +15,7 @@ ROBSCAR.C:  Sample program for direct kinematics of Scara robot
 #include <math.h>
 #include "SPACELIB.H"
 
-void main(void)
+int main(void)
 {
 	real q[3] ={PIG/4,PIG/6,-0.5};      /* joint variables array */
 	real qp[3]={PIG*5/4,PIG*5/4,-0.5};  /* joint var. first time der. */

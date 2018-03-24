@@ -15,7 +15,7 @@ CARDAM.C:
 #include <math.h>
 #include "SPACELIB.H"
 
-void main(void)
+int main(void)
 {
 	POINT O={100.,200.,300.,1.};
 	MAT4 m;
