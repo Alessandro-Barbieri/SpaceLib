@@ -30,7 +30,7 @@
 
 /* == crossVtoM =========================================================== */
 /* function that evaluates the cross product between vector a and vector b and
-   put the result in the 3*3 upper-left part of matrix C*/
+   put the result in the 3×3 upper-left part of matrix C*/
 
 void crossVtoM(real *a, real *b, MAT C, int dim)
 
@@ -50,7 +50,7 @@ void crossVtoM(real *a, real *b, MAT C, int dim)
 
 /* == crossMtoM =========================================================== */
 /* function that evaluates the cross product between vector a and vector b stored in the
-   matrices A and B and put the result in the 3*3 upper-left part of matrix C*/
+   matrices A and B and put the result in the 3×3 upper-left part of matrix C*/
 
 void crossMtoM(MAT A, MAT B, MAT C, int dima, int dimb, int dimc)
 
@@ -153,7 +153,7 @@ void traslat24(int a, real h, POINT p, MAT4 m)
 
 
 /* == psedot =========================================================== */
-/* function that performs the Pseudo scalar product between two 4*4 matrices.*/
+/* function that performs the Pseudo scalar product between two 4×4 matrices.*/
 
 real psedot(MAT4 A, MAT4 B)
 

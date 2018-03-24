@@ -12,7 +12,7 @@ typedef double real;
 #endif
 #define aabs(a)   ((double)(a)>0.  ? (a) : -(a))
                    /* conditional compilation to avoid conflict with standard definitions of min
-                      and max. SPACELIB © definitions coincide with ANSI definitions */
+                      and maximum SPACELIB © definitions coincide with ANSI definitions */
 #ifndef max
 #define max(a,b) ((a)>(b) ? (a) : (b))
 #endif
@@ -33,8 +33,8 @@ typedef real MAT4[4][4];                 /* transform matrices (& others)  */
 typedef real POINT[4];                   /* homogeneous points coordinates */
 typedef real AXIS[3];                    /* unit vectors (axes)            */
 typedef real VECTOR[3];                  /* vectors                        */
-typedef real (*MAT4P)[4];                /* used to point to 4*4 matrices  */
-typedef real (*MAT3P)[3];                /* used to point to 3*3 matrices  */
+typedef real (*MAT4P)[4];                /* used to point to 4×4 matrices  */
+typedef real (*MAT3P)[3];                /* used to point to 3×3 matrices  */
 typedef struct {            /* Definition of the LINE type following the parametric definition*/
                   POINT P;               /*  X = Xp+t*alpha ** Y = Yp+t*beta ** Z = Zp+t*gamma*/
                   VECTOR dir;            /* where P=(Xp,Yp,Zp) and dir=[alpha,beta,gamma]*/
@@ -65,23 +65,23 @@ typedef real PLANE[4];   /* PLANE type is defined as a four real element array. 
 #define Yaxis_n  {0.,-1.,0.}
 #define Zaxis_n  {0.,0.,-1.}
 #define ORIGIN {0,0,0,1}
-                                         /* identity and null matrices 3*3 and 4*4 */
+                                         /* identity and null matrices 3×3 and 4×4 */
 #define NULL3 {{0.,0.,0.}, {0.,0.,0.}, {0.,0.,0.}}
 #define UNIT3 {{1.,0.,0.}, {0.,1.,0.}, {0.,0.,1.}}
 #define NULL4 {{0.,0.,0.,0.}, {0.,0.,0.,0.}, {0.,0.,0.,0.}, {0.,0.,0.,0.}}
 #define UNIT4 {{1.,0.,0.,0.}, {0.,1.,0.,0.}, {0.,0.,1.,0.}, {0.,0.,0.,1.}}
 
 /* ============== MACRO FOR ADJUSTABLE-DIMENSIONS MATRICES ================ */
-            /* Note : 3/4 suffixes refer to 3*3 or 4*4 matrices */
+            /* Note : 3/4 suffixes refer to 3×3 or 4×4 matrices */
                                                     /* --- norm of a matrix --- */
 #define norm3(a)           norm(M a,3,3)
 #define norm4(a)           norm(M a,4,4)
                                                     /* --- Rotation and Position Matrices --- */
 #define rotat23(a,q,R)     rotat2(a,q,M R,3);       /* rotation matrix */
                                              /* --- Matrix Transformations, Normalization --- */
-#define normal3(a)         normal(M a,3)            /* normalizes rotat. matrices */
-#define normal4(a)         normal(M a,4)  /* normalizes rot. part. of transformation matrices */
-                                                  /* normalizes symm. and skew symm. matrices */
+#define normal3(a)         normal(M a,3)            /* normalizes rotation matrices */
+#define normal4(a)         normal(M a,4)  /* normalizes rotation part. of transformation matrices */
+                                                  /* normalizes symmetrical and skew symmetrical matrices */
 #define n_simm3(m)         norm_simm_skew(M m,3,3, SYMM);
 #define n_simm34(m)        norm_simm_skew(M m,3,4, SYMM);
 #define n_simm4(m)         norm_simm_skew(M m,4,4, SYMM);
@@ -92,26 +92,26 @@ typedef real PLANE[4];   /* PLANE type is defined as a four real element array. 
 #define DHtoMstd(theta,d,a,alpha,MM)      dhtom(0,theta,d,0.,a,alpha,0.,MM)   
 
                                       /* --- Matrix Transformations, Change of Reference --- */
-#define trasf_mamt4(a,b,c) trasf_mamt(M a,M b,M c,4) /* change of reference for 4*4
+#define trasf_mamt4(a,b,c) trasf_mamt(M a,M b,M c,4) /* change of reference for 4×4
                                                         contra-variant matrices */
                                         /* --- Matrix transformations, General Operations --- */
-#define mtov3(v,m)         mtov(M m,3,v)             /* skew matrix 3*3 to vector */
-#define mtov4(v,m)         mtov(M m,4,v)             /* skew matrix 4*4 to vector */
-#define vtom3(v,m)         vtom(v,M m,3)             /* vector[3] to 3*3 skew mat. */
-#define vtom4(v,m)         vtom(v,M m,4)             /* vector[3] to 4*4 skew mat. */
-#define skew4(a,b,c)       skew(M a,M b,M c,4)       /* performs c=skew(a,b) for 4*4 matrices */
+#define mtov3(v,m)         mtov(M m,3,v)             /* skew matrix 3×3 to vector */
+#define mtov4(v,m)         mtov(M m,4,v)             /* skew matrix 4×4 to vector */
+#define vtom3(v,m)         vtom(v,M m,3)             /* vector[3] to 3×3 skew matrix */
+#define vtom4(v,m)         vtom(v,M m,4)             /* vector[3] to 4×4 skew matrix */
+#define skew4(a,b,c)       skew(M a,M b,M c,4)       /* performs c=skew(a,b) for 4×4 matrices */
                                /* --- Conversion from Cardan Angles to Matrices, Position --- */
 #define cardantor3(a,i,j,k,m)   cardantor(a,i,j,k,M m,3)
 #define cardantor4(a,i,j,k,m)   cardantor(a,i,j,k,M m,4)
 #define rtocardan3(m,i,j,k,a,b) rtocardan(M m,3,i,j,k,a,b)
 #define rtocardan4(m,i,j,k,a,b) rtocardan(M m,4,i,j,k,a,b)
-#define cardtoM(q,O,m)          cardantoM(q,X,Y,Z,O,m);    /* pos. mat. from T-B angles */
-#define eultoM(q,O,m)           cardantoM(q,Z,X,Z,O,m);    /* pos. mat. from Euler angles */
-#define nauttoM(q,O,m)          cardantoM(q,Z,Y,X,O,m);    /* pos. mat. from nautical angles */
-#define Mtocard(m,q1,q2)        Mtocardan(m,X,Y,Z,q1,q2);  /* T-B angles from pos. mat. */
-#define Mtoeul(m,q1,q2)         Mtocardan(m,Z,X,Z,q1,q2);  /* Euler angles from pos. mat. */
-#define Mtonaut(m,q1,q2)        Mtocardan(m,Z,Y,X,q1,q2);  /* nautical angles from pos. mat. */
-                          /* --- Conversion from Cardan Angles to Matrices, Vel. and Acc. --- */
+#define cardtoM(q,O,m)          cardantoM(q,X,Y,Z,O,m);    /* position matrix from T-B angles */
+#define eultoM(q,O,m)           cardantoM(q,Z,X,Z,O,m);    /* position matrix from Euler angles */
+#define nauttoM(q,O,m)          cardantoM(q,Z,Y,X,O,m);    /* position matrix from nautical angles */
+#define Mtocard(m,q1,q2)        Mtocardan(m,X,Y,Z,q1,q2);  /* T-B angles from position matrix */
+#define Mtoeul(m,q1,q2)         Mtocardan(m,Z,X,Z,q1,q2);  /* Euler angles from position matrix */
+#define Mtonaut(m,q1,q2)        Mtocardan(m,Z,Y,X,q1,q2);  /* nautical angles from position matrix */
+                          /* --- Conversion from Cardan Angles to Matrices, Velocity and Acceleration --- */
                                                           /* W from T-B angles and derivative */
 #define cardtoW(q,qp,O,W)          cardantoW(q,qp,X,Y,Z,O,W);
                                                         /* W from Euler angles and derivative */
@@ -146,39 +146,39 @@ typedef real PLANE[4];   /* PLANE type is defined as a four real element array. 
 #define frameV3(v1,v2,a1,a2,r)        frameV(v1,v2,a1,a2, M r,3)
 #define frameV4(v1,v2,a1,a2,r)        frameV(v1,v2,a1,a2, M r,4)
                   /* --- Operations on Matrices and Vectors, Matrices and Vectors Algebra --- */
-#define molt3(a,b,c)       molt(M a,M b,M c,3,3,3)  /* mult. square matrices */
+#define molt3(a,b,c)       molt(M a,M b,M c,3,3,3)  /* multiplication square matrices */
 #define molt4(a,b,c)       molt(M a,M b,M c,4,4,4)
-#define moltp(a,b,c)       molt(M a,M b,M c,4,4,1)  /* mult. pos. matrix and point */
-#define moltmv3(A,v1,v2)   molt(M A,M v1,M v2,3,3,1); /* mult. 3x3 matrix and vector[3] */
-#define rmolt3(a,r,b)      rmolt(M a,r,M b,3,3)     /* mult. scalar and sq. mat. */
+#define moltp(a,b,c)       molt(M a,M b,M c,4,4,1)  /* multiplication position matrix and point */
+#define moltmv3(A,v1,v2)   molt(M A,M v1,M v2,3,3,1); /* multiplication 3x3 matrix and vector[3] */
+#define rmolt3(a,r,b)      rmolt(M a,r,M b,3,3)     /* multiplication scalar and square matrix */
 #define rmolt4(a,r,b)      rmolt(M a,r,M b,4,4)
-#define rmoltv(v1,r,v2)    rmolt(M v1,r,M v2,3,1);  /* mult. vector[3] by a scalar r */
+#define rmoltv(v1,r,v2)    rmolt(M v1,r,M v2,3,1);  /* multiplication vector[3] by a scalar r */
 #define sum3(a,b,c)        sum(M a,M b,M c,3,3)     /* sum of square matrices */
 #define sum4(a,b,c)        sum(M a,M b,M c,4,4)
 #define sumv(a,b,c)        sum(M a,M b,M c,3,1);    /* sum of vectors */
-#define sub3(a,b,c)        sub(M a,M b,M c,3,3)     /* diff. of square matrices */
+#define sub3(a,b,c)        sub(M a,M b,M c,3,3)     /* difference of square matrices */
 #define sub4(a,b,c)        sub(M a,M b,M c,4,4)
-#define subv(a,b,c)        sub(M a,M b,M c,3,1);    /* diff. of vectors */
-                   /* --- Operations on Matrices and Vectors, Gen. Operations on Matrices --- */
-#define clear3(m)          clear(M m,3,3)           /* clears a 3*3 matrix */
-#define clear4(m)          clear(M m,4,4)           /* clears a 4*4 matrix */
-#define idmat3(m)          idmat(M m,3)             /* makes unitary 3*3 matrices */
-#define idmat4(m)          idmat(M m,4)             /* makes unitary 4*4 matrices */
+#define subv(a,b,c)        sub(M a,M b,M c,3,1);    /* difference of vectors */
+                   /* --- Operations on Matrices and Vectors, General Operations on Matrices --- */
+#define clear3(m)          clear(M m,3,3)           /* clears a 3×3 matrix */
+#define clear4(m)          clear(M m,4,4)           /* clears a 4×4 matrix */
+#define idmat3(m)          idmat(M m,3)             /* makes unitary 3×3 matrices */
+#define idmat4(m)          idmat(M m,4)             /* makes unitary 4×4 matrices */
 #define transp3(a,b)       transp(M a,M b,3,3)      /* transpose of a matrix */
 #define transp4(a,b)       transp(M a,M b,4,4)
-                    /* --- Operations on Matrices and Vectors, Gen. Operations on Vectors --- */
+                    /* --- Operations on Matrices and Vectors, General Operations on Vectors --- */
 #define clearv(v)          clear(M v,3,1);          /* clears vector */
                                                                     /* --- Copy Functions --- */
-#define mcopy3(a,b)        mcopy(M a,M b,3,3)       /* copy of square mat. */
+#define mcopy3(a,b)        mcopy(M a,M b,3,3)       /* copy of square matrix */
 #define mcopy4(a,b)        mcopy(M a,M b,4,4)
-#define mcopy34(a,b)       mmcopy(M a,M b,3,4,3,3)  /* copy 3*3 submatrix */
+#define mcopy34(a,b)       mmcopy(M a,M b,3,4,3,3)  /* copy 3×3 submatrix */
 #define mcopy43(a,b)       mmcopy(M a,M b,4,3,3,3)
 #define vcopy(v1,v2)       mcopy(M v1,M v2,3,1);    /* copy vectors */
 #define pcopy(P1,P2)       mcopy(M P1,M P2,4,1);    /* copy points */
                                                                    /* --- Print Functions --- */
 #define printm(str,m)   fprintm3(stdout,str,m)      /* for compatibility */
-#define printm3(str,m)  fprintm3(stdout,str,m)      /* print 3*3 matrices to stdout */
-#define printm4(str,m)  fprintm4(stdout,str,m)      /* print 4*4 matrices to stdout */
+#define printm3(str,m)  fprintm3(stdout,str,m)      /* print 3×3 matrices to stdout */
+#define printm4(str,m)  fprintm4(stdout,str,m)      /* print 4×4 matrices to stdout */
 #define printv(str,m,n) fprintv(stdout,str,m,n)     /* print vector to stdout */
 
         /* ============================ FUNCTIONS PROTOTYPES ====================== */
@@ -219,8 +219,8 @@ void   trasf_miamit(MAT4 A1, MAT4 m, MAT4 A2);
                                         /* --- Matrix transformations, General Operations --- */
 void   coriolis(MAT4 H0, MAT4 H1, MAT4 W0, MAT4 W1, MAT4 H);
 void   inverse(MAT4 m, MAT4 mi);
-void   mtov(MAT A, int dim, VECTOR v);      /* 3*3 skew matrix to vector[3] */
-void   vtom(VECTOR v, MAT A, int dim);      /* vector[3] to 3*3 skew matrix */
+void   mtov(MAT A, int dim, VECTOR v);      /* 3×3 skew matrix to vector[3] */
+void   vtom(VECTOR v, MAT A, int dim);      /* vector[3] to 3×3 skew matrix */
 void   skew(MAT A, MAT B, MAT C, int dim);
 real   trac_ljlt4(MAT4 L1, MAT4 J, MAT4 L2);
                                /* --- Conversion from Cardan Angles to Matrices, Position --- */
@@ -229,7 +229,7 @@ int    rtocardan(MAT R, int dim, int i, int j, int k, real q1[3], real q2[3]);
 void   cardantoM(real *q, int i, int j, int k, POINT O, MAT4 m);
                                               /* Euler/Cardan angles from a position matrix m */
 int    Mtocardan(MAT4 m, int i, int j, int k, real q1[3], real q2[3]);
-                          /* --- Conversion from Cardan Angles to Matrices, Vel. and Acc. --- */
+                          /* --- Conversion from Cardan Angles to Matrices, Velocity and Acceleration --- */
 void   cardantoW(real *q, real *qp, int i, int j, int k, POINT O, MAT4 W);
     /* extracts the Euler/Cardan angles and their first time derivative from matrices m and W */
 int    Wtocardan(MAT4 m, MAT4 W, int i, int j, int k, real q1[3], real q2[3], real qp1[3],
@@ -276,13 +276,13 @@ void   rmolt(MAT A, real r, MAT B, int d1, int d2);
 void   sum(MAT A, MAT B, MAT C, int d1, int d2);
 void   sub(MAT A, MAT B, MAT C, int d1, int d2);
 real   norm(MAT A, int d1, int d2);
-                   /* --- Operations on Matrices and Vectors, Gen. Operations on Matrices --- */
+                   /* --- Operations on Matrices and Vectors, General Operations on Matrices --- */
 void   clear(MAT A, int id, int jd);
 void   idmat(MAT A, int ijd);
 void   transp(MAT A, MAT At, int d1, int d2);
 int    pseudo_inv(MAT A, MAT Api, int rows, int cols);
-                    /* --- Operations on Matrices and Vectors, Gen. Operations on Vectors --- */
-void   cross(VECTOR a, VECTOR b, VECTOR  c);   /* cross product c = a x b */
+                    /* --- Operations on Matrices and Vectors, General Operations on Vectors --- */
+void   cross(VECTOR a, VECTOR b, VECTOR  c);   /* cross product c = a × b */
 real   dot(VECTOR a, VECTOR b);                /* dot product of 3 element vector */
 real   dot2(real *v1, real *v2, int dim);      /* dot product of dim element vector */
 real   mod(VECTOR a);                          /* module of a vector */
@@ -293,10 +293,10 @@ void   vector(AXIS u, real m, VECTOR v);       /* evaluate a vector v whose modu
                                           /* --- Copy Functions --- */
 void   mcopy(MAT A1, MAT A2, int d1, int d2);
 void   mmcopy(MAT A, MAT B, int d1, int d2, int im, int jm);
-int    mvcopy(MAT A, int rows, int cols, int val, int type, real *v); /* from row/col of A
+int    mvcopy(MAT A, int rows, int cols, int val, int type, real *v); /* from row/column of A
                                                                          to vector */
 int    vmcopy(real *v, int dim, int val, int type, MAT A, int rows,
-              int cols);                       /* from vect. to row/col of A */
+              int cols);                       /* from vector to row/column of A */
                                                /* --- Print Functions --- */
 void   fprintm3(FILE *out, char *s, MAT3 A);
 void   fprintm4(FILE *out, char *s, MAT4 A);

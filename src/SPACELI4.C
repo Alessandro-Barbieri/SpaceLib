@@ -105,8 +105,8 @@ void velacctoWH3(int jtype, int a, real qp, real qpp, POINT O, MAT4 W,
 		clearv(omega); clearv(omegapto);
 		omega[z]=qp; omegapto[z]=qpp;
 		cross(omega,O,vel);
-		cross(omega,vel,a_norm); /* norm. comp. of the acc. vector */
-		cross(omegapto,O,acc); /* tang. comp. of the acc. vector */
+		cross(omega,vel,a_norm); /* normal composition of the acceleration vector */
+		cross(omegapto,O,acc); /* tangential composition of the acceleration vector */
 		sumv(acc,a_norm,acc);
 		W[x][U]=-vel[x]; W[y][U]=-vel[y]; W[z][U]=-vel[z];
 		H[x][U]=-acc[x]; H[y][U]=-acc[y]; H[z][U]=-acc[z];
@@ -150,7 +150,7 @@ int Mtocardan(MAT4 m, int i, int j, int k, real q1[3], real q2[3])
 }
 
 
-/* --- Conversion form Cardan Angles to Matrices, Vel. and Acc. --- */
+/* --- Conversion form Cardan Angles to Matrices, Velocity and Acceleration --- */
 
 /* == Wtocardan =========================================================== */
 /* function that extracts the Euler/Cardan angles and their first time
@@ -194,7 +194,7 @@ int Wtocardan(MAT4 m, MAT4 W, int i, int j, int k, real q1[3], real q2[3],
 	else                            /* anti-cyclic */
 		sig=-1;
 
-	test=Mtocardan(m,i,j,k,q1,q2);  /* Eul./Card. angles from m */
+	test=Mtocardan(m,i,j,k,q1,q2);  /* Euler/Cardan angles from m */
 	if (test==OK)
 	{
 		mcopy43(W,OMEGA);	/* a. v. matrix */
@@ -713,7 +713,7 @@ void intersection(LINE l1, LINE l2, LINEP lmindist, real * mindist, PLANE pl,
 }
 
 
-/* --- Operations on Matrices and Vectors, Gen. Operations on Matrices --- */
+/* --- Operations on Matrices and Vectors, General Operations on Matrices --- */
 
 /* == pseudo_inv ========================================================= */
 /* function that builds the pseudo-inverse matrix Api of a given matrix A. It
@@ -837,7 +837,7 @@ void crossmtom(real *a, real *b, MAT C, int dim)
 }
 
 
-/* --- Operations on Matrices and Vectors, Gen. Operations on Vectors --- */
+/* --- Operations on Matrices and Vectors, General Operations on Vectors --- */
 
 /* == dot2 ================================================================ */
 /* function that evaluates the dot product of two dim elements vectors

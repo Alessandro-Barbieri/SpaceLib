@@ -3,7 +3,7 @@
                                           /* --- Speed and Acceleration Matrices --- */
 int    dyn_eq(MAT4 J, MAT4 Wp, MAT4 F, int var[2][6]);
                                           /* --- Functions solve minvers linear, solve --- */
-int    solve(MAT A, real *b, real *x, int dim); /* solves linear syst. A*x=b */
+int    solve(MAT A, real *b, real *x, int dim); /* solves linear system A*x=b */
                                           /* --- Functions solve minvers linear, minvers --- */
 int    minvers(MAT A, MAT Ai, int dim);   /* inverse of A using linear */
                                           /* --- Functions solve minvers linear, linear --- */

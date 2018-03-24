@@ -28,38 +28,38 @@ int main(int argc,char *argv[])
 	real fi[MAXLINK+1]={0.,PIG_2,0.,0.,3*PIG_2,PIG_2,0.};
 	real a[MAXLINK+1];         /* to be read from data_file */
 
-	real q,qp,qpp;             /* joint variables : pos., vel., acc. */
+	real q,qp,qpp;             /* joint variables : position, velocity, acceleration */
 	real t,dt;
 
 	VECTOR q1,q2;              /* Euler/Cardan angle configurations */
-	VECTOR qp1,qp2;            /* Euler/Cardan angle first time der. */
-	VECTOR qpp1,qpp2;          /* Euler/Cardan angle sec. time der. */
+	VECTOR qp1,qp2;            /* Euler/Cardan angle first time derivative */
+	VECTOR qpp1,qpp2;          /* Euler/Cardan angle second time derivative */
 
-	MAT4 mreli_1[MAXLINK+1],   /* array containing pos. mat. of frame
+	MAT4 mreli_1[MAXLINK+1],   /* array containing position matrix of frame
 				      (i) seen in frame (i-1) */
-	     mabs[MAXLINK+1],      /* array containing abs. pos. mat. of
+	     mabs[MAXLINK+1],      /* array containing absolute position matrix of
 				      frame (i) in base frame */
-	     Wreli_1[MAXLINK+1],   /* array containing rel. vel. mat. of
+	     Wreli_1[MAXLINK+1],   /* array containing relative velocity matrix of
 				      frame (i) seen in frame (i-1) */
-	     Wrel0[MAXLINK+1],     /* array containing rel. vel. mat. of
+	     Wrel0[MAXLINK+1],     /* array containing relative velocity matrix of
 				      frame (i) seen in base frame */
-	     Wabs[MAXLINK+1],      /* array containing abs. vel. mat. of
+	     Wabs[MAXLINK+1],      /* array containing absolute velocity matrix of
 				      frame (i) in base frame */
-	     Hreli_1[MAXLINK+1],   /* array containing rel. acc. mat. of
+	     Hreli_1[MAXLINK+1],   /* array containing relative acceleration matrix of
 				      frame (i) seen in frame (i-1) */
-	     Hrel0[MAXLINK+1],     /* array containing rel. acc. mat. of
+	     Hrel0[MAXLINK+1],     /* array containing relative acceleration matrix of
 				      frame (i) seen in base frame */
-	     Habs[MAXLINK+1];      /* array containing abs. vel. mat. of
+	     Habs[MAXLINK+1];      /* array containing absolute velocity matrix of
 				      frame (i) in base frame */
 	MAT4 Last ={ {0.,1.,0.,0.},      /* transformation matrix from */
 		     {0.,0.,1.,0.},      /* frame (6) to gripper       */
 		     {1.,0.,0.,0.},      /* element Z-U is in a[6]     */
 		     {0.,0.,0.,1.} };    /*                            */
-	MAT4 gripper;              /* abs. frame of gripper */
+	MAT4 gripper;              /* absolute frame of gripper */
 	POINT first=ORIGIN;        /* origin of frame 0 with respect to base,
 				      Z value is in a[1] */
 	MAT4 Aux,                  /* Auxiliary frame, origin in gripper, parallel to base */
-	     Waux, Haux;           /* abs. gripper vel. and acc. in Aux frame */
+	     Waux, Haux;           /* absolute gripper velocity and acceleration in Auxiliary frame */
 	FILE *data;                /* file containing robot description */
 	FILE *motion;              /* file containing motion description */
 	FILE *out;                 /* output file */
@@ -95,10 +95,10 @@ int main(int argc,char *argv[])
 	}
 				   /* matrices initialization */
 	first[Z]=a[1];
-	rotat24(Z,PIG_2,first,mabs[0]); /* pos. mat. of frame 0 from base frame */
+	rotat24(Z,PIG_2,first,mabs[0]); /* position matrix of frame 0 from base frame */
 	Last[Z][U]=a[6];                /* gripper position in frame 6 */
 	idmat4(Aux);
-	clear4(Wabs[0]);               /* abs. velocity of base and of frame 0 */
+	clear4(Wabs[0]);               /* absolute velocity of base and of frame 0 */
 	clear4(Habs[0]);               /*      acceleration */
 
 	a[1]=a[6]=0;    /* D&H parameter 'a' of link 1 and link 6 are zero */
@@ -115,20 +115,20 @@ int main(int argc,char *argv[])
 			if(ierr!=3)
 				exit(0);
 
-				   /* builds rel. pos. matrix */
+				   /* builds relative position matrix */
 			dhtom(Rev,theta[i],d[i],b[i],a[i],fi[i],q,mreli_1[i]);
 
-				   /* builds rel. vel. and acc. matrices */
+				   /* builds relative velocity and acceleration matrices */
 			velacctoWH(Rev,qp,qpp,Wreli_1[i],Hreli_1[i]);
 
-				   /* abs. pos. matrix of frame (i) */
+				   /* absolute position matrix of frame (i) */
 			molt4(mabs[i-1],mreli_1[i],mabs[i]);
 
 				   /* W and H matrices in base frame */
 			trasf_mami(Wreli_1[i],mabs[i-1],Wrel0[i]);
 			trasf_mami(Hreli_1[i],mabs[i-1],Hrel0[i]);
 
-				   /* abs. vel. and acc. matrices */
+				   /* absolute velocity and acceleration matrices */
 			sum4(Wabs[i-1],Wrel0[i],Wabs[i]);
 			coriolis(Habs[i-1],Hrel0[i],Wabs[i-1],Wrel0[i],Habs[i]);
 		}

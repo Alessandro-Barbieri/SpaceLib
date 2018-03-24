@@ -69,7 +69,7 @@ int main(int argc,char *argv[])
 		fscanf(data,"%f %f %f %f %f %f %f",
 		       &m,&jxx,&jxy,&jxz,&jyy,&jyz,&jzz);
 		fscanf(data,"%f %f %f",&xg,&yg,&zg);
-					   /* build inertia mat. */
+					   /* build inertia matrix */
 		jtoJ(m,jxx,jyy,jzz,jxy,jyz,jxz,xg,yg,zg,J[i]);
 	}
 				       /* read gravity acceleration vector */
@@ -133,14 +133,14 @@ int main(int argc,char *argv[])
 		for(i=1;i<=nlink;i++)         /* for each link */
 		{
 			printf("\n\n Link %d \n\n",i);
-			printm4("Rel. pos. matrix",mrel[i]);
-			printm4("Abs. pos. matrix",T[i]);
-			printm4("Rel. vel. matrix in frame (i)",W[i]);
-			printm4("Rel. vel. matrix in frame (0)",W0[i]);
+			printm4("Rel. position matrix",mrel[i]);
+			printm4("Abs. position matrix",T[i]);
+			printm4("Rel. velocity matrix in frame (i)",W[i]);
+			printm4("Rel. velocity matrix in frame (0)",W0[i]);
 			printm4("Absolute velocity matrix in frame (0)",
 				WA[i]);
-			printm4("Rel. acc. matrix in frame (i)",H[i]);
-			printm4("Rel. acc. matrix in frame (0)",H0[i]);
+			printm4("Rel. acceleration matrix in frame (i)",H[i]);
+			printm4("Rel. acceleration matrix in frame (0)",H0[i]);
 			printm4("Absolute acceleration matrix in frame (0)",
 				HA[i]);
 			printm4("Inertia matrix in frame (i)",J[i]);

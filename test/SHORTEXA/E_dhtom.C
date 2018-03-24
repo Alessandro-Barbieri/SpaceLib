@@ -20,7 +20,7 @@ real a[]={0., 0., 0., 0., 0., 0};
 real d[]={0., 0.2, 0., 0., 0., 0.};
 real theta[]={0., 0., 0., 0., 0., 0.};
 
-real q[]={0.11,0.22, 0.33, 0.44, 0.55, 0.66}; /* array of joint pos. variables */
+real q[]={0.11,0.22, 0.33, 0.44, 0.55, 0.66}; /* array of joint position variables */
 
 #define RandData 0     /* 1 = random data, 0 = fixed data */
 

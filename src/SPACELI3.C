@@ -33,7 +33,7 @@
 /* this function builds a rotation matrix describing a rotation of angle q
    around axis a. It is
       a : rotation axis (it must be either the constant X=0,Y=1, Z=2, U=3)
-   The rotation matrix is stored in the 3*3 upper-left part of a dim*dim
+   The rotation matrix is stored in the 3×3 upper-left part of a dim×dim
    matrix. If a=U the rotation is assumed null */
 
 int rotat2(int a, real q, MAT R, int dim)
@@ -222,8 +222,8 @@ void Wtovel(MAT4 W, AXIS u, real *omega, real *vel, POINT P)
 
 /* == cardantor =========================================================== */
 /* Cardan or Euler angles to rotation matrix. Builds a rotation matrix
-   starting from the Cardan or Euler angles and stores it in the 3*3 upper-
-   left sub-matrix of a dim*dim matrix A. It is
+   starting from the Cardan or Euler angles and stores it in the 3×3 upper-
+   left sub-matrix of a dim×dim matrix A. It is
       i,j,k : rotation axes (their value must be the constant X=0, Y=1 or Z=2)
       q : vector containing 1st, 2nd and 3rd angle
 */
@@ -292,7 +292,7 @@ int cardantor(real *q, int i, int j, int k, MAT A, int dim)
 
 /* == rtocardan =========================================================== */
 /* rotation matrix to Cardan or Euler angles. Extracts the Cardan or Euler
-   angles from the 3*3 upper-left sub-matrix of a dim*dim matrix. It is
+   angles from the 3×3 upper-left sub-matrix of a dim×dim matrix. It is
       i,j,k : rotation axes (their value must be the constant X=0, Y=1 or Z=2)
       q1[3] : first solution;
       q2[3] : second solution;
@@ -343,7 +343,7 @@ int rtocardan(MAT R, int dim, int i, int j, int k, real q1[3], real q2[3])
 
 /* == cardantoM =========================================================== */
 /* build the position matrix m of a frame whose origin is O and whose
-   orientation is specified by a Euler/Cardanic convention:
+   orientation is specified by a Euler/Cardan convention:
       * 3 rotations around axis i, j, k
       * the angles value are contained in array q
 */
@@ -359,11 +359,11 @@ void cardantoM(real *q, int i, int j, int k, POINT O, MAT4 m)
 }
 
 
-/* --- Conversion from Cardan Angles to Matrices, Vel. and Acc. --- */
+/* --- Conversion from Cardan Angles to Matrices, Velocity and Acceleration --- */
 
 /* == cardantoW =========================================================== */
 /* builds the velocity matrix W of a frame whose origin is O and whose
-   orientation is specified by a Euler/Cardanic convention:
+   orientation is specified by a Euler/Cardan convention:
       * 3 rotations around axis i, j, k
       * the angle values are contained in array q
       * the angular speeds are contained in array qp
@@ -402,12 +402,12 @@ void cardanto_omega(real *q, real *qp, int i, int j, int k, MAT A, int dim)
 
 	cardantol(q,i,j,k,mat,3);
 	molt(mat,qp,omega,3,3,1);    /* evaluates angular velocity */
-	vtom(omega,A,dim);           /* store a.v. in 3*3 skew simm. matrix */
+	vtom(omega,A,dim);           /* store a.v. in 3×3 skew symmetrical matrix */
 }
 
 /* == cardantoH =========================================================== */
 /* builds the acceleration matrix H of a frame whose origin is O and whose
-   orientation is specified by a Euler/Cardanic convention:
+   orientation is specified by a Euler/Cardan convention:
       * 3 rotations, each around an axis i, j, k
       * the angles value are contained in array q
       * the angular speeds are contained in array qp
@@ -450,7 +450,7 @@ void cardanto_G(real *q, real *qp, real *qpp, int i, int j, int k, MAT A,
 	molt(mat,qpp,buffer,3,3,1);
 	molt(mat1,wprod,buffer1,3,3,1);
 	sum(buffer,buffer1,omegapto,3,1);
-	vtom(omegapto,A,dim);        /* ang. acc. into 3*3 skew-simm. mat. */
+	vtom(omegapto,A,dim);        /* angular acceleration into 3×3 skew-symmetrical matrix */
 	#ifdef _BORLAND_
 		*A += -omega[Y]*omega[Y]-omega[Z]*omega[Z];
 		a(Y,Y) += -omega[X]*omega[X]-omega[Z]*omega[Z];
@@ -589,7 +589,7 @@ int cardantoWPROD(real *q, int i, int j, int k, MAT R, int dim)
 /* builds a rotation matrix from three points. Axis a1 from P1 toward point
    P2, axis a2 from P1 toward point P3. Axis a1 has priority. a1,a2 must be
    either the constant X=0, Y=1 or Z=2 (a1!=a2). The rotation matrix is stored
-   in the 3*3 upper-left part of the dim*dim matrix A */
+   in the 3×3 upper-left part of the dim×dim matrix A */
 
 int frameP(POINT P1, POINT P2, POINT P3, int a1, int a2, MAT A, int dim)
 {
@@ -629,7 +629,7 @@ void frame4P(POINT P1, POINT P2, POINT P3, int a1, int a2, MAT4 m)
 /* builds a rotation matrix from two vectors. Axis a1 directed as v1, axis a2
    directed as v2. Axis a1 has priority. Third axis as v1xv2. a1,a2 must be
    either the constant X=0, Y=1 or Z=2 (a1!=a2). The rotation matrix is
-   stored in the 3*3 upper-left part of the dim*dim matrix A */
+   stored in the 3×3 upper-left part of the dim×dim matrix A */
 
 int frameV(VECTOR v1, VECTOR v2, int a1, int a2, MAT A, int dim)
 
@@ -732,7 +732,7 @@ void vect(POINT P1, POINT P2, VECTOR v)
 }
 
 
-/* --- Operations on Matrices and Vectors, Gen. Operations on Matrices --- */
+/* --- Operations on Matrices and Vectors, General Operations on Matrices --- */
 
 /* == clear =============================================================== */
 /* clears a id*jd matrix */

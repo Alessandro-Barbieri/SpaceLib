@@ -19,11 +19,11 @@ int main(void)
 	MAT4 m01,m02,m10;   /* position matrices */
 	MAT4 Q;             /* rototranslation matrix */
 
-	POINT P1={0,1,2,1}; /* points of the triangle in the starting pos. */
+	POINT P1={0,1,2,1}; /* points of the triangle in the starting position */
 	POINT P2={0,6,2,1};
 	POINT P3={0,1,6,1};
 
-	POINT P4={3,0,2,1}; /* points of the triangle in the final pos. */
+	POINT P4={3,0,2,1}; /* points of the triangle in the final position */
 	POINT P5={8,0,2,1};
 	POINT P6={3,0,6,1};
 
@@ -32,8 +32,8 @@ int main(void)
 	real fi;            /* rotation angle */
 	real h;             /* pitch of the screw */
 
-	frame4P(P1,P2,P3,Y,Z,m01);  /* builds starting pos. matrix */
-	frame4P(P4,P5,P6,Y,Z,m02);  /* builds final pos. matrix */
+	frame4P(P1,P2,P3,Y,Z,m01);  /* builds starting position matrix */
+	frame4P(P4,P5,P6,Y,Z,m02);  /* builds final position matrix */
 
 	inverse(m01,m10);            /* builds the rototrasl. matrix Q */
 	molt4(m02,m10,Q);

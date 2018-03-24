@@ -70,7 +70,7 @@ int dhtom(int jtype, real theta, real d, real b, real a, real alpha, real q,
 
 /* == extract ============================================================= */
 /* extracts the unit vector u and the rotational angle fi from the upper-left
-   3*3 submatrix of a dim*dim matrix A. fi is assumed >= 0 and <= PIG */
+   3×3 submatrix of a dim×dim matrix A. fi is assumed >= 0 and <= PIG */
 
 void extract(MAT A, AXIS u, real *fi, int dim)
 
@@ -259,7 +259,7 @@ void screwtom (AXIS u, real fi, real h, POINT P, MAT4 Q)
 
 /* == rotat =============================================================== */
 /* builds rotational matrix from unit vector u and rotation angle fi.
-   Stores the matrix in the 3*3 upper-left part of a dim*dim matrix A */
+   Stores the matrix in the 3×3 upper-left part of a dim×dim matrix A */
 
 void rotat (AXIS u, real fi, MAT A, int dim)
 
@@ -435,7 +435,7 @@ void jtoJ(real mass, real jxx, real jyy, real jzz, real jxy, real jyz,
 /* --- Matrix Transformations, Normalization --- */
 
 /* == normal ============================================================== */
-/* makes orthogonal a rotation matrix (if n==3) or the 3*3 upper-left
+/* makes orthogonal a rotation matrix (if n==3) or the 3×3 upper-left
    sub-matrix of a n*n square matrix
 
    Note : a square matrix is orthogonal if its transpose and its inverse are
@@ -505,7 +505,7 @@ int normal(MAT R, int n)
 
 /* == norm_simm_skew ====================================================== */
 /* makes symmetric/antisymmetric (normalize) the n*n upper-left submatrix of
-   a dim*dim square matrix. It is
+   a dim×dim square matrix. It is
 		sign=1,-1  1=symmetric -1=anti-sym. */
 
 int norm_simm_skew(MAT A, int n, int dim, int sign)
@@ -543,7 +543,7 @@ int norm_simm_skew(MAT A, int n, int dim, int sign)
 /* --- Matrix transformations, Change of Reference --- */
 
 /* == trasf_mami ========================================================== */
-/* change of reference for 4*4 matrices which are contra-variant with respect
+/* change of reference for 4×4 matrices which are contra-variant with respect
    to the row index and co-variant with respect to the column index and
    therefore transform as:
 		A2 = m * A1 * m(i)       (i)=inverse
@@ -554,7 +554,7 @@ void trasf_mami(MAT4 A1, MAT4 m, MAT4 A2)
 	int i,j,h,k;
 	double t;
 
-	for (i=0;i<3;i++)             /* 3*3 sub matrix */
+	for (i=0;i<3;i++)             /* 3×3 sub matrix */
 		for (j=0;j<3;j++)
 		{
 			t=0.;
@@ -574,7 +574,7 @@ void trasf_mami(MAT4 A1, MAT4 m, MAT4 A2)
 }
 
 /* == trasf_miam ========================================================== */
-/* inverse change of reference for 4*4 transformation matrices which are
+/* inverse change of reference for 4×4 transformation matrices which are
    contra-variant with respect to the row index and co-variant with respect to
    the column index. These matrices transform as:
 		A2 = m(i) * A1 * m        (i)=inverse
@@ -586,7 +586,7 @@ void trasf_miam(MAT4 A1, MAT4 m, MAT4 A2)
 	double t;
 	real tmp[3];
 
-	for (i=0;i<3;i++)             /* 3*3 rotational sub-matrix*/
+	for (i=0;i<3;i++)             /* 3×3 rotational sub-matrix*/
 		for (j=0;j<3;j++)
 		{
 			t=0.;
@@ -612,7 +612,7 @@ void trasf_miam(MAT4 A1, MAT4 m, MAT4 A2)
 }
 
 /* == trasf_mamt ========================================================== */
-/* change of reference for (dim*dim) matrices which are contra-variant and
+/* change of reference for (dim×dim) matrices which are contra-variant and
    therefore which transform as:
 		A2 = m * A1 * m(t)  (t)=transpose
 */
@@ -642,7 +642,7 @@ void trasf_mamt(MAT A1, MAT m, MAT A2, int dim)
 }
 
 /* == trasf_miamit ======================================================== */
-/* inverse change of reference for 4*4 contravariant matrices which transform
+/* inverse change of reference for 4×4 contravariant matrices which transform
    as :
 		A2 = m(i) * A1 * m(i)(t)   (t)=transpose, (i)=inverse
    It is assumed that m[3][0]==m[3][1]==m[3][2]==0 and m[3][3]==1 */
@@ -659,7 +659,7 @@ void trasf_miamit(MAT4 A1, MAT4 m, MAT4 A2)
 			t += -m[j][i]*m[j][U];
 		tmp[i] = t;
 	}
-	for (i=0;i<3;i++)             /* 3*3 rotational sub-matrix */
+	for (i=0;i<3;i++)             /* 3×3 rotational sub-matrix */
 		for (j=0;j<3;j++)
 		{
 			t=0.; t1=0.; t2=0.;
@@ -740,8 +740,8 @@ void inverse(MAT4 m, MAT4 mi)
 }
 
 /* == mtov ================================================================ */
-/* 3*3 submatrix to 3 element vector. Extracts a 3 element vector from a 3*3
-   skew-symmetric sub-matrix in the upper-left part of a dim*dim matrix A */
+/* 3×3 submatrix to 3 element vector. Extracts a 3 element vector from a 3×3
+   skew-symmetric sub-matrix in the upper-left part of a dim×dim matrix A */
 
 void mtov(MAT A, int dim, VECTOR v)
 
@@ -755,8 +755,8 @@ void mtov(MAT A, int dim, VECTOR v)
 }
 
 /* == vtom ================================================================ */
-/* 3 element vector to 3*3 submatrix. Creates a 3*3 skew-symmetric sub-matrix
-   in the upper-left part of a dim*dim matrix A */
+/* 3 element vector to 3×3 submatrix. Creates a 3×3 skew-symmetric sub-matrix
+   in the upper-left part of a dim×dim matrix A */
 
 void vtom(VECTOR v, MAT A, int dim)
 
@@ -777,7 +777,7 @@ void vtom(VECTOR v, MAT A, int dim)
 }
 
 /* == skew ================================================================ */
-/* evaluates C=skew(A*B) for dim*dim matrices */
+/* evaluates C=skew(A*B) for dim×dim matrices */
 
 void skew(MAT A, MAT B, MAT C, int dim)
 
@@ -806,8 +806,8 @@ void skew(MAT A, MAT B, MAT C, int dim)
 }
 
 /* == trac_ljlt4 ========================================================== */
-/* evaluates the trace of L1*J*L2(t) (t) = transpose. L1,L2 are 4*4 matrices
-   whose 4th row is null. J is a 4*4 square matrix */
+/* evaluates the trace of L1*J*L2(t) (t) = transpose. L1,L2 are 4×4 matrices
+   whose 4th row is null. J is a 4×4 square matrix */
 
 real trac_ljlt4(MAT4 L1, MAT4 J, MAT4 L2)
 {
@@ -918,7 +918,7 @@ void sub(MAT A, MAT B, MAT C, int d1, int d2)
 }
 
 
-/* --- Operations on Matrices and Vectors, Gen. Operations on Matrices --- */
+/* --- Operations on Matrices and Vectors, General Operations on Matrices --- */
 
 /* == transp ============================================================== */
 /* transposes a d1*d2 matrix A */
@@ -939,7 +939,7 @@ void transp(MAT A, MAT At, int d1, int d2)
 }
 
 
-/* --- Operations on Matrices and Vectors, Gen. Operations on Vectors --- */
+/* --- Operations on Matrices and Vectors, General Operations on Vectors --- */
 
 /* == cross =============================================================== */
 /* cross product c = a x b */

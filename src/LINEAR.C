@@ -53,7 +53,7 @@ int   dyn_eq(MAT4 J, MAT4 Wp, MAT4 F, int var[2][6])
 	{
 		acc[i]=0.; mat[i][6]=0.; ivar[i]=i;
 	}
-	if (!var[0][X])		acc[X]=Wp[Z][Y];          /* angular acc. */
+	if (!var[0][X])		acc[X]=Wp[Z][Y];          /* angular acceleration */
 	if (!var[0][Y])		acc[Y]=Wp[X][Z];
 	if (!var[0][Z])		acc[Z]=Wp[Y][X];
 	if (!var[0][3+X])		acc[3+X]=Wp[X][U];        /* accelerations */

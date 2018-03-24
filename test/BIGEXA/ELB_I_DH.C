@@ -24,30 +24,30 @@ int main(int argc,char *argv[])
 	real fi[MAXLINK+1]={0.,PIG_2,0.,0.,3*PIG_2,PIG_2,0.};
 	real a[MAXLINK+1];
 
-	VECTOR q1,                     /* Eul./Card. angle configurations */
-	       qp1,                    /* Eul./Card. angle first time der. */
-	       qpp1,vel,acc;           /* Eul./Card. angle sec. time der. */
+	VECTOR q1,                     /* Euler/Cardan angle configurations */
+	       qp1,                    /* Euler/Cardan angle first time derivative */
+	       qpp1,vel,acc;           /* Euler/Cardan angle second time derivative */
 
-				       /* array of joint pos. variables */
+				       /* array of joint position variables */
 	real q[MAXLINK];               /* joint angles */
-	real qp[MAXLINK];              /* array of joint vel. variables */
-	real qpp[MAXLINK];             /* array of jint acc. variables */
-	real ds[MAXLINK],              /* sol. of the eq. J*dq=ds */
-	     dq[MAXLINK],              /* sol. of Newton/Raphson alg. step */
+	real qp[MAXLINK];              /* array of joint velocity variables */
+	real qpp[MAXLINK];             /* array of joint acceleration variables */
+	real ds[MAXLINK],              /* solution of the eq. J*dq=ds */
+	     dq[MAXLINK],              /* solution of Newton/Raphson algorithm step */
 	     buf[MAXLINK];
 	real t,dt;
 	real toll=0.0005;              /* precision of the solution */
-	int maxiter=15;                /* max. num. of iter. in N-R alg. */
+	int maxiter=15;                /* maximum number of iterations in N-R algorithm */
 	int ierr,i,k,p;
-        int ii,jj,kk;                  /* Eul./Card. convention (gripper orientation) */
+        int ii,jj,kk;                  /* Euler/Cardan convention (gripper orientation) */
 	int rank;                      /* rank of linear system */
 	real n;
 	POINT O,orig=ORIGIN;
 	real Jac[MAXLINK][MAXLINK];    /* Jacobian matrix */
 	MAT4 mtar,                     /* target position matrix */
-	     mrelp_1[MAXLINK+1],       /* array containing pos. mat. of frame
+	     mrelp_1[MAXLINK+1],       /* array containing position matrix of frame
 					  (p) seen in frame (p-1) */
-	     mabs[MAXLINK+1],          /* array containing abs. pos. mat. of
+	     mabs[MAXLINK+1],          /* array containing absolute position matrix of
                                           frame (p) in base frame */
 	     mabsinv,                  /* inverse position matrix of the frame
 					  positioned in the centre of the
@@ -57,18 +57,18 @@ int main(int argc,char *argv[])
 	     Lrel0,                    /* L relative matrix of p-th joint
                                           seen in base frame */
 	     dm,dS,
-	     Wrelp_1[MAXLINK+1],       /* array containing rel. vel. mat. of
+	     Wrelp_1[MAXLINK+1],       /* array containing relative velocity matrix of
 					  frame (p) seen in frame (p-1) */
-	     Wrel0[MAXLINK+1],         /* array containing rel. vel. mat. of
+	     Wrel0[MAXLINK+1],         /* array containing relative velocity matrix of
                                           frame (p) seen in base frame */
-	     Wabs[MAXLINK+1],          /* array containing abs. vel. mat. of
+	     Wabs[MAXLINK+1],          /* array containing absolute velocity matrix of
 					  frame (i) in base frame */
 	     Wtar,                     /* target velocity matrix */
-	     Hrelp_1[MAXLINK+1],       /* array containing rel. acc. mat. of
+	     Hrelp_1[MAXLINK+1],       /* array containing relative acceleration matrix of
 					  frame (p) seen in frame (p-1) */
-	     Hrel0[MAXLINK+1],         /* array containing rel. acc. mat. of
+	     Hrel0[MAXLINK+1],         /* array containing relative acceleration matrix of
                                           frame (p) seen in base frame */
-	     Habs[MAXLINK+1],          /* array containing abs. acc. mat. of
+	     Habs[MAXLINK+1],          /* array containing absolute acceleration matrix of
 					  frame (i) in base frame */
              Htar,                     /* target acceleration matrix */
              dH;                       /* Htar - H~    H~ is the acceleration
@@ -77,14 +77,14 @@ int main(int argc,char *argv[])
                      {0.,0.,1.,0.},    /* frame (6) to gripper       */
                      {1.,0.,0.,0.},    /* element Z-U is in a[6]     */
                      {0.,0.,0.,1.} };  /*                            */
-	MAT4 gripper;       /* abs. frame of gripper */
+	MAT4 gripper;       /* absolute frame of gripper */
 	POINT first=ORIGIN; /* origin of frame 0 with respect to base,
 			       Z value is in a[1] */
 	MAT4 Aux,                  /* Auxiliary frame, origin in gripper, parallel to base */
-	     Waux, Haux;           /* abs. gripper vel. and acc. in Aux frame */
+	     Waux, Haux;           /* absolute gripper velocity and acceleration in Auxiliary frame */
 
         FILE *data;                /* file containing robot description */
-        FILE *motion;              /* file containing motion descr. */
+        FILE *motion;              /* file containing motion description */
         FILE *out;                 /* output file */
         FILE *guess;               /* 1st guess for q */
 
@@ -126,7 +126,7 @@ int main(int argc,char *argv[])
 	clear(M Jac,MAXLINK,MAXLINK);
 
 	first[Z]=a[1];
-	rotat24(Z,PIG_2,first,mabs[0]); /* pos. mat. of frame 0 from base frame */
+	rotat24(Z,PIG_2,first,mabs[0]); /* position matrix of frame 0 from base frame */
 	Last[Z][U]=a[6];                /* gripper position in frame 6 */
         idmat4(Aux);
 	clear4(Waux); clear4(Haux);
@@ -156,14 +156,14 @@ int main(int argc,char *argv[])
 		{
 			for (p=1;p<=MAXLINK;p++)
 			{
-				       /* builds rel. pos. matrix */
+				       /* builds relative position matrix */
 				dhtom(Rev,theta[p],d[p],b[p],a[p],fi[p],
 				      q[p-1],mrelp_1[p]);
-				       /* builds abs. pos. matrix */
+				       /* builds absolute position matrix */
 				molt4(mabs[p-1],mrelp_1[p],mabs[p]);
-                                       /* builds rel. L matrix in base frame */
+                                       /* builds relative L matrix in base frame */
 				makeL2(Rev,Z,0.,orig,Lrelp);
-				       /* builds rel L matrix in frame (p) */
+				       /* builds relative L matrix in frame (p) */
 				trasf_mami(Lrelp,mabs[p-1],Lrel0);
 				buf[0]=Lrel0[X][U];
 				buf[1]=Lrel0[Y][U];
@@ -177,7 +177,7 @@ int main(int argc,char *argv[])
 			molt4(mabs[MAXLINK],Last,gripper);
 			sub4(mtar,gripper,dm);
 			n=norm4(dm);
-				       /* tests if sol. has been reached */
+				       /* tests if solution has been reached */
 			if (n>toll)
 			{
 				inverse(gripper,mabsinv);
@@ -211,7 +211,7 @@ int main(int argc,char *argv[])
 		 vmcopy(M acc,3,4,Col,M Haux,4,4);
 		 trasf_mami(Haux,Aux,Htar); /* transform acceleration from auxiliary frame to base frame */
 
-				       /* builds joint volocity array */
+				       /* builds joint velocity array */
 		 buf[0]=Wtar[X][U];
 		 buf[1]=Wtar[Y][U];
 		 buf[2]=Wtar[Z][U];
@@ -226,7 +226,7 @@ int main(int argc,char *argv[])
 				   /* W and H matrices in frame 0 */
 		   trasf_mami(Wrelp_1[i],mabs[i-1],Wrel0[i]);
 		   trasf_mami(Hrelp_1[i],mabs[i-1],Hrel0[i]);
-				   /* abs. vel. and acc. matrices */
+				   /* absolute velocity and acceleration matrices */
 		   sum4(Wabs[i-1],Wrel0[i],Wabs[i]);
 		   coriolis(Habs[i-1],Hrel0[i],Wabs[i-1],Wrel0[i],Habs[i]);
 		 }

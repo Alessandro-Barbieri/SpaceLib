@@ -18,18 +18,18 @@ ROBSCAR.C:  Sample program for direct kinematics of Scara robot
 int main(void)
 {
 	real q[3] ={PIG/4,PIG/6,-0.5};      /* joint variables array */
-	real qp[3]={PIG*5/4,PIG*5/4,-0.5};  /* joint var. first time der. */
+	real qp[3]={PIG*5/4,PIG*5/4,-0.5};  /* joint var. first time derivative */
 	POINT O1={0.,0.,1.5,1.};          /* origin of frame (1) in frame (0) */
 	POINT O2={0.33,0.,0.,1.};         /* origin of frame (2) in frame (1) */
 	POINT O3={0.33,0.,0.,1.};         /* origin of frame (3) in frame (2) */
 	POINT O4={0.,0., 0., 1.};         /* origin of frame (4) in frame (3) */
 	POINT Oa;                         /* origin of frame (a) in frame (0) */
 	POINT O=ORIGIN;
-	MAT4 m01,m12,m23,m34;           /* mi-1,i  : pos. of frame (i) in frame (i-1) */
-	MAT4 m02,m03,m04,m0a;           /* m0,i    : pos. of frame (i) in frame (0) */
-	MAT4 L12r,L23r,L34r;            /* Li,i+1r : L mat. of joint i in frame (i-1) */
-	MAT4 L12f,L23f,L34f;            /* Li,i+1f : L mat. of joint i in frame (0) */
-	MAT4 W01,W12,W23,W34;           /* Wi,i+1  : W mat. of frame (i+1) in frame (i) */
+	MAT4 m01,m12,m23,m34;           /* mi-1,i  : position of frame (i) in frame (i-1) */
+	MAT4 m02,m03,m04,m0a;           /* m0,i    : position of frame (i) in frame (0) */
+	MAT4 L12r,L23r,L34r;            /* Li,i+1r : L matrix of joint i in frame (i-1) */
+	MAT4 L12f,L23f,L34f;            /* Li,i+1f : L matrix of joint i in frame (0) */
+	MAT4 W01,W12,W23,W34;           /* Wi,i+1  : W matrix of frame (i+1) in frame (i) */
 	MAT4 W04;                       /* velocity matrix of the gripper in frame (0) */
 	MAT4 W04a;                      /* velocity matrix of the gripper in frame (a) */
 
@@ -46,7 +46,7 @@ int main(void)
 	molt4(m02,m23,m03);
 	molt4(m03,m34,m04);
 
-	idmat4(m0a);                    /* builds pos. matrix of frame (a) in frame (0) */
+	idmat4(m0a);                    /* builds position matrix of frame (a) in frame (0) */
 	mvcopy(M m04,4,4,4,Col,M Oa);
 	vmcopy(M Oa,4,4,Col,M m0a,4,4);
 
@@ -63,7 +63,7 @@ int main(void)
 	rmolt4(L23f,qp[1],W23);
 	rmolt4(L34f,qp[2],W34);
 
-	sum4(W01,W12,W04);              /* builds abs. W matrix of frame (4) in frame (0) */
+	sum4(W01,W12,W04);              /* builds absolute W matrix of frame (4) in frame (0) */
 	sum4(W04,W23,W04);
 	sum4(W04,W34,W04);
 
