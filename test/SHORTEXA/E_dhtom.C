@@ -1,7 +1,7 @@
-/* E_dhtom.c 
+/* E_dhtom.c
   sample program to test the functions 'dhtom' and 'DHtoMstd'
   they must perform the same result
- 
+
   direct kinematic of the Stanford Arm
 */
 
@@ -39,7 +39,7 @@ int main(int argc,char *argv[])
 	}
 
 	idmat4(Ma);					/* direct kinematics with 'dhtom' */
-	for (i=0;i<MAXLINK;i++) {   
+	for (i=0;i<MAXLINK;i++) {
 		dhtom(jtype[i],theta[i],d[i],0.,a[i],alpha[i],q[i],MM);
 		molt4(Ma,MM,tmp);
 		mcopy4(tmp,Ma);
@@ -47,7 +47,7 @@ int main(int argc,char *argv[])
 	printm4("Ma: result with 'dhtom'",Ma);
 
 	idmat4(Mb);					/* direct kinematics with 'DHtoMstd' */
-	for (i=0;i<MAXLINK;i++) { 
+	for (i=0;i<MAXLINK;i++) {
 		if (jtype[i]==Rev){
 			DHtoMstd(q[i],d[i],a[i],alpha[i],MM);
 		} else {

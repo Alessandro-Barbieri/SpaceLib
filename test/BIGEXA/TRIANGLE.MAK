@@ -1,17 +1,17 @@
 PROJ	=TRIANGLE
 DEBUG	=1
 CC	=qcl
-CFLAGS_G	= /AL /W4 /Ze 
-CFLAGS_D	= /Zi /Zr /Gi$(PROJ).mdt /Od 
-CFLAGS_R	= /O /Ot /DNDEBUG 
+CFLAGS_G	= /AL /W4 /Ze
+CFLAGS_D	= /Zi /Zr /Gi$(PROJ).mdt /Od
+CFLAGS_R	= /O /Ot /DNDEBUG
 CFLAGS	=$(CFLAGS_G) $(CFLAGS_D)
-LFLAGS_G	= /CP:0xffff /NOI /SE:0x80 /ST:0x2710 
-LFLAGS_D	= /CO /INCR 
-LFLAGS_R	= 
+LFLAGS_G	= /CP:0xffff /NOI /SE:0x80 /ST:0x2710
+LFLAGS_D	= /CO /INCR
+LFLAGS_R	=
 LFLAGS	=$(LFLAGS_G) $(LFLAGS_D)
 RUNFLAGS	=
-OBJS_EXT = 	
-LIBS_EXT = 	
+OBJS_EXT =
+LIBS_EXT =
 
 .asm.obj: ; $(AS) $(AFLAGS) -c $*.asm
 
@@ -40,4 +40,3 @@ $(LIBS_EXT);
 
 run: $(PROJ).EXE
 	$(PROJ) $(RUNFLAGS)
-

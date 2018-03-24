@@ -7,7 +7,7 @@ The library hase been verified with Microsoft Visual Studio 6.0 and lcc-win32 di
 
 To install the SpaceLib follow the instruction contained in section 2 of the user's manual.
 
-As an alternative unzip the files in 
+As an alternative unzip the files in
 
 c:\users\spacelib_c
 

@@ -163,5 +163,3 @@ real psedot(MAT4 A, MAT4 B)
 	     A[Z][Y]*B[Z][Y]+A[X][Z]*B[X][Z]+A[Y][X]*B[Y][X];
 	  return(ps);
 }
-
-

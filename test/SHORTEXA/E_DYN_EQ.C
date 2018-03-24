@@ -20,14 +20,14 @@ int main()
 
 	real fx=0., fy=8.334, fz=0, cx=0.8334, cy=0., cz=8.35;
 	real jxx,jyy,jzz, jxy,jxz,jyz, xg, yg, zg, m;
-	
+
 	printf("----------------\n");
 
 
 	actom(fx,fy,fz,cx,cy,cz,F);
 	printm4("J",J);
 	printm4("F",F);
-		
+
 	clear4(Wp);
 
 	dyn_eq(J,Wp,F,var);

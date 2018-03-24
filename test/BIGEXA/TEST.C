@@ -1,19 +1,19 @@
 /*                                 TEST
 		     Program for the trajectory prediction
-                  of a two-link system floating in the space                  
+                  of a two-link system floating in the space
 
-                                October 1990 
-*/ 
+                                October 1990
+*/
 
 /* Note: To compile this program the type real must be set equivalent to the type float
 	 (see also User's Manual). This is necessary because the formatting string of the
 	 fscanf function have been written using %f as descriptor. */
 
-#include <stdio.h> 
-#include <float.h> 
-#include <math.h> 
-#include "SPACELIB.H" 
-#include "LINEAR.H" 
+#include <stdio.h>
+#include <float.h>
+#include <math.h>
+#include "SPACELIB.H"
+#include "LINEAR.H"
 
 void delta_m(MAT4 W, MAT4 H, real dt, MAT4 dm);
 
@@ -117,7 +117,7 @@ int main(void)
 		delta_m(W1,H1,dt,dm);                  /* builds matrix dm(m) */
 		molt4(dm,m1,TMP);                      /* new position of link 1 (n) */
 		mcopy4(TMP,m1);
-		
+
 		rmolt4(Wp,dt,Wp);                      /* new velocity of link 1 (o) */
 		sum4(Wp,W1,W1);
 	}
@@ -126,7 +126,7 @@ int main(void)
 
 
 /* --- Function delta_m: builts matrix dm where dm=[1]+Wdt+0.5Hdt^2 --- */
- 
+
 void delta_m(MAT4 W, MAT4 H, real dt, MAT4 dm)
 {
 	int i,j;

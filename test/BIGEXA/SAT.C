@@ -11,17 +11,17 @@ int main (void)
 {
         POINT P1={0.875, 2.100, 1.500, 1. }; /* values of initial configuration */
         POINT P2={1.750, 2.100, 3.200, 1. };
-        MAT4 mi={ {1.,  0., 0., 0.875}, 
+        MAT4 mi={ {1.,  0., 0., 0.875},
                   {0.,  0., 1., 2.100},
                   {0., -1., 0., 1.500},
                   {0.,  0., 0., 1.   } };
 	real alpha=atan2( P2[Z]-P1[Z], P2[X]-P1[X] );
 	real beta=atan2( P2[Y], P2[X] );
         real d=dist(P1,P2);
-        
+
         MAT4 m4, Q5, mf, miinv;              /* elements used in computation */
         AXIS u5;
-        
+
         MAT4 Qtot;                           /* global elements which are evaluated */
         AXIS utot;
         real fi,h;
@@ -36,15 +36,15 @@ int main (void)
                                              /* step 5 */
         u5[X]=sb; u5[Y]=-cb; u5[Z]=0.;
 	screwtom(u5,rad(26.),0.,P2,Q5);
-                                             
+
                                              /* final configuration */
 	molt4(Q5,m4,mf);
-                                             
+
                                              /* evaluate global elements */
         inverse(mi,miinv);
         molt4(mf,miinv,Qtot);
 	mtoscrew(Qtot,utot,&fi,&h,P);
-                                             
+
                                              /* output results */
         printf("\n*** Results ***\n");
         printv("The rototranslation axis is :",utot,3);
@@ -58,4 +58,3 @@ int main (void)
 #undef cb_a
 
 }
-

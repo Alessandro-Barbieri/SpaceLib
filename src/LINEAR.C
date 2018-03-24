@@ -79,7 +79,7 @@ int   dyn_eq(MAT4 J, MAT4 Wp, MAT4 F, int var[2][6])
 	mat[Y][3+Z]=mat[3+Z][Y]= -(mat[Z][3+Y]=mat[3+Y][Z]=J[X][U]);
 	mat[Z][3+X]=mat[3+X][Z]= -(mat[X][3+Z]=mat[3+Z][X]=J[Y][U]);
 	mat[X][3+Y]=mat[3+Y][X]= -(mat[Y][3+X]=mat[3+X][Y]=J[Z][U]);
-	
+
 	mat[3+X][3+X]=J[U][U]; mat[3+X][3+Y]=0.;      mat[3+X][3+Z]=0.;
 	mat[3+Y][3+X]=0.     ; mat[3+Y][3+Y]=J[U][U]; mat[3+Y][3+Z]=0.;
 	mat[3+Z][3+X]=0.     ; mat[3+Z][3+Y]=0.;      mat[3+Z][3+Z]=J[U][U];
@@ -93,7 +93,7 @@ int   dyn_eq(MAT4 J, MAT4 Wp, MAT4 F, int var[2][6])
 	{
 		var_a[j]=j; var_f[j]=j;
 	}
-	
+
 	for(i=0;i<2;i++)
 		for(j=0;j<6;j++)
 			var2[i][j]=var[i][j];
@@ -155,7 +155,7 @@ int   dyn_eq(MAT4 J, MAT4 Wp, MAT4 F, int var[2][6])
 	if(var2[0][X]) Wp[Y][Z]= -(Wp[Z][Y]=acc[X]);
 	if(var2[0][Y]) Wp[Z][X]= -(Wp[X][Z]=acc[Y]);
 	if(var2[0][Z]) Wp[X][Y]= -(Wp[Y][X]=acc[Z]);
-	if(var2[0][3+X]) Wp[X][U]=acc[3+X]; 
+	if(var2[0][3+X]) Wp[X][U]=acc[3+X];
 	if(var2[0][3+Y]) Wp[Y][U]=acc[3+Y];
 	if(var2[0][3+Z]) Wp[Z][U]=acc[3+Z];
 

@@ -74,7 +74,7 @@ int main(int argc,char *argv[])
 	}
 				       /* read gravity acceleration vector */
 	fscanf(data,"%f %f %f",&gx,&gy,&gz);
-	gtom(gx,gy,gz,Hg);             /* build gravity acceleration matrix */ 
+	gtom(gx,gy,gz,Hg);             /* build gravity acceleration matrix */
 	fscanf(motion,"%f",&dt);       /* read the range of time */
 	for(t=0;;t+=dt)                /* for each instant of time */
 	{

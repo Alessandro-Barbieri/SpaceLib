@@ -1,8 +1,8 @@
 /*                       TEST_new.c
 
 		     Program for the trajectory prediction
-           of a two-link system floating in the space                  
-              July 1998 update version of test.c 
+           of a two-link system floating in the space
+              July 1998 update version of test.c
 
 % This is an improved version of Test.c <----------------****************
 % The angular moment of the system should be constant, but inaccuracy in
@@ -12,18 +12,18 @@
 % At each integration step the angular momentum is evaluated and a velocity dW
 % added to the system in order to set the value of the angular momentum equal
 % to its initial value (G=Go for t==0.)
-*/ 
+*/
 
 /* Note: To compile this program the type real must be set equivalent to the type float
 	 (see also User's Manual). This is necessary because the formatting string of the
 	 fscanf function has been written using %f as descriptor (and NOT %lf). */
 
 #include <stdlib.h>
-#include <stdio.h> 
-#include <float.h> 
-#include <math.h> 
-#include "SPACELIB.H" 
-#include "LINEAR.H" 
+#include <stdio.h>
+#include <float.h>
+#include <math.h>
+#include "SPACELIB.H"
+#include "LINEAR.H"
 
 void delta_m(MAT4 W, MAT4 H, real dt, MAT4 dm);
 
@@ -100,7 +100,7 @@ int main(void)
 				of link 2 (g1) */
 		sum4(W1,W120,W2);
 				/* step (g2) moved forward */
-		
+
 			     /* refer inertia moment to absolute frame (h) */
 		trasf_mamt4(J1,m1,J10);
 		trasf_mamt4(J2,m2,J20);
@@ -165,7 +165,7 @@ int main(void)
 
 
 /* --- Function delta_m: builts matrix dm where dm=[1]+Wdt+0.5Hdt^2 --- */
- 
+
 void delta_m(MAT4 W, MAT4 H, real dt, MAT4 dm)
 {
 	int i,j;
@@ -178,4 +178,4 @@ void delta_m(MAT4 W, MAT4 H, real dt, MAT4 dm)
 	dm[U][X]=dm[U][Y]=dm[U][Z]=0.;
 	dm[U][U]=1;
 	normal4(dm);
-} 
+}

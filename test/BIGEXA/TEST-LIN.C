@@ -26,13 +26,13 @@ int main(void)
 	vpr[0]=-1;
 	/* read matrix of coefficients and right-hand side vector from file */
 	f=fopen("inp.dat","r");
-	if(f==NULL) 
+	if(f==NULL)
 	{
 		printf("Error on input file\a");
 		exit(1);
 	}
 	fscanf(f,"%d %d",&n,&m);  /* read dimension of matrix */
-	if(n>Nmax || m>Mmax) 
+	if(n>Nmax || m>Mmax)
 	{
 		printf("ERROR: matrix too big");
 		exit(1);

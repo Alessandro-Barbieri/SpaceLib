@@ -10,7 +10,7 @@ PROJPONL.C:
 
                 giovanni.legnani @ unibs.it
 -----------------------------------------------------------------------------
-*/   
+*/
 #include <stdio.h>
 #include <math.h>
 #include "SPACELIB.H"

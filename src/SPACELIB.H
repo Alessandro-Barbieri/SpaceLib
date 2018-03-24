@@ -7,7 +7,7 @@
 #endif
 #ifdef FLOAT
 typedef float real;
-#else 
+#else
 typedef double real;
 #endif
 #define aabs(a)   ((double)(a)>0.  ? (a) : -(a))
@@ -89,7 +89,7 @@ typedef real PLANE[4];   /* PLANE type is defined as a four real element array. 
 #define n_skew34(m)        norm_simm_skew(M m,3,4, SKEW);
 #define n_skew4(m)         norm_simm_skew(M m,4,4, SKEW);
                                                                     /* standard D&H matrix */
-#define DHtoMstd(theta,d,a,alpha,MM)      dhtom(0,theta,d,0.,a,alpha,0.,MM)   
+#define DHtoMstd(theta,d,a,alpha,MM)      dhtom(0,theta,d,0.,a,alpha,0.,MM)
 
                                       /* --- Matrix Transformations, Change of Reference --- */
 #define trasf_mamt4(a,b,c) trasf_mamt(M a,M b,M c,4) /* change of reference for 4×4

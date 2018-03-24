@@ -123,5 +123,3 @@ int minvers(MAT A, MAT Ai, int dim)
 
 	return irank;
 }
-
-
