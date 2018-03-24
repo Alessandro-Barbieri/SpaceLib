@@ -20,9 +20,9 @@ typedef double real;
 #define min(a,b) ((a)<(b) ? (a) : (b))
 #endif
 #define sign(x) ((x)<0 ? -1 : ((x)>0 ? 1 :0))
-#define  PIG_2 1.570796326794897
-#define  PIG   3.141592653589793
-#define  PIG2  6.283185307179586
+#define  PIG_2 1.5707963267948966192313216916397514420
+#define  PIG   3.1415926535897932384626433832795028841
+#define  PIG2  6.2831853071795864769252867665590057683
 #define rad(x)  ((x)/180.*PIG)           /* degrees to radiants */
 #define deg(x)  ((x)*180./PIG)           /* radiants to degrees */
 #define M (real *)                       /* to recast pointers when calling functions
