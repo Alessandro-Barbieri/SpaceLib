@@ -403,7 +403,7 @@ void WPRODtocardan(real alpha, real beta, int sig, int i, int j, int k,
 /* --- Working with Points Lines and Planes, Operations on Points --- */
 
 /* == intermediate ======================================================== */
-/* function that evalutes the middle point between two given points
+/* function that evaluates the middle point between two given points
     Input parameters
       P1 : first point
       a  : weight of P1
@@ -615,7 +615,7 @@ void interslpl(LINE l, PLANE pl, POINT I, int *inttype)
 	zero=zerom();
 	par=dot(pl,l.dir);
 	lie=dot2(pl,l.P,4);
-	if(fabs(par)<zero)	             /* l is parallel to pl */ /* fabs() bug fixed jan 2003 */
+	if(fabs(par)<zero)	             /* l is parallel to pl */ /* fabs() bug fixed Jan 2003 */
 	{
 		if(lie<zero)         /* pl passes through l.P */
 			*inttype=1;  /* the intersection is the line itself */
@@ -687,7 +687,7 @@ void intersection(LINE l1, LINE l2, LINEP lmindist, real * mindist, PLANE pl,
 		unitv(lmindist->dir,lmindist->dir);
 		plane2(I,u3,pl);         /* builds the minimum distance pl. */
 		if ( (*mindist) > zero ) /* l1 and l2 are oblique lines */
-			*inttype=1;      /* intersesction is middle point */
+			*inttype=1;      /* intersection is middle point */
 		else			 /* l1 and l2 are incident lines */
 		{
 			*mindist=0.;
