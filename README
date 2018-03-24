@@ -39,20 +39,20 @@ The functions contained in the library are devoted to:
     ...
 * basic operation on vectors
     module, dot product, cross product, ...
-* tranformation matrices (rototranslations)
+* transformation matrices (rototranslations)
 * velocity and acceleration matrices
 * Cardan/Euler angles
-    tranformation of angles to/from rotation matrices
+    transformation of angles to/from rotation matrices
     derivative of angles to/from angular velocity and acceleration
 * linear systems
 
 The library is intended as an aid in writing programs for the 
 analysis of systems of rigid bodies following a particular 
-methodology based on 4⨯4 matrices. This approach can be 
+methodology based on 4×4 matrices. This approach can be 
 considered a powerful generalization of the Transformation 
 Matrix Approach  proposed by Denavit and Hartenberg.
 Shortly the position and the orientation of each body is 
-represented by 4⨯4 transformation matrices.
+represented by 4×4 transformation matrices.
 Two others matrices called W and H are utilized for the velocity 
 and the acceleration (linear and angular).
 Additional matrices are used for the momentum, forces, torques, 
@@ -69,14 +69,14 @@ of all the files of the library, of the examples and of the
 documentation. 
 ----------------------------------------------------------------
 
-The library is free avalailable for non-profit activities including 
+The library is free available for non-profit activities including 
 scientific and educational purposes.
-See also the "disclaimer warranties" statment in the manual.
+See also the "disclaimer warranties" statement in the manual.
 
 For commercial activities please contact:
 Giovanni Legnani
-Universita di Brescia
-Dip. Ing. Meccanica
+Università degli Studi di Brescia
+Dipartimento di Ingegneria Meccanica ed Industriale
 Via Branze 38
 25123 Brescia, Italy.
 
