@@ -23,8 +23,8 @@ typedef double real;
 #define  PIG_2 1.5707963267948966192313216916397514420
 #define  PIG   3.1415926535897932384626433832795028841
 #define  PIG2  6.2831853071795864769252867665590057683
-#define rad(x)  ((x)/180.*PIG)           /* degrees to radiants */
-#define deg(x)  ((x)*180./PIG)           /* radiants to degrees */
+#define rad(x)  ((x)/180.*PIG)           /* degrees to radians */
+#define deg(x)  ((x)*180./PIG)           /* radians to degrees */
 #define M (real *)                       /* to recast pointers when calling functions
                                            (used for adjustable dimension matrices) */
 typedef real *MAT;                       /* generic matrix                 */
