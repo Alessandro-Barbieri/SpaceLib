@@ -12,7 +12,6 @@ MTOSCREW.C:
 -----------------------------------------------------------------------------
 */
 #include <stdio.h>
-#include <conio.h>
 #include "SPACELIB.H"
 
 void main (void)

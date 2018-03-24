@@ -87,7 +87,7 @@ int   dyn_eq(MAT4 J, MAT4 Wp, MAT4 F, int var[2][6])
 
 	//printm67("mat",mat);
 
-	//getch();
+	//char a; scanf(" %c",&a);
 
 	for(j=0;j<6;j++)
 	{
@@ -124,7 +124,7 @@ int   dyn_eq(MAT4 J, MAT4 Wp, MAT4 F, int var[2][6])
 		}
 	}
 
-	//printf("**neq: %d\n",neq);   getch();
+	//printf("**neq: %d\n",neq);   char a; scanf(" %c",&a);
 	tappo= -1;
 	for(i=0;i<6;i++)
 	{

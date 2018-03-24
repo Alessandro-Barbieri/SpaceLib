@@ -6,7 +6,6 @@
 */
 
 #include <stdio.h>
-#include <conio.h>
 #include <math.h>
 #include <stdlib.h>
 #include <time.h>
@@ -62,5 +61,5 @@ void main(int argc,char *argv[])
 	sub4(Ma,Mb,dM);
 	printm4("the results must be identical and so dM=Ma-Mb=[0]",dM);
 
-printf("hit any key"); getch();
+printf("hit any key"); char a; scanf(" %c",&a);
 }

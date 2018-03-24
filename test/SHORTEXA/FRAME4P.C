@@ -36,7 +36,8 @@ void main(void)
 	printm4("\nThe position matrix m01 is:",m01);
 	printm4("\nThe position matrix ma1 is:",ma1);
 	printm4("\nThe position matrix m0a is:",m0a);
-	getch();
+	char a;
+	scanf(" %c",&a);
 	moltp( m0a, P1, Ptmp );
 	printv("temp", Ptmp,4);
 	printv("Q1", Q1,4);
@@ -49,5 +50,5 @@ void main(void)
 	printv("temp", Ptmp,4);
 	printv("Q1", Q2,4);
 
-	getch();
+	scanf(" %c",&a);
 }

@@ -12,7 +12,6 @@ PROJPONL.C:
 -----------------------------------------------------------------------------
 */   
 #include <stdio.h>
-#include <conio.h>
 #include <math.h>
 #include "SPACELIB.H"
 

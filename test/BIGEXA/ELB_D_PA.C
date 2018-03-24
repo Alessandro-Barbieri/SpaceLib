@@ -8,7 +8,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <conio.h>
 #include <math.h>
 #include "SPACELIB.H"
 
@@ -167,7 +166,7 @@ void main(int argc,char *argv[])
 		printm4("The velocity matrix of the gripper is:",Waus);
 		printm4("The acceleration matrix of the gripper is:",Haus);
 		printf("\nPress any key to continue\n");
-		getch();
+		char a; scanf(" %c",&a);
 
 		fprintf(out,"%f %f %f\n",q1[0],q1[1],q1[2]);
 		fprintf(out,"%f %f %f\n",qp1[0],qp1[1],qp1[2]);

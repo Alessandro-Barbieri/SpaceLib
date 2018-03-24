@@ -8,7 +8,6 @@
 	 fscanf function have been written using %f as descriptor. */
 
 #include <stdio.h>
-#include <conio.h>
 #include <math.h>
 #include <stdlib.h>
 #include "SPACELIB.H"
@@ -253,7 +252,7 @@ void main(int argc,char *argv[])
                 printv("The joint angles q are",q,6);
                 printv("The joint velocity qp are",qp,6);
                 printv("The joint ecceleration qpp are",qpp,6);
-		getch();
+		char a; scanf(" %c",&a);
 
 		for (p=0;p<MAXLINK;p++)
 		{
