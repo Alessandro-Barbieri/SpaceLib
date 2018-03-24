@@ -14,7 +14,7 @@ EXTRACT.C:
 #include <stdio.h>
 #include "SPACELIB.H"
 
-void main (void)
+int main (void)
 {
 	MAT4 Q= { {0., 1., 0., 0.},
 		  {-1., 0., 0., 2.},

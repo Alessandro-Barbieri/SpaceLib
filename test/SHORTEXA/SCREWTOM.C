@@ -14,7 +14,7 @@ SCREWTOM.C:
 #include <stdio.h>
 #include "SPACELIB.H"
 
-void main (void)
+int main (void)
 {
 	MAT4 Q;
 	real fi=PIG_2;

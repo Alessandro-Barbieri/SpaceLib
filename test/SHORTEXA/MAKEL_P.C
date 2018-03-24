@@ -14,7 +14,7 @@ MAKE_P.C:
 #include <stdio.h>
 #include "SPACELIB.H"
 
-void main (void)
+int main (void)
 {
 	POINT O=ORIGIN;
 	AXIS u=Xaxis;

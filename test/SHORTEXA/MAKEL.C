@@ -14,7 +14,7 @@ MAKEL.C:
 #include <stdio.h>
 #include "SPACELIB.H"
 
-void main (void)
+int main (void)
 {
    POINT P={0.,1.2,1.2,1.};
    real pitch=0.;

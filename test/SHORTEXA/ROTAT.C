@@ -14,7 +14,7 @@ ROTAT.C:
 #include <stdio.h>
 #include "SPACELIB.H"
 
-void main (void)
+int main (void)
 {
 	MAT4 A;
 	AXIS u=Zaxis_n;

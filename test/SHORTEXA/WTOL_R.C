@@ -15,7 +15,7 @@ WTOL_P.C:
 #include <math.h>
 #include "SPACELIB.H"
 
-void main (void)
+int main (void)
 {
 	MAT4 W = { {0.,0.,0.,0.}, {0.,0.,-2.,0.},
 		   {0.,2.,0.,0.}, {0.,0., 0., 0.} };

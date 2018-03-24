@@ -2,7 +2,7 @@
 #include <math.h>
 #include "SPACELIB.H"
 
-void main (void)
+int main (void)
 
 #define sb      (real) sin(beta)
 #define cb      (real) cos(beta)
