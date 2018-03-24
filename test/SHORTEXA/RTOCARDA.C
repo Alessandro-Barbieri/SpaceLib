@@ -24,6 +24,6 @@ int main(void)
 
 	rtocardan(M R,3,Y,X,Z,q1,q2);
 
-	printv("\nThe first Cardan angule q1 is:",q1,3);
-	printv("\nThe second Cardan angule q2 is:",q2,3);
+	printv("\nThe first Cardan angle q1 is:",q1,3);
+	printv("\nThe second Cardan angle q2 is:",q2,3);
 }
