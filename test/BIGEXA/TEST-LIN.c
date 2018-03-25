@@ -25,7 +25,7 @@ int main(void)
 	FILE *f;
 	vpr[0]=-1;
 	/* read matrix of coefficients and right-hand side vector from file */
-	f=fopen("inp.dat","r");
+	f=fopen("INP.DAT","r");
 	if(f==NULL)
 	{
 		printf("Error on input file\a");

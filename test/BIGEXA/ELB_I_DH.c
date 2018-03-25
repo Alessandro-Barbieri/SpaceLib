@@ -45,41 +45,27 @@ int main(int argc,char *argv[])
 	POINT O,orig=ORIGIN;
 	real Jac[MAXLINK][MAXLINK];    /* Jacobian matrix */
 	MAT4 mtar,                     /* target position matrix */
-	     mrelp_1[MAXLINK+1],       /* array containing position matrix of frame
-					  (p) seen in frame (p-1) */
-	     mabs[MAXLINK+1],          /* array containing absolute position matrix of
-                                          frame (p) in base frame */
-	     mabsinv,                  /* inverse position matrix of the frame
-					  positioned in the centre of the
-					  gripper */
-	     Lrelp,                    /* L relative matrix of p-th joint
-					  seen in frame (p-1) */
-	     Lrel0,                    /* L relative matrix of p-th joint
-                                          seen in base frame */
+	     mrelp_1[MAXLINK+1],       /* array containing position matrix of frame (p) seen in frame (p-1) */
+	     mabs[MAXLINK+1],          /* array containing absolute position matrix of frame (p) in base frame */
+	     mabsinv,                  /* inverse position matrix of the frame positioned in the centre of the gripper */
+	     Lrelp,                    /* L relative matrix of p-th joint seen in frame (p-1) */
+	     Lrel0,                    /* L relative matrix of p-th joint seen in base frame */
 	     dm,dS,
-	     Wrelp_1[MAXLINK+1],       /* array containing relative velocity matrix of
-					  frame (p) seen in frame (p-1) */
-	     Wrel0[MAXLINK+1],         /* array containing relative velocity matrix of
-                                          frame (p) seen in base frame */
-	     Wabs[MAXLINK+1],          /* array containing absolute velocity matrix of
-					  frame (i) in base frame */
+	     Wrelp_1[MAXLINK+1],       /* array containing relative velocity matrix of frame (p) seen in frame (p-1) */
+	     Wrel0[MAXLINK+1],         /* array containing relative velocity matrix of frame (p) seen in base frame */
+	     Wabs[MAXLINK+1],          /* array containing absolute velocity matrix of frame (i) in base frame */
 	     Wtar,                     /* target velocity matrix */
-	     Hrelp_1[MAXLINK+1],       /* array containing relative acceleration matrix of
-					  frame (p) seen in frame (p-1) */
-	     Hrel0[MAXLINK+1],         /* array containing relative acceleration matrix of
-                                          frame (p) seen in base frame */
-	     Habs[MAXLINK+1],          /* array containing absolute acceleration matrix of
-					  frame (i) in base frame */
+	     Hrelp_1[MAXLINK+1],       /* array containing relative acceleration matrix of frame (p) seen in frame (p-1) */
+	     Hrel0[MAXLINK+1],         /* array containing relative acceleration matrix of frame (p) seen in base frame */
+	     Habs[MAXLINK+1],          /* array containing absolute acceleration matrix of frame (i) in base frame */
              Htar,                     /* target acceleration matrix */
-             dH;                       /* Htar - H~    H~ is the acceleration
-						       evaluated with qpp=0 */
+             dH;                       /* Htar - H~    H~ is the acceleration evaluated with qpp=0 */
         MAT4 Last ={ {0.,1.,0.,0.},    /* transformation matrix from */
                      {0.,0.,1.,0.},    /* frame (6) to gripper       */
                      {1.,0.,0.,0.},    /* element Z-U is in a[6]     */
                      {0.,0.,0.,1.} };  /*                            */
 	MAT4 gripper;       /* absolute frame of gripper */
-	POINT first=ORIGIN; /* origin of frame 0 with respect to base,
-			       Z value is in a[1] */
+	POINT first=ORIGIN; /* origin of frame 0 with respect to base, Z value is in a[1] */
 	MAT4 Aux,                  /* Auxiliary frame, origin in gripper, parallel to base */
 	     Waux, Haux;           /* absolute gripper velocity and acceleration in Auxiliary frame */
 

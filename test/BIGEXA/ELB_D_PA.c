@@ -30,23 +30,15 @@ int main(int argc,char *argv[])
 	       qp1,qp2,            /* angles first time derivative */
 	       qpp1,qpp2;          /* angles second time derivative*/
 
-	MAT4 mreli_1[MAXLINK+2],   /* array containing position matrix of frame
-				      (i) seen in frame (i-1) */
-	     mabs[MAXLINK+2],      /* array containing absolute position matrix of
-				      frame (i) in frame (0) */
-	     Wreli_1[MAXLINK+2],   /* array containing relative velocity matrix of
-				      frame (i) seen in frame (i-1) */
-	     Wrel0[MAXLINK+2],     /* array containing relative velocity matrix of
-				      frame (i) seen in frame (0) */
-	     Wabs[MAXLINK+2],      /* array containing absolute velocity matrix of
-				      frame (i) in frame (0) */
-	     Hreli_1[MAXLINK+2],   /* array containing relative acceleration matrix of
-				      frame (i) seen in frame (i-1) */
-	     Hrel0[MAXLINK+2],     /* array containing relative acceleration matrix of
-				      frame (i) seen in frame (0) */
-	     Habs[MAXLINK+2];      /* array containing absolute velocity matrix of
-				      frame (i) in frame (0) */
-        MAT4 Aux,                  /* Auxiliary frame, origin in gripper, parallel to base */
+	MAT4 mreli_1[MAXLINK+2],   /* array containing position matrix of frame (i) seen in frame (i-1) */
+	     mabs[MAXLINK+2],      /* array containing absolute position matrix of frame (i) in frame (0) */
+	     Wreli_1[MAXLINK+2],   /* array containing relative velocity matrix of frame (i) seen in frame (i-1) */
+	     Wrel0[MAXLINK+2],     /* array containing relative velocity matrix of frame (i) seen in frame (0) */
+	     Wabs[MAXLINK+2],      /* array containing absolute velocity matrix of frame (i) in frame (0) */
+	     Hreli_1[MAXLINK+2],   /* array containing relative acceleration matrix of frame (i) seen in frame (i-1) */
+	     Hrel0[MAXLINK+2],     /* array containing relative acceleration matrix of frame (i) seen in frame (0) */
+	     Habs[MAXLINK+2];      /* array containing absolute velocity matrix of frame (i) in frame (0) */
+    MAT4 Aux,                  /* Auxiliary frame, origin in gripper, parallel to base */
 	     Waux, Haux;           /* absolute gripper velocity and acceleration in Aux frame */
 
 	FILE *data;                /* file containing robot description */
@@ -155,8 +147,7 @@ int main(int argc,char *argv[])
 		Aux[Z][U]=mabs[MAXLINK+1][Z][U];
 		trasf_miam(Wabs[MAXLINK],Aux,Waux); /* transform velocity */
 		trasf_miam(Habs[MAXLINK],Aux,Haux); /* and acceleration in auxiliary frame */
-					  /* extracts Cardan angles (and their
-					     time derivatives) of gripper  */
+					  /* extracts Cardan angles (and their time derivatives) of gripper  */
 		Htocardan(mabs[MAXLINK+1],Waux,Haux,
 			  ii,jj,kk,q1,q2,qp1,qp2,qpp1,qpp2);
 

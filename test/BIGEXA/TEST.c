@@ -34,7 +34,7 @@ int main(void)
 	int i,j,n,excode;
 	FILE *fil;
 
-	fil=fopen("test.dat","r"); /* open description file */
+	fil=fopen("TEST.DAT","r"); /* open description file */
 	if (fil==NULL)
 	{
 		printf("Error on input file TEST.DAT");
@@ -58,7 +58,7 @@ int main(void)
 			fscanf(fil,"%f",&m1[i][j]);
 	fclose(fil);
 
-	fil=fopen("test.mot","r"); /* open motion file */
+	fil=fopen("TEST.MOT","r"); /* open motion file */
 	if (fil==NULL)
 	{
 		printf("error on input file TEST.MOT");
@@ -107,11 +107,11 @@ int main(void)
 		sum4(Wp,H2,H2);
 
 		printm4("Position matrix of link 1",m1);
-		printm4("Abs. position matrix of link 2",m2);
+		printm4("Absolute position matrix of link 2",m2);
 		printm4("Velocity matrix of link 1",W1);
-		printm4("Abs. velocity matrix of link 2",W2);
+		printm4("Absolute velocity matrix of link 2",W2);
 		printm4("Acceleration matrix of link 1",H1);
-		printm4("Abs. acceleration matrix of link 2",H2);
+		printm4("Absolute acceleration matrix of link 2",H2);
 
 		if(n!=3) break;               	       /*if motion file empty -> end of loop */
 		delta_m(W1,H1,dt,dm);                  /* builds matrix dm(m) */
@@ -125,7 +125,7 @@ int main(void)
 }
 
 
-/* --- Function delta_m: builts matrix dm where dm=[1]+Wdt+0.5Hdt^2 --- */
+/* --- Function delta_m: builds matrix dm where dm=[1]+Wdt+0.5Hdt^2 --- */
 
 void delta_m(MAT4 W, MAT4 H, real dt, MAT4 dm)
 {

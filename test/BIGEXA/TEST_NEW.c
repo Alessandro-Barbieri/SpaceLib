@@ -47,7 +47,7 @@ int main(void)
 	int i,j,n,excode;
 	FILE *fil;
 
-	fil=fopen("test.dat","r"); /* open description file */
+	fil=fopen("TEST.DAT","r"); /* open description file */
 	if (fil==NULL)
 	{
 		printf("Error on input file TEST.DAT");
@@ -71,7 +71,7 @@ int main(void)
 			fscanf(fil,"%f",&m1[i][j]);
 	fclose(fil);
 
-	fil=fopen("test.mot","r"); /* open motion file */
+	fil=fopen("TEST.MOT","r"); /* open motion file */
 	if (fil==NULL)
 	{
 		printf("error on input file TEST.MOT");
@@ -96,8 +96,7 @@ int main(void)
 		trasf_mami(W12,m1,W120);
 		trasf_mami(H12,m1,H120);               /* (f) */
 		norm_simm_skew(M W120,3,4,SKEW);       /* normalization reducing numerical error */
-			     /* absolute velocity and partial acceleration
-				of link 2 (g1) */
+			     /* absolute velocity and partial acceleration of link 2 (g1) */
 		sum4(W1,W120,W2);
 				/* step (g2) moved forward */
 
@@ -123,8 +122,7 @@ int main(void)
 		molt4(W1,W1,H1);                       /* partial acceleration of link 1 (d) */
 		coriolis(H1,H120,W1,W120,H2); /* (g2) */
 /**/
-		skew4(H1,J10,F1);                      /* evaluate inertia
-							actions (j) */
+		skew4(H1,J10,F1);                      /* evaluate inertia actions (j) */
 		skew4(H2,J20,F2);
 		sum4(F1,F2,F1);
 
@@ -137,34 +135,29 @@ int main(void)
 			exit(1);
 		}
 
-		sum4(Wp,H1,H1);                        /* absolute acceleration of
-							links 1 & 2 (l) */
+		sum4(Wp,H1,H1);                        /* absolute acceleration of links 1 & 2 (l) */
 		sum4(Wp,H2,H2);
 
 		printm4("Position matrix of link 1",m1);
-		printm4("Abs. position matrix of link 2",m2);
+		printm4("Absolute position matrix of link 2",m2);
 		printm4("Velocity matrix of link 1",W1);
-		printm4("Abs. velocity matrix of link 2",W2);
+		printm4("Absolute velocity matrix of link 2",W2);
 		printm4("Acceleration matrix of link 1",H1);
-		printm4("Abs. acceleration matrix of link 2",H2);
+		printm4("Absolute acceleration matrix of link 2",H2);
 
-		if(n!=3) break;               	       /*if motion file empty
-							-> end of loop */
-		delta_m(W1,H1,dt,dm);                  /* builds matrix dm
-							(m) */
-		molt4(dm,m1,TMP);                      /* new position of
-							link 1 (n) */
+		if(n!=3) break;               	       /*if motion file empty -> end of loop */
+		delta_m(W1,H1,dt,dm);                  /* builds matrix dm (m) */
+		molt4(dm,m1,TMP);                      /* new position of link 1 (n) */
 		mcopy4(TMP,m1);
 
-		rmolt4(Wp,dt,Wp);                      /* new velocity of
-							link 1 (o) */
+		rmolt4(Wp,dt,Wp);                      /* new velocity of link 1 (o) */
 		sum4(Wp,W1,W1);
 	}
 	fcloseall();
 }
 
 
-/* --- Function delta_m: builts matrix dm where dm=[1]+Wdt+0.5Hdt^2 --- */
+/* --- Function delta_m: builds matrix dm where dm=[1]+Wdt+0.5Hdt^2 --- */
 
 void delta_m(MAT4 W, MAT4 H, real dt, MAT4 dm)
 {
