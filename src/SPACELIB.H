@@ -317,5 +317,5 @@ void   traslat2(int a, real h, MAT4 m);
 void   traslat24(int a, real h, POINT p, MAT4 m);
 real   psedot(MAT4 A, MAT4 B);
 
-void runtime_error(char *name, char *msg, int ex);
+void runtime_error(const char *name, const char *msg, int ex);
 #endif
