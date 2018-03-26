@@ -35,7 +35,7 @@ int main(void)
 	frame4P(P1,P2,P3,Y,Z,m01);  /* builds starting position matrix */
 	frame4P(P4,P5,P6,Y,Z,m02);  /* builds final position matrix */
 
-	inverse(m01,m10);            /* builds the rototranslation matrix Q */
+	invers(m01,m10);            /* builds the rototranslation matrix Q */
 	molt4(m02,m10,Q);
 
 	mtoscrew(Q,u,&fi,&h,P);     /* extracts the rototranslation parameters from Q */

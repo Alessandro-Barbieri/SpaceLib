@@ -166,7 +166,7 @@ int main(int argc,char *argv[])
 				       /* tests if solution has been reached */
 			if (n>toll)
 			{
-				inverse(gripper,mabsinv);
+				invers(gripper,mabsinv);
 				molt4(dm,mabsinv,dS);
 				ds[0]=dS[X][U];
 				ds[1]=dS[Y][U];

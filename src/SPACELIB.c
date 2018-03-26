@@ -718,13 +718,13 @@ void coriolis(MAT4 H0, MAT4 H1, MAT4 W0, MAT4 W1, MAT4 H)
 /* == inverse ============================================================== */
 /* inverts transformation matrix m : mi = inv(m) */
 
-void inverse(MAT4 m, MAT4 mi)
+void invers(MAT4 m, MAT4 mi)
 {
 	int i,j;
 	real t;
 
 	if (m==mi){
-		runtime_error("inverse(m,mi)","the input and the output operands 'm' and 'mi' must be different", 1);
+		runtime_error("invers(m,mi)","the input and the output operands 'm' and 'mi' must be different", 1);
 	}
 
 	for (i=0;i<3;i++)

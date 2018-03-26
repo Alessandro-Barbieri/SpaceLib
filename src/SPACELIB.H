@@ -194,8 +194,7 @@ int    rotat24(int a, real q, POINT O, MAT4 m);
 void   rotat34(int a, real q, POINT P, MAT4 m);
                                                    /* --- Speed and Acceleration Matrices --- */
 void   gtom(real gx, real gy, real gz, MAT4 Hg);
-void   Gtomegapto (MAT3 G, VECTOR omegapto);/* extracts the angular velocity vector from the 3x3
-                                          upper left submatrix G of the acceleration matrix H */
+void   Gtomegapto (MAT3 G, VECTOR omegapto);/* extracts the angular velocity vector from the 3x3 upper left submatrix G of the acceleration matrix H */
 int    makeL(int jtype, AXIS u, real pitch, POINT P, MAT4 L);
 int    makeL2(int jtype, int a, real pitch, POINT P, MAT4 L);
 void   WtoL(MAT4 W, MAT4 L);                         /* W matrix to L matrix */
@@ -218,7 +217,7 @@ void   trasf_mamt(MAT A1, MAT m, MAT A2, int dim);
 void   trasf_miamit(MAT4 A1, MAT4 m, MAT4 A2);
                                         /* --- Matrix transformations, General Operations --- */
 void   coriolis(MAT4 H0, MAT4 H1, MAT4 W0, MAT4 W1, MAT4 H);
-void   inverse(MAT4 m, MAT4 mi);
+void   invers(MAT4 m, MAT4 mi);
 void   mtov(MAT A, int dim, VECTOR v);      /* 3×3 skew matrix to vector[3] */
 void   vtom(VECTOR v, MAT A, int dim);      /* vector[3] to 3×3 skew matrix */
 void   skew(MAT A, MAT B, MAT C, int dim);
@@ -237,8 +236,7 @@ int    Wtocardan(MAT4 m, MAT4 W, int i, int j, int k, real q1[3], real q2[3], re
 void   cardanto_OMEGA(real *q, real *qp, int i, int j, int k, real *omega);
 void   cardanto_omega(real *q, real *qp, int i, int j, int k, MAT A, int dim);
 void   cardantoH(real *q, real *qp, real *qpp, int i, int j, int k, POINT O, MAT4 H);
-                  /* extracts the Euler/Cardan angles and their first and second time derivative
-                     from matrices m, W and H */
+                  /* extracts the Euler/Cardan angles and their first and second time derivative from matrices m, W and H */
 int    Htocardan(MAT4 m, MAT4 W, MAT4 H, int i, int j, int k, real q1[3], real q2[3],
                  real qp1[3], real qp2[3], real qpp1[3], real qpp2[3]);
 void   cardanto_G(real *q, real *qp, real *qpp, int i, int j, int k, MAT A, int dim);
@@ -293,8 +291,7 @@ void   vector(AXIS u, real m, VECTOR v);       /* evaluate a vector v whose modu
                                           /* --- Copy Functions --- */
 void   mcopy(MAT A1, MAT A2, int d1, int d2);
 void   mmcopy(MAT A, MAT B, int d1, int d2, int im, int jm);
-int    mvcopy(MAT A, int rows, int cols, int val, int type, real *v); /* from row/column of A
-                                                                         to vector */
+int    mvcopy(MAT A, int rows, int cols, int val, int type, real *v); /* from row/column of A to vector */
 int    vmcopy(real *v, int dim, int val, int type, MAT A, int rows,
               int cols);                       /* from vector to row/column of A */
                                                /* --- Print Functions --- */

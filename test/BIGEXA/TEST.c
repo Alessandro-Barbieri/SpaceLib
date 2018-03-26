@@ -114,7 +114,7 @@ int main(void)
 		printm4("Absolute acceleration matrix of link 2",H2);
 
 		if(n!=3) break;               	       /*if motion file empty -> end of loop */
-		delta_m(W1,H1,dt,dm);                  /* builds matrix dm(m) */
+		delta_m(W1,H1,dt,dm);                  /* builds matrix dm (m) */
 		molt4(dm,m1,TMP);                      /* new position of link 1 (n) */
 		mcopy4(TMP,m1);
 

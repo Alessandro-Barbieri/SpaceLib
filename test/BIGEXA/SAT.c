@@ -41,7 +41,7 @@ int main (void)
 	molt4(Q5,m4,mf);
 
                                              /* evaluate global elements */
-        inverse(mi,miinv);
+        invers(mi,miinv);
         molt4(mf,miinv,Qtot);
 	mtoscrew(Qtot,utot,&fi,&h,P);
 

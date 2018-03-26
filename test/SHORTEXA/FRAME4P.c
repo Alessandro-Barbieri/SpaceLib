@@ -30,7 +30,7 @@ int main(void)
 
 	frame4P(P1,P2,P3,X,Y,ma1);
 	frame4P(Q1,Q2,Q3,X,Y,m01);
-	inverse( ma1, m1a );
+	invers( ma1, m1a );
 	molt4(m01, m1a , m0a);
 
 	printm4("\nThe position matrix m01 is:",m01);
