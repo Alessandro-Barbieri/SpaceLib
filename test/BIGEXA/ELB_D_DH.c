@@ -98,7 +98,9 @@ int main(int argc,char *argv[])
 	fprintf(out,"%f\n",dt);        /* write dt to out file */
 	fprintf(out,"%d %d %d\n\n",ii,jj,kk);  /* write Cardan convention to out file */
 
-	for(t=0;eof(motion);t+=dt) /* main loop */
+	//for(t=0;eof(motion);t+=dt) /* main loop */
+	t=0;
+	while(!feof(motion))
 	{
 		for(i=1;i<=MAXLINK;i++)
 		{                  /* read joint motion */
@@ -139,7 +141,8 @@ int main(int argc,char *argv[])
 		printm4("The velocity matrix of the gripper is:",Waux);
 		printm4("The acceleration matrix of the gripper is:",Haux);
 		printf("\nPress any key to continue\n");
-		getch() ;
+		char a;
+		(void)scanf(" %c",&a);
 
 		fprintf(out,"%f %f %f\n",q1[0],q1[1],q1[2]);
 		fprintf(out,"%f %f %f\n",qp1[0],qp1[1],qp1[2]);
@@ -149,6 +152,7 @@ int main(int argc,char *argv[])
 						       gripper[Z][U]);
 		fprintf(out,"%f %f %f\n",Waux[X][U],Waux[Y][U],Waux[Z][U]);
 		fprintf(out,"%f %f %f\n",Haux[X][U],Haux[Y][U],Haux[Z][U]);
+		t+=dt;
 	}
-	fcloseall();
+	exit(0);
 }

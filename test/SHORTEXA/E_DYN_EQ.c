@@ -32,13 +32,13 @@ int main()
 
 	dyn_eq(J,Wp,F,var);
 	char a;
-	scanf(" %c",&a);
+	(void)scanf(" %c",&a);
 	skew4(Wp,J,F2);
 	printm4("Wp",Wp);
 	printm4("F",F2);
 	printm4("F2",F2);
 
-	scanf(" %c",&a); printf("-------\n");
+	(void)scanf(" %c",&a); printf("-------\n");
 
 	jxx=1.01; jyy=1.02; jzz=1.03;
 	jxy=0.1;  jxz=0.2;  jyz=0.3;
@@ -60,7 +60,7 @@ int main()
 	printm4("F",F);
 	printm4("F2",F2);
 
-	scanf(" %c",&a); printf("0-------\n");
+	(void)scanf(" %c",&a); printf("0-------\n");
 	clear4(F);
 	dyn_eq(J,Wp,F,var2);
 	skew4(Wp,J,F2);
@@ -68,7 +68,7 @@ int main()
 	printm4("F",F);
 	printm4("F2",F2);
 
-	scanf(" %c",&a); printf("1-------\n");
+	(void)scanf(" %c",&a); printf("1-------\n");
 	Wp[Z][X]=999.; Wp[X][Z]=999.;
 	Wp[X][U]=999.;
 	Wp[Z][U]=999.;
@@ -84,7 +84,7 @@ int main()
 	printm4("F",F);
 	printm4("F2",F2);
 
-	scanf(" %c",&a); printf("2-------\n");
+	(void)scanf(" %c",&a); printf("2-------\n");
 	Wp[Y][Z]=999.; Wp[Z][Y]=999.;
 	Wp[Y][X]=999.; Wp[X][Y]=999.;
 	Wp[X][U]=999.;
@@ -100,7 +100,7 @@ int main()
 	printm4("F",F);
 	printm4("F2",F2);
 
-	scanf(" %c",&a); printf("3-------\n");
+	(void)scanf(" %c",&a); printf("3-------\n");
 	Wp[X][Z]=999.; Wp[Z][X]=999.;
 	Wp[Y][U]=999.;
 

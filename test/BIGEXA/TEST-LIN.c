@@ -86,5 +86,5 @@ int main(void)
 		}
 		printf("\n");
 	}
-	fcloseall();
+	exit(0);
 }

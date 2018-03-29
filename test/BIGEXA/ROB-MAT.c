@@ -84,7 +84,7 @@ int main(int argc,char *argv[])
 					   /* read motions (2) */
 			ierr=fscanf(motion,"%f %f %f",&q,&qp,&qpp);
 			if (ierr!=3)   /* end of data in file MOTION */
-			{       fcloseall();
+			{
 				exit(0);
 			}
 					  /* build relative position matrix (3) */

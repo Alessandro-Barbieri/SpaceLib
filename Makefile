@@ -1,7 +1,7 @@
 SRC_DIR := ./src
 LIB_DIR := ./lib
 
-CFLAGS += -fPIC -g -O3 -fstack-protector-all -D_FORTIFY_SOURCE=2 -DREENTRANT
+CFLAGS += -std=c11 -fPIC -g -O3 -fstack-protector-all -D_FORTIFY_SOURCE=2 -DREENTRANT
 LDFLAGS += -shared -lm
 
 TARGET = $(LIB_DIR)/libspacelib.so

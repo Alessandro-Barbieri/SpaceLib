@@ -47,7 +47,7 @@ int main(int argc,char *argv[])
 
 	if (argc!=4)               /* testing parameters */
 	{
-		fprintf(stderr,"Usage: Elb_d_pa data_file joint_motion_file griper_output_file\n");
+		fprintf(stderr,"Usage: Elb_d_pa data_file joint_motion_file gripper_output_file\n");
 		exit(1);
 	}
 	data=fopen(argv[1],"r");
@@ -93,8 +93,9 @@ int main(int argc,char *argv[])
         fscanf(motion,"%f",&dt);       /* read time step */
         fprintf(out,"%f\n",dt);        /* write dt to out file */
         fprintf(out,"%d %d %d\n\n",ii,jj,kk);  /* write gripper Cardan convention to out file */
-	for(t=0;eof(motion);t+=dt) /* main loop */
-	{
+//	for(t=0;eof(motion);t+=dt) /* main loop */
+	while(!feof(motion))
+		{
 		for(i=1;i<=MAXLINK;i++)
 		{
 			ierr=fscanf(motion,"%f %f %f",&q,&qp,&qpp);
@@ -167,6 +168,7 @@ int main(int argc,char *argv[])
 						       mabs[MAXLINK+1][Z][U]);
 		fprintf(out,"%f %f %f\n",Waux[X][U],Waux[Y][U],Waux[Z][U]);
 		fprintf(out,"%f %f %f\n",Haux[X][U],Haux[Y][U],Haux[Z][U]);
+		t+=dt;
 	}
-	fcloseall();
+	exit(0);
 }

@@ -153,7 +153,7 @@ int main(void)
 		rmolt4(Wp,dt,Wp);                      /* new velocity of link 1 (o) */
 		sum4(Wp,W1,W1);
 	}
-	fcloseall();
+	exit(0);
 }
 
 
