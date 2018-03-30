@@ -234,7 +234,6 @@ int main(int argc,char *argv[])
                 printv("The joint angles q are",q,6);
                 printv("The joint velocity qp are",qp,6);
                 printv("The joint acceleration qpp are",qpp,6);
-		char a; scanf(" %c",&a);
 
 		for (p=0;p<MAXLINK;p++)
 		{

@@ -134,9 +134,6 @@ int main(int argc,char *argv[])
 		printm4("The position matrix of the gripper is:",gripper);
 		printm4("The velocity matrix of the gripper is:",Waux);
 		printm4("The acceleration matrix of the gripper is:",Haux);
-		printf("\nPress any key to continue\n");
-		char a;
-		(void)scanf(" %c",&a);
 
 		fprintf(out,"%f %f %f\n",q1[0],q1[1],q1[2]);
 		fprintf(out,"%f %f %f\n",qp1[0],qp1[1],qp1[2]);

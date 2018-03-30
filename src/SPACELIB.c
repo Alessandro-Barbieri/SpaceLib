@@ -1152,12 +1152,9 @@ double dzerom(void)
 */
 void runtime_error(const char *name, const char *msg, int ex)
 {
-	char a;
 	fprintf(stderr,"\n\n*** runtime error spacelib/%s\n",name);
 	fprintf(stderr,"%s\n\n",msg);
 	if (ex){
-   		fprintf(stderr,"hit any key to exit\a\a"); (void)scanf(" %c",&a);
 		exit(ex);
 	}
-	printf("hit any key to continue"); (void)scanf(" %c",&a);
 }
