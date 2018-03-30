@@ -24,4 +24,5 @@ int main(void)
 	cardanto_OMEGA(q,qp,Z,Y,X,omega);
 
 	printv("\nThe angular velocity omega is:",omega,3);
+	return(0);
 }

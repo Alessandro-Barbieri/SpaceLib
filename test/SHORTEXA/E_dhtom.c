@@ -60,4 +60,5 @@ int main(int argc,char *argv[])
 
 	sub4(Ma,Mb,dM);
 	printm4("the results must be identical and so dM=Ma-Mb=[0]",dM);
+	return(0);
 }

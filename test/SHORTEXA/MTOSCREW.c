@@ -30,4 +30,5 @@ int main (void)
 	printf("\nThe angle fi is : %f\n",fi);
 	printf("\nThe pitch h is : %f\n",h);
 	printv("The point P is :",P,4);
+	return(0);
 }

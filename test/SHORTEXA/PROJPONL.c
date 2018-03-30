@@ -26,4 +26,5 @@ int main(void)
 	printv("2nd point [projection of P] is",P1,4);
 	printv("The origin of the new line is:",m.P,4);
 	printv("The direction of the new line is:",m.dir,3);
+	return(0);
 }

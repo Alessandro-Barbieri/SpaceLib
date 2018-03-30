@@ -25,4 +25,5 @@ int main(void)
 	gtom(gx,gy,gz,Hg);
 
 	printm4("\nThe acceleration matrix Hg is:",Hg);
+	return(0);
 }

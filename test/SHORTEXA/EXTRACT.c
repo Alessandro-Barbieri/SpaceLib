@@ -27,4 +27,5 @@ int main (void)
 
 	printf("\nThe angle fi is : %f\n",fi);
 	printv("The axis u is :",u,3);
+	return(0);
 }

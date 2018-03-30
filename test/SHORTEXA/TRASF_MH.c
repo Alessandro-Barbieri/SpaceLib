@@ -34,4 +34,5 @@ int main(void)
 	printm4("The acceleration matrix H in frame (1) is:",H1);
 	printm4("The position matrix M01 is:", m01);
 	printm4("The acceleration matrix H in frame (0) is:",H0);
+	return(0);
 }

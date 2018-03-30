@@ -26,4 +26,5 @@ int main(void)
 	cardantoH(q,qp,qpp,X,Z,Y,O,H);
 
 	printm4("\nThe acceleration matrix H is:",H);
+	return(0);
 }

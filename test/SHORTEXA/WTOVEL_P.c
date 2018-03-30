@@ -31,4 +31,5 @@ int main(void)
 	printf("The angular speed omega is: %f",omega);
 	printf("The linear velocity vel is: %f",vel);
 	printv("The point P of the axis is:",P,4);
+	return(0);
 }

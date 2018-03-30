@@ -25,4 +25,5 @@ int main(void)
 
 	printm4("\nThe velocity matrix W in frame (1) is:",W1);
 	printm4("\nThe acceleration matrix H in frame (1) is:",H1);
+	return(0);
 }

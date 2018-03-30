@@ -128,4 +128,5 @@ int main(int argc,char *argv[])
 			printm4("Action on joint i",ACT0[i]);
 		}
 	}
+	return(0);
 }  			                      /*  end main  */

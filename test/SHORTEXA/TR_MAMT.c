@@ -28,4 +28,5 @@ int main(void)
 	printm4("The angular momentum matrix in frame (1) is:",GAMMA1);
 	printm4("The position matrix M01 is:", m);
 	printm4("The angular momentum matrix in frame (0) is:",GAMMA0);
+	return(0);
 }

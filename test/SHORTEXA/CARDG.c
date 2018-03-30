@@ -26,4 +26,5 @@ int main(void)
 	cardanto_G(q,qp,qpp,Y,X,Z,M A,4);
 
 	printm4("\nThe matrix A is:",A);
+	return(0);
 }

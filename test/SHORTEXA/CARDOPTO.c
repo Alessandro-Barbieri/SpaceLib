@@ -25,4 +25,5 @@ int main(void)
 	cardanto_OMEGAPTO(q,qp,qpp,Y,X,Z,omegapto);
 
 	printv("\nThe angular acceleration omegapto is:",omegapto,3);
+	return(0);
 }

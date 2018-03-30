@@ -24,4 +24,5 @@ int main (void)
 	makeL(Pri,u,pitch,O,L0);
 
 	printm4("\nThe L matrix for the prismatic joint is:",L0);
+	return(0);
 }

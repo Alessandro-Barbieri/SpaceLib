@@ -48,4 +48,5 @@ int main(void)
 	moltp( m0a, P2, Ptmp );
 	printv("temp", Ptmp,4);
 	printv("Q1", Q2,4);
+	return(0);
 }

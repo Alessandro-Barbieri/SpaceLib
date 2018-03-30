@@ -36,4 +36,5 @@ real d;
 	subv(P1,v,Ps);
 	Ps[U]=1.;
 	printv("The symmetric point Ps is:",Ps,4);
+	return(0);
 }

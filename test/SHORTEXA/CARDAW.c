@@ -26,4 +26,5 @@ int main(void)
 	cardantoW(q,qp,X,Z,Y,O,W);
 
 	printm4("\nThe velocity matrix W is:",W);
+	return(0);
 }

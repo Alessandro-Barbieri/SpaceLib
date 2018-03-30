@@ -48,4 +48,5 @@ int main(void)
 	printf("\nThe rotation angle is %f:",fi);
 	printf("\nThe pitch is %f:",h);
 	printv("\nThe point of the axis is:",P,4);
+	return(0);
 }

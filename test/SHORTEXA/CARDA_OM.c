@@ -25,4 +25,5 @@ int main(void)
 	cardanto_omega(q,qp,Z,Y,X,M A,4);
 
 	printm4("\nThe angular velocity matrix A is:",A);
+	return(0);
 }

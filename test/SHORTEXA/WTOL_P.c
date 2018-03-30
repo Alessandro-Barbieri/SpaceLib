@@ -25,5 +25,5 @@ int main (void)
 
 	printm4("\nThe velocity matrix is:", W);
 	printm4("\nThe L matrix for a prismatic joint is:",L);
-
+	return(0);
 }

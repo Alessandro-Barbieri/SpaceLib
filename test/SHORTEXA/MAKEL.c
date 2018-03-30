@@ -24,4 +24,5 @@ int main (void)
 	makeL(Rev,u,pitch,P,Lk);
 
 	printm4("The L matrix in the frame k is:",Lk);
+	return(0);
 }

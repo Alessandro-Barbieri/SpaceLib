@@ -24,4 +24,5 @@ int main(void)
 	cardantoM(q,X,Z,Y,O,m);
 
 	printm4("\nThe position matrix m is:",m);
+	return(0);
 }

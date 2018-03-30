@@ -24,4 +24,5 @@ int main (void)
 	rotat(u,fi,M A,4);
 
 	printm4("The A matrix is :",A);
+	return(0);
 }

@@ -38,4 +38,5 @@ int main(void)
     M10[X][U]=xg; M10[Y][U]=yg;  M10[Z][U]=zg;
     trasf_mamt4(J0,M10,J1);
     printm4("Inertia Matrix in frame (1) J1:",J1);
+	return(0);
 }

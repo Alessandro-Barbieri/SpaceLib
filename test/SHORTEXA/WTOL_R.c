@@ -24,4 +24,5 @@ int main (void)
 	WtoL(W,L);
 	printm4("\nThe velocity matrix is:", W);
 	printm4("\nThe L matrix for a revolute joint is:",L);
+	return(0);
 }
