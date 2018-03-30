@@ -72,5 +72,5 @@ int main(void)
 					/* output results */
 	printm4("The velocity matrix of the gripper in frame (0) is:",W04);
 	printm4("The velocity matrix of the gripper in frame (a) is:",W04a);
-
+	return(0);
 }
