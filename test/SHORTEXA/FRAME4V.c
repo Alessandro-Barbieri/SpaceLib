@@ -22,7 +22,8 @@ int main(void)
 	VECTOR v1={0.,2.,1.};
 	VECTOR v2={0.,1.,2.};
 
-	frame4V(P1, v1,v2,X,Y,M m01);
+	frame4V(P1, v1,v2,X,Y,m01);
 
 	printm4("\nThe position matrix m01 is:",m01);
+	return(0);
 }
