@@ -1,10 +1,6 @@
 /* ROB-MAT: program for direct kinematics and inverse dynamics of ANY serial robot v.2
    Developed on MS-DOS operative system with Microsoft C compiler V. 5.10 */
 
-/* Note: To compile this program the type real must be set equivalent to the type float
-	 (see also User's Manual). This is necessary because the formatting string of the
-	 fscanf function have been written using %f as descriptor. */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -64,16 +60,16 @@ int main(int argc,char *argv[])
 	for (i=1;i<=nlink;i++) 		 /* for each link */
 	{                                /* D.&H. parameters */
 					 /* dynamic data */
-		fscanf(data,"%d %f %f %f %f %f",
+		fscanf(data,"%d %lf %lf %lf %lf %lf",
 		       &jtype[i],&theta[i],&d[i],&b[i],&a[i],&alpha[i]);
-		fscanf(data,"%f %f %f %f %f %f %f",
+		fscanf(data,"%lf %lf %lf %lf %lf %lf %lf",
 		       &m,&jxx,&jxy,&jxz,&jyy,&jyz,&jzz);
-		fscanf(data,"%f %f %f",&xg,&yg,&zg);
+		fscanf(data,"%lf %lf %lf",&xg,&yg,&zg);
 					   /* build inertia matrix */
 		jtoJ(m,jxx,jyy,jzz,jxy,jyz,jxz,xg,yg,zg,J[i]);
 	}
 				       /* read gravity acceleration vector */
-	fscanf(data,"%f %f %f",&gx,&gy,&gz);
+	fscanf(data,"%lf %lf %lf",&gx,&gy,&gz);
 	gtom(gx,gy,gz,Hg);             /* build gravity acceleration matrix */
 	fscanf(motion,"%f",&dt);       /* read the range of time */
 	for(t=0;;t+=dt)                /* for each instant of time */
@@ -82,7 +78,7 @@ int main(int argc,char *argv[])
 		for (i=1;i<=nlink;i++) /* for each link */
 		{
 					   /* read motions (2) */
-			ierr=fscanf(motion,"%f %f %f",&q,&qp,&qpp);
+			ierr=fscanf(motion,"%lf %lf %lf",&q,&qp,&qpp);
 			if (ierr!=3)   /* end of data in file MOTION */
 			{
 				exit(0);
@@ -101,7 +97,7 @@ int main(int argc,char *argv[])
 				   /* ***** DYNAMICS ***** */
 				   /* initializations  (10) */
 				   /* read external actions on end-effector */
-		fscanf(data,"%f %f %f %f %f %f",&fx,&fy,&fz,&cx,&cy,&cz);
+		fscanf(data,"%lf %lf %lf %lf %lf %lf",&fx,&fy,&fz,&cx,&cy,&cz);
 		actom(fx,fy,fz,cx,cy,cz,EXT);           /* build external action matrix */
 		trasf_mamt4(EXT,T[nlink],ACT0[nlink+1]);/* transforms external actions from local to base frame */
 		for(i=nlink;i>0;i--)                    /* for each link */

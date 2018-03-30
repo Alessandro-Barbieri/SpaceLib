@@ -1,11 +1,7 @@
 /* elb_I_DH.c program for the INVERSE kinematics of ELBOW robot.
    Frames assigned according to Denavit and Hartenberg conventions.
    the output of this program is compatible with the input  of elb_d_dh.c
-   the input  of this program is compatible with tho output of elb_d_dh.c */
-
-/* Note: To compile this program the type real must be set equivalent to the type float
-	 (see also User's Manual). This is necessary because the formatting string of the
-	 fscanf function have been written using %f as descriptor. */
+   the input  of this program is compatible with the output of elb_d_dh.c */
 
 #include <stdio.h>
 #include <math.h>
@@ -104,9 +100,9 @@ int main(int argc,char *argv[])
 		exit(5);
 	}
 	for(p=1;p<=MAXLINK;p++)
-		fscanf(data,"%f",&a[p]); /* read robot description */
+		fscanf(data,"%lf",&a[p]); /* read robot description */
 	for(p=0;p<MAXLINK;p++)
-		fscanf(guess,"%f",&q[p]); /* 1st guess for q */
+		fscanf(guess,"%lf",&q[p]); /* 1st guess for q */
 
 				       /* matrices initialization */
 	clear(M Jac,MAXLINK,MAXLINK);
@@ -121,13 +117,13 @@ int main(int argc,char *argv[])
 
 	a[1]=a[6]=0;    /* D&H parameter 'a' of link 1 and link 6 are zero */
 
-        fscanf(motion,"%f",&dt);                /* read time step */
+        fscanf(motion,"%lf",&dt);                /* read time step */
 	fscanf(motion,"%d %d %d",&ii,&jj,&kk);  /* read Cardan convention */
 	fprintf(out,"%f\n\n",dt);
 
 	for(t=0;;t+=dt)                /* main loop */
 	{
-		ierr=fscanf(motion,"%f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f",
+		ierr=fscanf(motion,"%lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf",
 			    &q1[0],&q1[1],&q1[2],&qp1[0],&qp1[1],&qp1[2],
 			    &qpp1[0],&qpp1[1],&qpp1[2],&O[X],&O[Y],&O[Z],
 			    &vel[0],&vel[1],&vel[2],&acc[0],&acc[1],&acc[2]);

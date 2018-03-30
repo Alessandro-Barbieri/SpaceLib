@@ -14,10 +14,6 @@
 % to its initial value (G=Go for t==0.)
 */
 
-/* Note: To compile this program the type real must be set equivalent to the type float
-	 (see also User's Manual). This is necessary because the formatting string of the
-	 fscanf function has been written using %f as descriptor (and NOT %lf). */
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <float.h>
@@ -65,10 +61,10 @@ int main(void)
 			     /* read initial condition of the system */
 	for(i=0;i<4;i++)     /* read velocity matrix of link 1 */
 		for(j=0;j<4;j++)
-			fscanf(fil,"%f",&W1[i][j]);
+			fscanf(fil,"%lf",&W1[i][j]);
 	for(i=0;i<4;i++)     /* read position matrix of link 1 */
 		for(j=0;j<4;j++)
-			fscanf(fil,"%f",&m1[i][j]);
+			fscanf(fil,"%lf",&m1[i][j]);
 	fclose(fil);
 
 	fil=fopen("TEST.MOT","r"); /* open motion file */
@@ -77,12 +73,12 @@ int main(void)
 		printf("error on input file TEST.MOT");
 		exit(1);
 	}
-	fscanf(fil,"%f",&dt);      /* read integration step "dt" */
+	fscanf(fil,"%lf",&dt);      /* read integration step "dt" */
 
 	for(t=0;;t+=dt)            /* loop for each instant t --- step (2) */
 	{
 
-		n=fscanf(fil,"%f %f %f ",&q,&qp,&qpp); /* read motion of
+		n=fscanf(fil,"%lf %lf %lf ",&q,&qp,&qpp); /* read motion of
 							motor (a) */
 		printf("--- t: %f ---- q: %f   qp: %f   qpp: %f",t,q,qp,qpp);
 

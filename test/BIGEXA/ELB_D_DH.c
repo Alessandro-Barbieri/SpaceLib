@@ -1,11 +1,7 @@
 /* elb_d_DH.c program for the DIRECT kinematics of ELBOW robot.
    Frames assigned according to Denavit and Hartenberg conventions.
    the output of this program is compatible with the input  of elb_i_dh.c
-   the input  of this program is compatible with tho output of elb_i_dh.c */
-
-/* NOTE: To compile this program the type real must be set equivalent to the type float
-	 (see also User's Manual). This is necessary because the formatting string of the
-	 fscanf function have been written using %f as descriptor. */
+   the input  of this program is compatible with the output of elb_i_dh.c */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -98,13 +94,11 @@ int main(int argc,char *argv[])
 	fprintf(out,"%f\n",dt);        /* write dt to out file */
 	fprintf(out,"%d %d %d\n\n",ii,jj,kk);  /* write Cardan convention to out file */
 
-	//for(t=0;eof(motion);t+=dt) /* main loop */
-	t=0;
-	while(!feof(motion))
+	for(t=0;!feof(motion);t+=dt) /* main loop */
 	{
 		for(i=1;i<=MAXLINK;i++)
 		{                  /* read joint motion */
-			ierr=fscanf(motion,"%f %f %f\n",&q,&qp,&qpp);
+			ierr=fscanf(motion,"%lf %lf %lf\n",&q,&qp,&qpp);
 			if(ierr!=3)
 				exit(0);
 
@@ -152,7 +146,6 @@ int main(int argc,char *argv[])
 						       gripper[Z][U]);
 		fprintf(out,"%f %f %f\n",Waux[X][U],Waux[Y][U],Waux[Z][U]);
 		fprintf(out,"%f %f %f\n",Haux[X][U],Haux[Y][U],Haux[Z][U]);
-		t+=dt;
 	}
 	exit(0);
 }

@@ -1,10 +1,6 @@
 /* elb_d_PA.c program for the DIRECT kinematics of ELBOW robot.
    the output of this program is compatible with the input  of elb_i_dh.c
-   the input  of this program is compatible with tho output of elb_i_dh.c */
-
-/* Note: To compile this program the type real must be set equivalent to the type float
-	 (see also User's Manual). This is necessary because the formatting string of the
-	 fscanf function have been written using %f as descriptor. */
+   the input  of this program is compatible with the output of elb_i_dh.c */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -78,7 +74,7 @@ int main(int argc,char *argv[])
 
         for(i=1;i<=MAXLINK;i++)         /* read link lengths */
 	{
-		fscanf(data,"%f",&a[i]);
+		fscanf(data,"%lf",&a[i]);
 	}
 
 				   /* relative origin of frame (i) in (i-1) */
@@ -90,15 +86,14 @@ int main(int argc,char *argv[])
 	O[6][X]=0.;   O[6][Y]=0.;   O[6][Z]=0.;   O[6][U]=1.;
 	O[7][X]=a[6]; O[7][Y]=0.;   O[7][Z]=0.;   O[7][U]=1.;
 
-        fscanf(motion,"%f",&dt);       /* read time step */
+        fscanf(motion,"%lf",&dt);       /* read time step */
         fprintf(out,"%f\n",dt);        /* write dt to out file */
         fprintf(out,"%d %d %d\n\n",ii,jj,kk);  /* write gripper Cardan convention to out file */
-//	for(t=0;eof(motion);t+=dt) /* main loop */
-	while(!feof(motion))
+	for(t=0;!feof(motion);t+=dt) /* main loop */
 		{
 		for(i=1;i<=MAXLINK;i++)
 		{
-			ierr=fscanf(motion,"%f %f %f",&q,&qp,&qpp);
+			ierr=fscanf(motion,"%lf %lf %lf",&q,&qp,&qpp);
 			if(ierr!=3)
 				exit(0);
 
@@ -168,7 +163,6 @@ int main(int argc,char *argv[])
 						       mabs[MAXLINK+1][Z][U]);
 		fprintf(out,"%f %f %f\n",Waux[X][U],Waux[Y][U],Waux[Z][U]);
 		fprintf(out,"%f %f %f\n",Haux[X][U],Haux[Y][U],Haux[Z][U]);
-		t+=dt;
 	}
 	exit(0);
 }

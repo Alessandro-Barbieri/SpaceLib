@@ -5,10 +5,6 @@
 	      A*x=b
 */
 
-/* Note: To compile this program the type real must be set equivalent to the type float
-	 (see also User's Manual). This is necessary because the formatting string of the
-	 fscanf function have been written using %f as descriptor. */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include "SPACELIB.H"
