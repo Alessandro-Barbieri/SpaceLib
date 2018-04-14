@@ -17,7 +17,7 @@ int main(int argc,char *argv[])
 	real theta[MAXLINK+1]={0.,0.,0.,0.,0.,0.,0.};
 	real d[MAXLINK+1]={0.,0.,0.,0.,0.,0.,0.};
 	real b[MAXLINK+1]={0.,0.,0.,0.,0.,0.,0.};
-	real fi[MAXLINK+1]={0.,PIG_2,0.,0.,3*PIG_2,PIG_2,0.};
+	real phi[MAXLINK+1]={0.,PIG_2,0.,0.,3*PIG_2,PIG_2,0.};
 	real a[MAXLINK+1];
 
 	VECTOR q1,                     /* Euler/Cardan angle configurations */
@@ -139,7 +139,7 @@ int main(int argc,char *argv[])
 			for (p=1;p<=MAXLINK;p++)
 			{
 				       /* builds relative position matrix */
-				dhtom(Rev,theta[p],d[p],b[p],a[p],fi[p],
+				dhtom(Rev,theta[p],d[p],b[p],a[p],phi[p],
 				      q[p-1],mrelp_1[p]);
 				       /* builds absolute position matrix */
 				molt4(mabs[p-1],mrelp_1[p],mabs[p]);

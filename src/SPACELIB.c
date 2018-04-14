@@ -69,10 +69,10 @@ int dhtom(int jtype, real theta, real d, real b, real a, real alpha, real q,
 }
 
 /* == extract ============================================================= */
-/* extracts the unit vector u and the rotational angle fi from the upper-left
-   3×3 submatrix of a dim×dim matrix A. fi is assumed >= 0 and <= PIG */
+/* extracts the unit vector u and the rotational angle phi from the upper-left
+   3×3 submatrix of a dim×dim matrix A. phi is assumed >= 0 and <= PIG */
 
-void extract(MAT A, AXIS u, real *fi, int dim)
+void extract(MAT A, AXIS u, real *phi, int dim)
 
 #define r(i,j) (*((A)+(j)+(i)*(dim)))      /* attention to the define */
 {
@@ -91,7 +91,7 @@ void extract(MAT A, AXIS u, real *fi, int dim)
 		co = (real) (r(X,X)+r(Y,Y)+r(Z,Z)-1.)/2;
 	#endif
 
-	*fi = (real) atan2(s,co);
+	*phi = (real) atan2(s,co);
 
 	co= (real) min(1.,max(-1.,co));
 	v= (real) 1.-co;
@@ -100,7 +100,7 @@ void extract(MAT A, AXIS u, real *fi, int dim)
 	{
 		u[X] = a/s; u[Y] = b/s; u[Z] = c/s;
 	}
-	else if ((*fi!=0) && (co>0))                /* fi nearly zero */
+	else if ((*phi!=0) && (co>0))                /* phi nearly zero */
 	{
 		t=(1./v);
 
@@ -122,7 +122,7 @@ void extract(MAT A, AXIS u, real *fi, int dim)
 		#endif
 
 	}
-	else if ((*fi!=0) && (co<0))                /* fi nearly PIG (3.14) */
+	else if ((*phi!=0) && (co<0))                /* phi nearly PIG (3.14) */
 	{
 		t= ((real)1./v);
 
@@ -148,7 +148,7 @@ void extract(MAT A, AXIS u, real *fi, int dim)
 		u[y] *= (real) sign(r(y,x)+r(x,y))*s;
 		u[z] *= (real) sign(r(z,x)+r(x,z))*s;
 	}
-	else                                        /* fi == 0 */
+	else                                        /* phi == 0 */
 	{
 		u[X] = u[Y] = u[Z] = (real) 0.;
 	}
@@ -158,7 +158,7 @@ void extract(MAT A, AXIS u, real *fi, int dim)
 
 /* == mtoscrew ============================================================ */
 
-int mtoscrew (MAT4 Q, AXIS u, real *fi, real *h, POINT P)
+int mtoscrew (MAT4 Q, AXIS u, real *phi, real *h, POINT P)
 {
 	real a,b,c,s,co,d,v,t,t1;
 	int i,j;
@@ -169,7 +169,7 @@ int mtoscrew (MAT4 Q, AXIS u, real *fi, real *h, POINT P)
 	c = (real) 0.5*(Q[Y][X]-Q[X][Y]);
 	s = (real) sqrt((double) (a*a+b*b+c*c));
 	co = (Q[X][X]+Q[Y][Y]+Q[Z][Z]-1.)/2.;
-	*fi = (real) atan2(s,co);
+	*phi = (real) atan2(s,co);
 
 	co = (real) min(1.,max(-1.,co));
 	v = (real) 1.-co;
@@ -178,14 +178,14 @@ int mtoscrew (MAT4 Q, AXIS u, real *fi, real *h, POINT P)
 	{
 		u[X] = a/s; u[Y] = b/s; u[Z] = c/s;
 	}
-	else if ((*fi!=0) && (co>0))                /* fi small */
+	else if ((*phi!=0) && (co>0))                /* phi small */
 	{
 		t= ((real)1./v);
 		u[X] = (real)sign(Q[Z][Y]-Q[Y][Z])* (real) sqrt(aabs((Q[X][X]-co)*t));
 		u[Y] = (real)sign(Q[X][Z]-Q[Z][X])* (real) sqrt(aabs((Q[Y][Y]-co)*t));
 		u[Z] = (real)sign(Q[Y][X]-Q[X][Y])* (real) sqrt(aabs((Q[Z][Z]-co)*t));
 	}
-	else if ((*fi!=0) && (co<0))                /* fi nearly PIG (3.14) */
+	else if ((*phi!=0) && (co<0))                /* phi nearly PIG (3.14) */
 	{
 		t= ((real)1./v);
 		u[X]=(real) sqrt(aabs((Q[X][X]-co)*t));
@@ -203,7 +203,7 @@ int mtoscrew (MAT4 Q, AXIS u, real *fi, real *h, POINT P)
 		u[y] *= (real) sign(Q[y][x]+Q[x][y])*s;
 		u[z] *= (real) sign(Q[z][x]+Q[x][z])*s;
 	}
-	else                                        /* fi==0 */
+	else                                        /* phi==0 */
 	{
 		d=(real)sqrt(Q[X][U]*Q[X][U]+Q[Y][U]*Q[Y][U]+Q[Z][U]*Q[Z][U]);
 		if (d==0)
@@ -238,15 +238,15 @@ int mtoscrew (MAT4 Q, AXIS u, real *fi, real *h, POINT P)
 }
 
 /* == screwtom ============================================================ */
-/* builds rototranslation matrix Q from: unit vector u, rotation angle fi,
-   translation h and a point P of the axis. fi is assumed >= 0 and <= PIG */
+/* builds rototranslation matrix Q from: unit vector u, rotation angle phi,
+   translation h and a point P of the axis. phi is assumed >= 0 and <= PIG */
 
-void screwtom (AXIS u, real fi, real h, POINT P, MAT4 Q)
+void screwtom (AXIS u, real phi, real h, POINT P, MAT4 Q)
 {
 	int i,j;
 	double t;
 
-	rotat(u,fi,M Q,4);  /* builds rotational sub-matrix */
+	rotat(u,phi,M Q,4);  /* builds rotational sub-matrix */
 
 	for(i=X;i<U;i++)
 	{
@@ -258,17 +258,17 @@ void screwtom (AXIS u, real fi, real h, POINT P, MAT4 Q)
 }
 
 /* == rotat =============================================================== */
-/* builds rotational matrix from unit vector u and rotation angle fi.
+/* builds rotational matrix from unit vector u and rotation angle phi.
    Stores the matrix in the 3×3 upper-left part of a dim×dim matrix A */
 
-void rotat (AXIS u, real fi, MAT A, int dim)
+void rotat (AXIS u, real phi, MAT A, int dim)
 
 #define a(i,j) (*((A)+(i)*(dim)+(j)))
 {
 	real s,v;
 
-	s = (real) sin(fi);
-	v =  1 - (real) cos(fi);
+	s = (real) sin(phi);
+	v =  1 - (real) cos(phi);
 
 
 	#ifdef _BORLAND_

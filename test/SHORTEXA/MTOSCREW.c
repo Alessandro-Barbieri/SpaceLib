@@ -21,13 +21,13 @@ int main (void)
 		  {0., 0., 1., 0.},
 		  {0., 0., 0., 1.} };
 	AXIS u;
-	real fi,h;
+	real phi,h;
 	POINT P;
 
-	mtoscrew(Q,u,&fi,&h,P);
+	mtoscrew(Q,u,&phi,&h,P);
 
 	printv("The axis u is :",u,3);
-	printf("\nThe angle fi is : %f\n",fi);
+	printf("\nThe angle phi is : %f\n",phi);
 	printf("\nThe pitch h is : %f\n",h);
 	printv("The point P is :",P,4);
 	return(0);

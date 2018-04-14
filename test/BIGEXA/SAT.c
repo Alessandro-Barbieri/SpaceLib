@@ -24,7 +24,7 @@ int main (void)
 
 	MAT4 Qtot;                           /* global elements which are evaluated */
 	AXIS utot;
-	real fi,h;
+	real phi,h;
 	POINT P;
 
    /* from initial configuration to step 4 */
@@ -43,12 +43,12 @@ int main (void)
                                              /* evaluate global elements */
 	invers(mi,miinv);
 	molt4(mf,miinv,Qtot);
-	mtoscrew(Qtot,utot,&fi,&h,P);
+	mtoscrew(Qtot,utot,&phi,&h,P);
 
                                              /* output results */
 	printf("\n*** Results ***\n");
 	printv("The rototranslation axis is :",utot,3);
-	printf("\nThe rotation angle about this axis is :%f [deg]\n",deg(fi));
+	printf("\nThe rotation angle about this axis is :%f [deg]\n",deg(phi));
 	printf("\nThe translation about this axis is :%f\n",h);
     printv("The point P of the axis is :",P,4);
 

@@ -21,7 +21,7 @@ int main(int argc,char *argv[])
 	real theta[MAXLINK+1]={0.,0.,0.,0.,0.,0.,0.};
 	real d[MAXLINK+1]={0.,0.,0.,0.,0.,0.,0.};
 	real b[MAXLINK+1]={0.,0.,0.,0.,0.,0.,0.};
-	real fi[MAXLINK+1]={0.,PIG_2,0.,0.,3*PIG_2,PIG_2,0.};
+	real phi[MAXLINK+1]={0.,PIG_2,0.,0.,3*PIG_2,PIG_2,0.};
 	real a[MAXLINK+1];         /* to be read from data_file */
 
 	real q,qp,qpp;             /* joint variables : position, velocity, acceleration */
@@ -103,7 +103,7 @@ int main(int argc,char *argv[])
 				exit(0);
 
 				   /* builds relative position matrix */
-			dhtom(Rev,theta[i],d[i],b[i],a[i],fi[i],q,mreli_1[i]);
+			dhtom(Rev,theta[i],d[i],b[i],a[i],phi[i],q,mreli_1[i]);
 
 				   /* builds relative velocity and acceleration matrices */
 			velacctoWH(Rev,qp,qpp,Wreli_1[i],Hreli_1[i]);

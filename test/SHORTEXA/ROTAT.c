@@ -18,10 +18,10 @@ int main (void)
 {
 	MAT4 A;
 	AXIS u=Zaxis_n;
-	real fi=PIG_2;
+	real phi=PIG_2;
 
 	clear4(A);
-	rotat(u,fi,M A,4);
+	rotat(u,phi,M A,4);
 
 	printm4("The A matrix is :",A);
 	return(0);

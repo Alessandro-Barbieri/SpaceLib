@@ -21,11 +21,11 @@ int main (void)
 		  {0., 0., 1., 0.},
 		  {0., 0., 0., 1.} };
 	AXIS u;
-	real fi;
+	real phi;
 
-	extract(M Q,u,&fi,4);
+	extract(M Q,u,&phi,4);
 
-	printf("\nThe angle fi is : %f\n",fi);
+	printf("\nThe angle phi is : %f\n",phi);
 	printv("The axis u is :",u,3);
 	return(0);
 }

@@ -17,12 +17,12 @@ SCREWTOM.C:
 int main (void)
 {
 	MAT4 Q;
-	real fi=PIG_2;
+	real phi=PIG_2;
 	real h=0;
 	AXIS u=Zaxis_n;
 	POINT P={1., 1., 0., 1.};
 
-	screwtom(u,fi,h,P,Q);
+	screwtom(u,phi,h,P,Q);
 
 	printm4("The Q matrix is :",Q);
 	return(0);

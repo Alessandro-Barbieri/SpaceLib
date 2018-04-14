@@ -29,7 +29,7 @@ int main(void)
 
 	AXIS u;             /* rototranslation axis */
 	POINT P;            /* point of the rototranslation axis */
-	real fi;            /* rotation angle */
+	real phi;            /* rotation angle */
 	real h;             /* pitch of the screw */
 
 	frame4P(P1,P2,P3,Y,Z,m01);  /* builds starting position matrix */
@@ -38,14 +38,14 @@ int main(void)
 	invers(m01,m10);            /* builds the rototranslation matrix Q */
 	molt4(m02,m10,Q);
 
-	mtoscrew(Q,u,&fi,&h,P);     /* extracts the rototranslation parameters from Q */
+	mtoscrew(Q,u,&phi,&h,P);     /* extracts the rototranslation parameters from Q */
 
                                /* output results */
 	printm4("The position matrix m10 is:",m10);
 	printm4("The position matrix m02 is:",m02);
 	printm4("The rototranslation matrix is:",Q);
 	printv("\nThe axis u is:",u,3);
-	printf("\nThe rotation angle is %f:",fi);
+	printf("\nThe rotation angle is %f:",phi);
 	printf("\nThe pitch is %f:",h);
 	printv("\nThe point of the axis is:",P,4);
 	return(0);

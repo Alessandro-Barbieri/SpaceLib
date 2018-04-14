@@ -185,10 +185,10 @@ typedef real PLANE[4];   /* PLANE type is defined as a four real element array. 
 
                                                     /* --- Rotation and Position Matrices --- */
 int    dhtom(int jtype, real theta, real d, real b, real a, real alpha,real q, MAT4 m);
-void   extract(MAT A, AXIS u, real *fi, int dim);
-int    mtoscrew(MAT4 Q, AXIS u, real *fi, real *h, POINT P);
-void   screwtom(AXIS u, real fi, real h, POINT P, MAT4 Q);
-void   rotat(AXIS u, real fi, MAT A, int dim);                       /* build rotation matrix */
+void   extract(MAT A, AXIS u, real *phi, int dim);
+int    mtoscrew(MAT4 Q, AXIS u, real *phi, real *h, POINT P);
+void   screwtom(AXIS u, real phi, real h, POINT P, MAT4 Q);
+void   rotat(AXIS u, real phi, MAT A, int dim);                       /* build rotation matrix */
 int    rotat2(int a, real q, MAT R, int dim);
 int    rotat24(int a, real q, POINT O, MAT4 m);
 void   rotat34(int a, real q, POINT P, MAT4 m);
