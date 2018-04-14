@@ -74,7 +74,7 @@ int main(int argc,char *argv[])
 
         for(i=1;i<=MAXLINK;i++)         /* read link lengths */
 	{
-		fscanf(data,"%lf",&a[i]);
+		fscanf(data,SCNr,&a[i]);
 	}
 
 				   /* relative origin of frame (i) in (i-1) */
@@ -86,14 +86,14 @@ int main(int argc,char *argv[])
 	O[6][X]=0.;   O[6][Y]=0.;   O[6][Z]=0.;   O[6][U]=1.;
 	O[7][X]=a[6]; O[7][Y]=0.;   O[7][Z]=0.;   O[7][U]=1.;
 
-        fscanf(motion,"%lf",&dt);       /* read time step */
-        fprintf(out,"%f\n",dt);        /* write dt to out file */
+        fscanf(motion,SCNr,&dt);       /* read time step */
+        fprintf(out,PRIr"\n",dt);        /* write dt to out file */
         fprintf(out,"%d %d %d\n\n",ii,jj,kk);  /* write gripper Cardan convention to out file */
 	for(t=0;!feof(motion);t+=dt) /* main loop */
 		{
 		for(i=1;i<=MAXLINK;i++)
 		{
-			ierr=fscanf(motion,"%lf %lf %lf",&q,&qp,&qpp);
+			ierr=fscanf(motion,SCNr" "SCNr" "SCNr,&q,&qp,&qpp);
 			if(ierr!=3)
 				exit(0);
 
@@ -101,8 +101,7 @@ int main(int argc,char *argv[])
 			rotat24(axis[i],q,O[i],mreli_1[i]);
 
 				   /* builds relative velocity and acceleration matrices */
-			velacctoWH3(Rev,axis[i],qp,qpp,O[i],Wreli_1[i],
-				    Hreli_1[i]);
+			velacctoWH3(Rev,axis[i],qp,qpp,O[i],Wreli_1[i],Hreli_1[i]);
 
 				   /* absolute position matrix of frame (i) */
 			molt4(mabs[i-1],mreli_1[i],mabs[i]);
@@ -113,8 +112,7 @@ int main(int argc,char *argv[])
 
 				   /* absolute velocity and acceleration matrices */
 			sum4(Wabs[i-1],Wrel0[i],Wabs[i]);
-			coriolis(Habs[i-1],Hrel0[i],Wabs[i-1],Wrel0[i],
-				 Habs[i]);
+			coriolis(Habs[i-1],Hrel0[i],Wabs[i-1],Wrel0[i],Habs[i]);
 		}
 				   /* relative position matrix of frame (7) */
 		idmat4(mreli_1[MAXLINK+1]);
@@ -131,12 +129,10 @@ int main(int argc,char *argv[])
 
 				   /* absolute velocity and acceleration matrices */
 		sum4(Wabs[MAXLINK],Wrel0[MAXLINK+1],Wabs[MAXLINK+1]);
-		coriolis(Habs[MAXLINK],Hrel0[MAXLINK+1],Wabs[MAXLINK],
-			 Wrel0[MAXLINK+1],Habs[MAXLINK+1]);
+		coriolis(Habs[MAXLINK],Hrel0[MAXLINK+1],Wabs[MAXLINK],Wrel0[MAXLINK+1],Habs[MAXLINK+1]);
 
 				   /* extracts Cardan angles */
-		Htocardan(mabs[MAXLINK+1],Wabs[MAXLINK+1],Habs[MAXLINK+1],
-			  ii,jj,kk,q1,q2,qp1,qp2,qpp1,qpp2);
+		Htocardan(mabs[MAXLINK+1],Wabs[MAXLINK+1],Habs[MAXLINK+1],ii,jj,kk,q1,q2,qp1,qp2,qpp1,qpp2);
 
 		Aux[X][U]=mabs[MAXLINK+1][X][U];
 		Aux[Y][U]=mabs[MAXLINK+1][Y][U];
@@ -144,23 +140,21 @@ int main(int argc,char *argv[])
 		trasf_miam(Wabs[MAXLINK],Aux,Waux); /* transform velocity */
 		trasf_miam(Habs[MAXLINK],Aux,Haux); /* and acceleration in auxiliary frame */
 					  /* extracts Cardan angles (and their time derivatives) of gripper  */
-		Htocardan(mabs[MAXLINK+1],Waux,Haux,
-			  ii,jj,kk,q1,q2,qp1,qp2,qpp1,qpp2);
+		Htocardan(mabs[MAXLINK+1],Waux,Haux,ii,jj,kk,q1,q2,qp1,qp2,qpp1,qpp2);
 
 				   /* output results */
-		printf("Time=%f\n",t);
+		printf("Time="PRIr"\n",t);
 		printm4("The position matrix of the gripper is:",mabs[MAXLINK+1]);
 		printm4("The velocity matrix of the gripper is:",Waux);
 		printm4("The acceleration matrix of the gripper is:",Haux);
 
-		fprintf(out,"%f %f %f\n",q1[0],q1[1],q1[2]);
-		fprintf(out,"%f %f %f\n",qp1[0],qp1[1],qp1[2]);
-		fprintf(out,"%f %f %f\n",qpp1[0],qpp1[1],qpp1[2]);
+		fprintf(out,PRIr" "PRIr" "PRIr"\n",q1[0],q1[1],q1[2]);
+		fprintf(out,PRIr" "PRIr" "PRIr"\n",qp1[0],qp1[1],qp1[2]);
+		fprintf(out,PRIr" "PRIr" "PRIr"\n",qpp1[0],qpp1[1],qpp1[2]);
 
-		fprintf(out,"%f %f %f\n",mabs[MAXLINK+1][X][U],mabs[MAXLINK+1][Y][U],
-						       mabs[MAXLINK+1][Z][U]);
-		fprintf(out,"%f %f %f\n",Waux[X][U],Waux[Y][U],Waux[Z][U]);
-		fprintf(out,"%f %f %f\n",Haux[X][U],Haux[Y][U],Haux[Z][U]);
+		fprintf(out,PRIr" "PRIr" "PRIr"\n",mabs[MAXLINK+1][X][U],mabs[MAXLINK+1][Y][U],mabs[MAXLINK+1][Z][U]);
+		fprintf(out,PRIr" "PRIr" "PRIr"\n",Waux[X][U],Waux[Y][U],Waux[Z][U]);
+		fprintf(out,PRIr" "PRIr" "PRIr"\n",Haux[X][U],Haux[Y][U],Haux[Z][U]);
 	}
 	exit(0);
 }

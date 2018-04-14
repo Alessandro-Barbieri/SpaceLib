@@ -25,7 +25,7 @@ int main (void)
 
 	extract(M Q,u,&phi,4);
 
-	printf("\nThe angle phi is : %f\n",phi);
+	printf("\nThe angle phi is : "PRIr"\n",phi);
 	printv("The axis u is :",u,3);
 	return(0);
 }

@@ -27,8 +27,8 @@ int main (void)
 	mtoscrew(Q,u,&phi,&h,P);
 
 	printv("The axis u is :",u,3);
-	printf("\nThe angle phi is : %f\n",phi);
-	printf("\nThe pitch h is : %f\n",h);
+	printf("\nThe angle phi is : "PRIr"\n",phi);
+	printf("\nThe pitch h is : "PRIr"\n",h);
 	printv("The point P is :",P,4);
 	return(0);
 }

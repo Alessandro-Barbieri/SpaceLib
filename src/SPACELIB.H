@@ -7,10 +7,14 @@
 #endif
 #ifdef FLOAT
 typedef float real;
+#define PRIr "%f"
+#define SCNr "%f"
 #else
 typedef double real;
+#define PRIr "%f"
+#define SCNr "%lf"
 #endif
-#define aabs(a)   ((double)(a)>0.  ? (a) : -(a))
+#define aabs(a)   ((real)(a)>0.  ? (a) : -(a))
                    /* conditional compilation to avoid conflict with standard definitions of min
                       and maximum SPACELIB © definitions coincide with ANSI definitions */
 #ifndef max

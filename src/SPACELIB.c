@@ -167,7 +167,7 @@ int mtoscrew (MAT4 Q, AXIS u, real *phi, real *h, POINT P)
 	a = (real) 0.5*(Q[Z][Y]-Q[Y][Z]);
 	b = (real) 0.5*(Q[X][Z]-Q[Z][X]);
 	c = (real) 0.5*(Q[Y][X]-Q[X][Y]);
-	s = (real) sqrt((double) (a*a+b*b+c*c));
+	s = (real) sqrt(a*a+b*b+c*c);
 	co = (Q[X][X]+Q[Y][Y]+Q[Z][Z]-1.)/2.;
 	*phi = (real) atan2(s,co);
 
@@ -244,7 +244,7 @@ int mtoscrew (MAT4 Q, AXIS u, real *phi, real *h, POINT P)
 void screwtom (AXIS u, real phi, real h, POINT P, MAT4 Q)
 {
 	int i,j;
-	double t;
+	real t;
 
 	rotat(u,phi,M Q,4);  /* builds rotational sub-matrix */
 
@@ -552,7 +552,7 @@ int norm_simm_skew(MAT A, int n, int dim, int sign)
 void trasf_mami(MAT4 A1, MAT4 m, MAT4 A2)
 {
 	int i,j,h,k;
-	double t;
+	real t;
 
 	for (i=0;i<3;i++)             /* 3×3 sub matrix */
 		for (j=0;j<3;j++)
@@ -583,7 +583,7 @@ void trasf_mami(MAT4 A1, MAT4 m, MAT4 A2)
 void trasf_miam(MAT4 A1, MAT4 m, MAT4 A2)
 {
 	int i,j,h,k;
-	double t;
+	real t;
 	real tmp[3];
 
 	for (i=0;i<3;i++)             /* 3×3 rotational sub-matrix*/
@@ -624,7 +624,7 @@ void trasf_mamt(MAT A1, MAT m, MAT A2, int dim)
 #define a2(i,j)  (*((A2)+(dim)*(i)+(j)))   /* attention to the define */
 {
 	int i,j,h,k;
-	double t;
+	real t;
 
 	for (i=0;i<dim;i++)
 		for (j=0;j<dim;j++)
@@ -650,8 +650,8 @@ void trasf_mamt(MAT A1, MAT m, MAT A2, int dim)
 void trasf_miamit(MAT4 A1, MAT4 m, MAT4 A2)
 {
 	int i,j,h,k;
-	double t,t1,t2;
-	double tmp[3];
+	real t,t1,t2;
+	real tmp[3];
 
 	for (i=0;i<3;i++)             /* build temporary vector */
 	{
@@ -697,7 +697,7 @@ void trasf_miamit(MAT4 A1, MAT4 m, MAT4 A2)
 void coriolis(MAT4 H0, MAT4 H1, MAT4 W0, MAT4 W1, MAT4 H)
 {
 
-	double t;
+	real t;
 	int i,j,k;
 
 	for (i=0;i<3;i++)
@@ -812,7 +812,7 @@ void skew(MAT A, MAT B, MAT C, int dim)
 real trac_ljlt4(MAT4 L1, MAT4 J, MAT4 L2)
 {
 	int i,h,k;
-	double t;
+	real t;
 
 	t=0.;
 	for (i=0;i<3;i++) /* 4th row of L1 and 4th column of L2 assumed null */
@@ -834,7 +834,7 @@ void molt(MAT A, MAT B, MAT C, int d1, int d2, int d3)
 #define b(i,j)  (*((B)+(d3)*(i)+(j)))      /* attention to the define */
 #define c(i,j)  (*((C)+(d3)*(i)+(j)))      /* attention to the define */
 {
-	double t;
+	real t;
 	int i,j,k;
 
 	if (A==C || B==C){
@@ -989,9 +989,9 @@ return rmax;
 
 real unitv(VECTOR v, AXIS u)
 {
-	double t;
+	real t;
 
-	t = sqrt ((double) v[X]*v[X] +v[Y]*v[Y] +v[Z]*v[Z]);
+	t = sqrt (v[X]*v[X] +v[Y]*v[Y] +v[Z]*v[Z]);
 	if(t!=0)
 	{
 		u[X] = v[X]/t; u[Y] = v[Y]/t; u[Z] = v[Z]/t;

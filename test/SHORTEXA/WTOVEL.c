@@ -28,8 +28,8 @@ int main(void)
 
 	printm4("The Velocity matrix is :", W);
 	printv("The axis of rotation <u> is:",u,3);
-	printf("\nThe angular speed omega is: %f",omega);
-	printf("\nThe linear velocity vel is: %f",vel);
+	printf("\nThe angular speed omega is: "PRIr,omega);
+	printf("\nThe linear velocity vel is: "PRIr,vel);
 	printv("\nThe point P of the axis is:",P,4);
 	return(0);
 }

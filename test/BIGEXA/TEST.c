@@ -27,7 +27,7 @@ int main(void)
 {
 	real q, qp, qpp;
 	real t,dt;
-	float mass,jx,jy,jz,jxy,jyz,jxz,xg,yg,zg;
+	real mass,jx,jy,jz,jxy,jyz,jxz,xg,yg,zg;
 	int i,j,n,excode;
 	FILE *fil;
 
@@ -38,21 +38,19 @@ int main(void)
 		exit(1);
 	}
 			     /* read description of the links --- step (1) */
-	fscanf(fil,"%f %f %f %f %f %f %f %f %f %f",
-	       &mass, &jx,&jy,&jz, &jxy,&jyz,&jxz, &xg,&yg,&zg); /* link 1 */
+	fscanf(fil,SCNr" "SCNr" "SCNr" "SCNr" "SCNr" "SCNr" "SCNr" "SCNr" "SCNr" "SCNr,&mass, &jx,&jy,&jz, &jxy,&jyz,&jxz, &xg,&yg,&zg); /* link 1 */
 	jtoJ(mass,jx,jy,jz,jxy,jyz,jxz,xg,yg,zg,J1); /*build inertia matrix*/
 
-	fscanf(fil,"%f %f %f %f %f %f %f %f %f %f",
-	       &mass, &jx,&jy,&jz, &jxy,&jyz,&jxz, &xg,&yg,&zg); /* link 2 */
+	fscanf(fil,SCNr" "SCNr" "SCNr" "SCNr" "SCNr" "SCNr" "SCNr" "SCNr" "SCNr" "SCNr,&mass, &jx,&jy,&jz, &jxy,&jyz,&jxz, &xg,&yg,&zg); /* link 2 */
 	jtoJ(mass,jx,jy,jz,jxy,jyz,jxz,xg,yg,zg,J2); /*build inertia matrix*/
 
 			     /* read initial condition of the system */
 	for(i=0;i<4;i++)     /* read velocity matrix of link 1 */
 		for(j=0;j<4;j++)
-			fscanf(fil,"%lf",&W1[i][j]);
+			fscanf(fil,SCNr,&W1[i][j]);
 	for(i=0;i<4;i++)     /* read position matrix of link 1 */
 		for(j=0;j<4;j++)
-			fscanf(fil,"%lf",&m1[i][j]);
+			fscanf(fil,SCNr,&m1[i][j]);
 	fclose(fil);
 
 	fil=fopen("TEST.MOT","r"); /* open motion file */
@@ -61,11 +59,11 @@ int main(void)
 		printf("error on input file TEST.MOT");
 		exit(1);
 	}
-	fscanf(fil,"%lf",&dt);      /* read integration step "dt" */
+	fscanf(fil,SCNr,&dt);      /* read integration step "dt" */
 	for(t=0;;t+=dt)            /* loop for each instant t --- step (2) */
 	{
-		n=fscanf(fil,"%lf %lf %lf ",&q,&qp,&qpp); /* read motion of motor (a) */
-		printf("--- t: %f ---- q: %f   qp: %f   qpp: %f",t,q,qp,qpp);
+		n=fscanf(fil,SCNr" "SCNr" "SCNr" ",&q,&qp,&qpp); /* read motion of motor (a) */
+		printf("--- t: "PRIr" ---- q: "PRIr"   qp: "PRIr"   qpp: "PRIr,t,q,qp,qpp);
 
 		screwtom(Zax, q, 0., O, m12);     /* relative position links 1&2 (b) */
 		molt4(m1,m12,m2);                      /* absolute position	of link 2 (c) */

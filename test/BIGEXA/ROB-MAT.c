@@ -26,7 +26,7 @@ int main(int argc,char *argv[])
 	int i;                           /* counter */
 	int ierr;                        /* error code */
 	int size;                        /* for use of calloc function */
-	float t,dt;
+	real t,dt;
 
 	if(argc!=3){
 		printf("Usage: Rob-Mat  data_file  motion_file\n");
@@ -60,32 +60,30 @@ int main(int argc,char *argv[])
 	for (i=1;i<=nlink;i++) 		 /* for each link */
 	{                                /* D.&H. parameters */
 					 /* dynamic data */
-		fscanf(data,"%d %lf %lf %lf %lf %lf",
-		       &jtype[i],&theta[i],&d[i],&b[i],&a[i],&alpha[i]);
-		fscanf(data,"%lf %lf %lf %lf %lf %lf %lf",
-		       &m,&jxx,&jxy,&jxz,&jyy,&jyz,&jzz);
-		fscanf(data,"%lf %lf %lf",&xg,&yg,&zg);
+		fscanf(data,"%d "SCNr" "SCNr" "SCNr" "SCNr" "SCNr,&jtype[i],&theta[i],&d[i],&b[i],&a[i],&alpha[i]);
+		fscanf(data,SCNr" "SCNr" "SCNr" "SCNr" "SCNr" "SCNr" "SCNr,&m,&jxx,&jxy,&jxz,&jyy,&jyz,&jzz);
+		fscanf(data,SCNr" "SCNr" "SCNr,&xg,&yg,&zg);
 					   /* build inertia matrix */
 		jtoJ(m,jxx,jyy,jzz,jxy,jyz,jxz,xg,yg,zg,J[i]);
 	}
 				       /* read gravity acceleration vector */
-	fscanf(data,"%lf %lf %lf",&gx,&gy,&gz);
+	fscanf(data,SCNr" "SCNr" "SCNr,&gx,&gy,&gz);
 	gtom(gx,gy,gz,Hg);             /* build gravity acceleration matrix */
-	fscanf(motion,"%f",&dt);       /* read the range of time */
+	fscanf(motion,SCNr,&dt);       /* read the range of time */
 	for(t=0;;t+=dt)                /* for each instant of time */
 	{
 					   /* ***** KINEMATICS *****  */
 		for (i=1;i<=nlink;i++) /* for each link */
 		{
 					   /* read motions (2) */
-			ierr=fscanf(motion,"%lf %lf %lf",&q,&qp,&qpp);
+			ierr=fscanf(motion,SCNr" "SCNr" "SCNr,&q,&qp,&qpp);
 			if (ierr!=3)   /* end of data in file MOTION */
 			{
 				exit(0);
 			}
 					  /* build relative position matrix (3) */
-			dhtom(jtype[i],theta[i],d[i],b[i],a[i],alpha[i],q,
-				  mrel[i]);/* build relative velocity and acceleration matrix in local frame (4) */
+					  /* build relative velocity and acceleration matrix in local frame (4) */
+			dhtom(jtype[i],theta[i],d[i],b[i],a[i],alpha[i],q,mrel[i]);
 			velacctoWH(jtype[i],qp,qpp,W[i],H[i]);
 			molt4(T[i-1],mrel[i],T[i]);   /* evaluate absolute position matrix (5) */
 			trasf_mami(W[i],T[i-1],W0[i]);/* transform relative velocity matrix from local frame to base frame  (6) */
@@ -97,7 +95,7 @@ int main(int argc,char *argv[])
 				   /* ***** DYNAMICS ***** */
 				   /* initializations  (10) */
 				   /* read external actions on end-effector */
-		fscanf(data,"%lf %lf %lf %lf %lf %lf",&fx,&fy,&fz,&cx,&cy,&cz);
+		fscanf(data,SCNr" "SCNr" "SCNr" "SCNr" "SCNr" "SCNr,&fx,&fy,&fz,&cx,&cy,&cz);
 		actom(fx,fy,fz,cx,cy,cz,EXT);           /* build external action matrix */
 		trasf_mamt4(EXT,T[nlink],ACT0[nlink+1]);/* transforms external actions from local to base frame */
 		for(i=nlink;i>0;i--)                    /* for each link */
@@ -116,12 +114,10 @@ int main(int argc,char *argv[])
 			printm4("Absolute position matrix",T[i]);
 			printm4("Rel. velocity matrix in frame (i)",W[i]);
 			printm4("Rel. velocity matrix in frame (0)",W0[i]);
-			printm4("Absolute velocity matrix in frame (0)",
-				WA[i]);
+			printm4("Absolute velocity matrix in frame (0)",WA[i]);
 			printm4("Rel. acceleration matrix in frame (i)",H[i]);
 			printm4("Rel. acceleration matrix in frame (0)",H0[i]);
-			printm4("Absolute acceleration matrix in frame (0)",
-				HA[i]);
+			printm4("Absolute acceleration matrix in frame (0)",HA[i]);
 			printm4("Inertia matrix in frame (i)",J[i]);
 			printm4("Inertia matrix in frame (0)",J0[i]);
 			printm4("Total actions",FI[i]);

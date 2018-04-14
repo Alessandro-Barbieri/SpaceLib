@@ -45,8 +45,8 @@ int main(void)
 	printm4("The position matrix m02 is:",m02);
 	printm4("The rototranslation matrix is:",Q);
 	printv("\nThe axis u is:",u,3);
-	printf("\nThe rotation angle is %f:",phi);
-	printf("\nThe pitch is %f:",h);
+	printf("\nThe rotation angle is "PRIr":",phi);
+	printf("\nThe pitch is "PRIr":",h);
 	printv("\nThe point of the axis is:",P,4);
 	return(0);
 }

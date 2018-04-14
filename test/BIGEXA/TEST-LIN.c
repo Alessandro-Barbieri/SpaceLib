@@ -17,7 +17,7 @@ int main(void)
 	int ivet[Mmax],vpr[1];
 	int i,j,irank,n,m;
 	real arm;
-	double t;
+	real t;
 	FILE *f;
 	vpr[0]=-1;
 	/* read matrix of coefficients and right-hand side vector from file */
@@ -37,10 +37,10 @@ int main(void)
 	{
 		for(j=0;j<m;j++)
 		{
-			fscanf(f,"%lf",&t);
+			fscanf(f,SCNr,&t);
 			A[i][j]=(real)t;
 		}
-		fscanf(f,"%lf",&t);
+		fscanf(f,SCNr,&t);
 		b[i]=(real)t;
 	}
 	for(i=0;i<n;i++)
@@ -64,7 +64,7 @@ int main(void)
 		for(i=0;i<n;i++)                  /* reorder solution */
 			x[ivet[i]]=H[i][n];
 		for(i=0;i<n;i++)                  /* output results */
-			printf("%f ",x[i]);
+			printf(PRIr" ",x[i]);
 	}
 	else
 	{

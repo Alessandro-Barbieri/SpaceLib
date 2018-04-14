@@ -78,7 +78,7 @@ int main(int argc,char *argv[])
 	a[0]=0;
         for(i=1;i<=MAXLINK;i++)          /* read link lengths */
 	{
-		fscanf(data,"%f",&a[i]);
+		fscanf(data,SCNr,&a[i]);
 	}
 				   /* matrices initialization */
 	first[Z]=a[1];
@@ -90,15 +90,15 @@ int main(int argc,char *argv[])
 
 	a[1]=a[6]=0;    /* D&H parameter 'a' of link 1 and link 6 are zero */
 
-	fscanf(motion,"%f",&dt);       /* read time step */
-	fprintf(out,"%f\n",dt);        /* write dt to out file */
+	fscanf(motion,SCNr,&dt);       /* read time step */
+	fprintf(out,PRIr"\n",dt);        /* write dt to out file */
 	fprintf(out,"%d %d %d\n\n",ii,jj,kk);  /* write Cardan convention to out file */
 
 	for(t=0;!feof(motion);t+=dt) /* main loop */
 	{
 		for(i=1;i<=MAXLINK;i++)
 		{                  /* read joint motion */
-			ierr=fscanf(motion,"%lf %lf %lf\n",&q,&qp,&qpp);
+			ierr=fscanf(motion,SCNr" "SCNr" "SCNr"\n",&q,&qp,&qpp);
 			if(ierr!=3)
 				exit(0);
 
@@ -126,23 +126,21 @@ int main(int argc,char *argv[])
 		trasf_miam(Wabs[MAXLINK],Aux,Waux); /* transform velocity */
 		trasf_miam(Habs[MAXLINK],Aux,Haux); /* and acceleration in auxiliary frame */
 					  /* extracts Cardan angles (and their time derivatives) of gripper  */
-		Htocardan(gripper,Waux,Haux,
-			  ii,jj,kk,q1,q2,qp1,qp2,qpp1,qpp2);
+		Htocardan(gripper,Waux,Haux,ii,jj,kk,q1,q2,qp1,qp2,qpp1,qpp2);
 
 				   /* output results */
-		printf("Time=%f\n",t);
+		printf("Time="PRIr"\n",t);
 		printm4("The position matrix of the gripper is:",gripper);
 		printm4("The velocity matrix of the gripper is:",Waux);
 		printm4("The acceleration matrix of the gripper is:",Haux);
 
-		fprintf(out,"%f %f %f\n",q1[0],q1[1],q1[2]);
-		fprintf(out,"%f %f %f\n",qp1[0],qp1[1],qp1[2]);
-		fprintf(out,"%f %f %f\n",qpp1[0],qpp1[1],qpp1[2]);
+		fprintf(out,PRIr" "PRIr" "PRIr"\n",q1[0],q1[1],q1[2]);
+		fprintf(out,PRIr" "PRIr" "PRIr"\n",qp1[0],qp1[1],qp1[2]);
+		fprintf(out,PRIr" "PRIr" "PRIr"\n",qpp1[0],qpp1[1],qpp1[2]);
 
-		fprintf(out,"%f %f %f\n",gripper[X][U],gripper[Y][U],
-						       gripper[Z][U]);
-		fprintf(out,"%f %f %f\n",Waux[X][U],Waux[Y][U],Waux[Z][U]);
-		fprintf(out,"%f %f %f\n",Haux[X][U],Haux[Y][U],Haux[Z][U]);
+		fprintf(out,PRIr" "PRIr" "PRIr"\n",gripper[X][U],gripper[Y][U],gripper[Z][U]);
+		fprintf(out,PRIr" "PRIr" "PRIr"\n",Waux[X][U],Waux[Y][U],Waux[Z][U]);
+		fprintf(out,PRIr" "PRIr" "PRIr"\n",Haux[X][U],Haux[Y][U],Haux[Z][U]);
 	}
 	exit(0);
 }

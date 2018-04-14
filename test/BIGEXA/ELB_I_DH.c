@@ -28,7 +28,7 @@ int main(int argc,char *argv[])
 	real q[MAXLINK];               /* joint angles */
 	real qp[MAXLINK];              /* array of joint velocity variables */
 	real qpp[MAXLINK];             /* array of joint acceleration variables */
-	real ds[MAXLINK],              /* solution of the eq. J*dq=ds */
+	real ds[MAXLINK],              /* solution of the equation J*dq=ds */
 	     dq[MAXLINK],              /* solution of Newton/Raphson algorithm step */
 	     buf[MAXLINK];
 	real t,dt;
@@ -100,9 +100,9 @@ int main(int argc,char *argv[])
 		exit(5);
 	}
 	for(p=1;p<=MAXLINK;p++)
-		fscanf(data,"%lf",&a[p]); /* read robot description */
+		fscanf(data,SCNr,&a[p]); /* read robot description */
 	for(p=0;p<MAXLINK;p++)
-		fscanf(guess,"%lf",&q[p]); /* 1st guess for q */
+		fscanf(guess,SCNr,&q[p]); /* 1st guess for q */
 
 				       /* matrices initialization */
 	clear(M Jac,MAXLINK,MAXLINK);
@@ -110,20 +110,21 @@ int main(int argc,char *argv[])
 	first[Z]=a[1];
 	rotat24(Z,PIG_2,first,mabs[0]); /* position matrix of frame 0 from base frame */
 	Last[Z][U]=a[6];                /* gripper position in frame 6 */
-        idmat4(Aux);
-	clear4(Waux); clear4(Haux);
-        clear4(Wabs[0]); /* abs velocity of base and of frame 0 */
-        clear4(Habs[0]); /*     acceleration                    */
+    idmat4(Aux);
+	clear4(Waux);
+	clear4(Haux);
+    clear4(Wabs[0]); /* abs velocity of base and of frame 0 */
+    clear4(Habs[0]); /*     acceleration                    */
 
 	a[1]=a[6]=0;    /* D&H parameter 'a' of link 1 and link 6 are zero */
 
-        fscanf(motion,"%lf",&dt);                /* read time step */
+    fscanf(motion,SCNr,&dt);                /* read time step */
 	fscanf(motion,"%d %d %d",&ii,&jj,&kk);  /* read Cardan convention */
-	fprintf(out,"%f\n\n",dt);
+	fprintf(out,PRIr"\n\n",dt);
 
 	for(t=0;;t+=dt)                /* main loop */
 	{
-		ierr=fscanf(motion,"%lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf",
+		ierr=fscanf(motion,SCNr" "SCNr" "SCNr" "SCNr" "SCNr" "SCNr" "SCNr" "SCNr" "SCNr" "SCNr" "SCNr" "SCNr" "SCNr" "SCNr" "SCNr" "SCNr" "SCNr" "SCNr,
 			    &q1[0],&q1[1],&q1[2],&qp1[0],&qp1[1],&qp1[2],
 			    &qpp1[0],&qpp1[1],&qpp1[2],&O[X],&O[Y],&O[Z],
 			    &vel[0],&vel[1],&vel[2],&acc[0],&acc[1],&acc[2]);
@@ -139,8 +140,7 @@ int main(int argc,char *argv[])
 			for (p=1;p<=MAXLINK;p++)
 			{
 				       /* builds relative position matrix */
-				dhtom(Rev,theta[p],d[p],b[p],a[p],phi[p],
-				      q[p-1],mrelp_1[p]);
+				dhtom(Rev,theta[p],d[p],b[p],a[p],phi[p],q[p-1],mrelp_1[p]);
 				       /* builds absolute position matrix */
 				molt4(mabs[p-1],mrelp_1[p],mabs[p]);
                                        /* builds relative L matrix in base frame */
@@ -153,8 +153,7 @@ int main(int argc,char *argv[])
 				buf[3]=Lrel0[Z][Y];
 				buf[4]=Lrel0[X][Z];
 				buf[5]=Lrel0[Y][X];
-				vmcopy(M buf,6,p,Col,M Jac,MAXLINK,
-				       MAXLINK);
+				vmcopy(M buf,6,p,Col,M Jac,MAXLINK,MAXLINK);
 			}
 			molt4(mabs[MAXLINK],Last,gripper);
 			sub4(mtar,gripper,dm);
@@ -204,7 +203,8 @@ int main(int argc,char *argv[])
 		 if(rank!=MAXLINK) printf("*** rank is %d: singular position!\a",rank);
 
 		 for(i=1;i<=MAXLINK;i++) /* acceleration */
-		 { velacctoWH(Rev,qp[i-1],0.,Wrelp_1[i],Hrelp_1[i]);
+		 { 
+		   velacctoWH(Rev,qp[i-1],0.,Wrelp_1[i],Hrelp_1[i]);
 				   /* W and H matrices in frame 0 */
 		   trasf_mami(Wrelp_1[i],mabs[i-1],Wrel0[i]);
 		   trasf_mami(Hrelp_1[i],mabs[i-1],Hrel0[i]);
@@ -230,10 +230,10 @@ int main(int argc,char *argv[])
 		}
 
 				       /* output results */
-		printf("\nTime=%f",t);
-                printv("The joint angles q are",q,6);
-                printv("The joint velocity qp are",qp,6);
-                printv("The joint acceleration qpp are",qpp,6);
+		printf("\nTime="PRIr,t);
+        printv("The joint angles q are",q,6);
+        printv("The joint velocity qp are",qp,6);
+        printv("The joint acceleration qpp are",qpp,6);
 
 		for (p=0;p<MAXLINK;p++)
 		{

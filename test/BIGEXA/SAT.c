@@ -48,8 +48,8 @@ int main (void)
                                              /* output results */
 	printf("\n*** Results ***\n");
 	printv("The rototranslation axis is :",utot,3);
-	printf("\nThe rotation angle about this axis is :%f [deg]\n",deg(phi));
-	printf("\nThe translation about this axis is :%f\n",h);
+	printf("\nThe rotation angle about this axis is :"PRIr" [deg]\n",deg(phi));
+	printf("\nThe translation about this axis is :"PRIr"\n",h);
     printv("The point P of the axis is :",P,4);
 
 	#undef sb
