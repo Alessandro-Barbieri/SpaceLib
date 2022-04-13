@@ -1,10 +1,13 @@
 SRC_DIR := ./src
 LIB_DIR := ./lib
 
-CFLAGS += -std=c11 -fPIC -g -O3 -fstack-protector-all -D_FORTIFY_SOURCE=2 -DREENTRANT
-LDFLAGS += -shared -lm
+CC ?= clang
 
-TARGET = $(LIB_DIR)/libspacelib.so
+CFLAGS ?= -O3 -fstack-protector-all -D_FORTIFY_SOURCE=2
+CFLAGS += -std=c11 -fPIC -g -Wall
+LDFLAGS += -lm
+
+TARGET = libspacelib.so
 SOURCES = $(wildcard $(SRC_DIR)/*.c)
 HEADERS = $(wildcard $(SRC_DIR)/*.H)
 OBJECTS = $(SOURCES:$(SRC_DIR)/%.c=$(SRC_DIR)/%.o)
@@ -14,7 +17,7 @@ OBJECTS = $(SOURCES:$(SRC_DIR)/%.c=$(SRC_DIR)/%.o)
 all: $(TARGET)
 
 $(TARGET) : $(OBJECTS)
-	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(TARGET_ARCH) $(OBJECTS) -o $(TARGET)
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(OBJECTS) -shared -Wl,-soname,${TARGET} -o $(TARGET)
 
 clean:
 	@- $(RM) $(TARGET)
