@@ -1,0 +1,5 @@
+
+The angle phi is : 1.570796
+
+ The axis u is : 
+      0.000   0.000  -1.000

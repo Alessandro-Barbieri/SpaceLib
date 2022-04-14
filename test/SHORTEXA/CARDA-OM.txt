@@ -1,0 +1,4 @@
+
+ 
+The angular velocity omega is: 
+      0.850  -1.832   0.959

@@ -1,0 +1,8 @@
+
+ 
+The first Cardan angle q1 is: 
+     -2.042   1.141  -1.641
+
+ 
+The second Cardan angle q2 is: 
+      1.100   2.001   1.501

@@ -1,0 +1,4 @@
+
+ 
+The angular acceleration omegapto is: 
+      2.573  -0.737  -1.319

@@ -1,0 +1,10 @@
+
+ The axis u is : 
+      0.000   0.000  -1.000
+
+The angle phi is : 1.570796
+
+The pitch h is : 0.000000
+
+ The point P is : 
+      1.000   1.000   0.000   1.000

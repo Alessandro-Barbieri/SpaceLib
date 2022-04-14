@@ -1,0 +1,17 @@
+
+
+ The Velocity matrix is : 
+               0.000    -2.000     2.500     2.500
+               2.000     0.000    -4.500     1.700
+              -2.500     4.500     0.000     3.200
+               0.000     0.000     0.000     0.000
+
+
+ The axis of rotation <u> is: 
+      0.815   0.453   0.362
+
+The angular speed omega is: 5.522681
+The linear velocity vel is: 3.965466
+ 
+The point P of the axis is: 
+      0.151  -0.308   0.046   1.000
