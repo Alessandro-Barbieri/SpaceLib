@@ -34,5 +34,6 @@ clean:
 	@- $(RM) $(TARGET)
 	@- $(RM) $(LIB_OBJECTS)
 	@- $(RM) $(SHORT_TEST)
+	@- $(RM) rm -f $(SHORT_TEST_DIR)/*.tmp
 
 distclean: clean
