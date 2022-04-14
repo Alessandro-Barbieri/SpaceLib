@@ -15,11 +15,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - env:
-        CFLAGS: -OO -fstack-protector-all -D_FORTIFY_SOURCE=2 -sanitize=${{ matrix.site }}
-    - name: make
-      run: make
     - name: make test
       run: make test
+      env:
+        CFLAGS: -OO -fstack-protector-all -D_FORTIFY_SOURCE=2 -sanitize=${{ matrix.site }}
     - name: test SHORTEXA
       run: cd test/SHORTEXA && ./test.sh
