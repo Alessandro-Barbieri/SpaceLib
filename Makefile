@@ -15,7 +15,7 @@ LIB_OBJECTS = $(SOURCES:$(SRC_DIR)/%.c=$(SRC_DIR)/%.o)
 SHORT_TEST_SRC := $(wildcard $(SHORT_TEST_DIR)/*.c)
 SHORT_TEST = $(SHORT_TEST_SRC:$(SHORT_TEST_DIR)/%.c=$(SHORT_TEST_DIR)/%)
 
-.PHONY: all clean distclean
+.PHONY: all clean distclean test
 
 all: $(TARGET)
 
@@ -25,10 +25,10 @@ $(LIB_OBJECTS) : %.o: %.c
 $(TARGET) : $(LIB_OBJECTS)
 	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LIB_OBJECTS) -fPIC -shared -Wl,-soname,${TARGET} -o $(TARGET)
 
-$(SHORT_TEST) : %: %.c
+$(SHORT_TEST) : %: %.c $(TARGET)
 	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) -fPIE -lspacelib -o $@ $<
 
-test: $(TARGET) $(SHORT_TEST)
+test: $(SHORT_TEST)
 
 clean:
 	@- $(RM) $(TARGET)
