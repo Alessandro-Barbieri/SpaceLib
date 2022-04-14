@@ -20,4 +20,4 @@ jobs:
       env:
         CFLAGS: -O0 -fstack-protector-all -D_FORTIFY_SOURCE=2 -fsanitize=${{ matrix.sanitizer }}
     - name: test SHORTEXA
-      run: cd test/SHORTEXA && sh test.sh
+      run: cd test/SHORTEXA && ./test.sh
