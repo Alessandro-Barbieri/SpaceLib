@@ -21,4 +21,4 @@ for i in CARDAH CARDAM CARDA_OM CARDA-OM CARDAW CARDG CARDOPTO E_dhtom E_DYN_EQ 
 	rm "${i}.temp.txt"
 done
 
-return ${r}
+exit ${r}
